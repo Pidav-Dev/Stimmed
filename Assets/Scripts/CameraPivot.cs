@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CameraOrbit : MonoBehaviour
+public class CameraPivot : MonoBehaviour
 {
     [SerializeField] private Transform pivot; // Point around which rotate
     [SerializeField] private float rotationSpeed = 5.0f; // Rotation velocity (less == more stiff)
