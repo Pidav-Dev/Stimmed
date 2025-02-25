@@ -15,6 +15,8 @@ public class CameraOrbit : MonoBehaviour
 
     void Start()
     {
+        // Locks fps at 60
+        Application.targetFrameRate = 60;
         // Set a limited initial angle
         Vector3 initialRotation = transform.eulerAngles;
         currentVerticalAngle = Mathf.Clamp(initialRotation.x, minVerticalAngle, maxVerticalAngle);
