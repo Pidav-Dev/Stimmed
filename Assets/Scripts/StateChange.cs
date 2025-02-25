@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class RandomActivation : MonoBehaviour
+public class StateChange : MonoBehaviour
 {
     private bool isActive = false;
     private Renderer objectRenderer;
@@ -9,10 +9,10 @@ public class RandomActivation : MonoBehaviour
 
     void Start()
     {
-        objectRenderer = GetComponent<Renderer>(); // Get the object's Renderer
+        objectRenderer = GetComponent<Renderer>();
         if (objectRenderer != null)
         {
-            originalColor = objectRenderer.material.color; // Store the original color
+            originalColor = objectRenderer.material.color;
         }
 
         StartCoroutine(ActivateRandomly());
@@ -40,6 +40,19 @@ public class RandomActivation : MonoBehaviour
         {
             isActive = false;
             ChangeColor(originalColor);
+
+            // Increase universal endurance when clicking any active object
+            if (EnduranceManager.Instance != null)
+            {
+                Debug.Log("Before Increase: " + EnduranceManager.Instance.endurance);
+                EnduranceManager.Instance.IncreaseEndurance(10f); // Increases universal endurance
+                Debug.Log("After Increase: " + EnduranceManager.Instance.endurance);
+            }
+            else
+            {
+                Debug.LogError("EnduranceManager instance is missing from the scene!");
+            }
+
             Debug.Log(gameObject.name + " Deactivated (Color: Original)");
         }
     }
