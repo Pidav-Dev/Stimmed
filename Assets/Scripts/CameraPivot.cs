@@ -2,22 +2,27 @@ using UnityEngine;
 
 public class CameraOrbit : MonoBehaviour
 {
-    [SerializeField] private Transform pivot; // Point around which allow the rotation
-    [SerializeField] private float rotationSpeed = 5.0f; // Define the sensibility of the rotation
-    [SerializeField] private float minVerticalAngle = 0f;  // Define inferior limit for the vertical rotation
-    [SerializeField] private float maxVerticalAngle = 30f; // Define superior limit for the vertical rotation 
-    [SerializeField] private float inertiaDamping = 0.95f; // Define the "throw" effect
+    [SerializeField] private Transform pivot; // Point around which to rotate
+    [SerializeField] private float rotationSpeed = 5.0f; // Rotation sensitivity
+    [SerializeField] private float minVerticalAngle = 0f;  // Lower limit for vertical rotation
+    [SerializeField] private float maxVerticalAngle = 30f; // Upper limit for vertical rotation 
+    [SerializeField] private float inertiaDamping = 0.95f; // Camera "throw" (inertia) effect
 
-    private Vector2 lastTouchPosition; // Detect where last input weas
-    private Vector2 velocity = Vector2.zero; // Camera velocity used for the "throw"
+    // Fields for zoom
+    [SerializeField] private float minZoomDistance = 2f;   // Minimum distance from the pivot
+    [SerializeField] private float maxZoomDistance = 15f;    // Maximum distance from the pivot
+    [SerializeField] private float zoomSpeed = 0.5f;         // Zoom sensitivity
+
+    private Vector2 lastTouchPosition; // Last touch/mouse position
+    private Vector2 velocity = Vector2.zero; // Camera velocity for inertia effect
     private bool isDragging = false; 
     private float currentVerticalAngle = 15f;
 
     void Start()
     {
-        // Locks fps at 60
+        // Set frame rate to 60 fps
         Application.targetFrameRate = 60;
-        // Set a limited initial angle
+        // Set an initial clamped angle
         Vector3 initialRotation = transform.eulerAngles;
         currentVerticalAngle = Mathf.Clamp(initialRotation.x, minVerticalAngle, maxVerticalAngle);
         transform.eulerAngles = new Vector3(currentVerticalAngle, initialRotation.y, initialRotation.z);
@@ -25,33 +30,47 @@ public class CameraOrbit : MonoBehaviour
 
     void Update()
     {
-        Vector2 delta = Vector2.zero; // Each frame the touch differential from the previous frame is resetted
+        // Handle pinch-to-zoom on touch devices
+        if (Input.touchCount == 2)
+        {
+            HandlePinchZoom();
+            return;
+        }
+        
+        // Handle zoom using the mouse wheel
+        if (Input.mouseScrollDelta.y != 0)
+        {
+            float scroll = Input.mouseScrollDelta.y;
+            float adjustedScroll = scroll * zoomSpeed * Time.deltaTime;
+            NewCameraDistance(adjustedScroll);
+        }
+        
+        Vector2 delta = Vector2.zero; // Reset the movement delta each frame
 
-        // Single touch control for iPhone
+        // Single touch control (iPhone)
         if (Input.touchCount == 1)
         {
             Touch touch = Input.GetTouch(0);
             
-            // Setup rotation once touch begins
             if (touch.phase == TouchPhase.Began)
             {
-                lastTouchPosition = touch.position; // Set the last touched position to the actual one
+                // On drag start: save position and reset velocity
+                lastTouchPosition = touch.position;
                 isDragging = true;
-                velocity = Vector2.zero; // When the new drag starts the velocity is set to zero
+                velocity = Vector2.zero;
             }
-            // Determine delta during the touch
             else if (touch.phase == TouchPhase.Moved && isDragging)
             {
+                // Calculate movement delta
                 delta = touch.deltaPosition;
             }
-            // Set off the rotation once touch ends
             else if (touch.phase == TouchPhase.Ended)
             {
                 isDragging = false;
             }
         }
 
-        // Mouse control in editor (for debug only) 
+        // Mouse control in editor (for debugging)
         if (Input.GetMouseButtonDown(0))
         {
             lastTouchPosition = Input.mousePosition;
@@ -68,37 +87,75 @@ public class CameraOrbit : MonoBehaviour
             isDragging = false;
         }
         
-        // Updates velocity
+        // Update velocity based on movement
         if (isDragging)
         {
-            // The update follows the differential of touch's movement and the delta time of the system
-            velocity = delta * rotationSpeed * Time.deltaTime; 
+            velocity = delta * rotationSpeed * Time.deltaTime;
         }
         else
         {
-            // Apply damping to speed to simulate inertia
+            // Apply damping to simulate inertia
             velocity *= inertiaDamping;
         }
 
-        // Apply rotation based on the gained speed
+        // Apply rotation based on accumulated velocity
         RotateCamera(velocity);
     }
 
-    // Rotate the camera based on a given velocity 
+    // Rotate the camera based on a given movement delta
     void RotateCamera(Vector2 delta)
     {
-        // Define axis rotation
-        float rotationX = delta.x * rotationSpeed * Time.deltaTime; // Vertical rotation
-        float rotationY = -delta.y * rotationSpeed * Time.deltaTime; // Horizontal rotation 
+        float rotationX = delta.x * rotationSpeed * Time.deltaTime; // Rotation around the Y-axis (horizontal)
+        float rotationY = -delta.y * rotationSpeed * Time.deltaTime; // Vertical rotation
 
-        // Limitless rotation around Y axis
+        // Rotate the camera around the pivot along the Y-axis
         transform.RotateAround(pivot.position, Vector3.up, rotationX);
 
-        // Determine new vertical angle 
+        // Calculate and clamp the new vertical angle
         float newVerticalAngle = currentVerticalAngle + rotationY;
         currentVerticalAngle = Mathf.Clamp(newVerticalAngle, minVerticalAngle, maxVerticalAngle);
 
-        // Set limited vertical rotation 
+        // Set the clamped vertical rotation
         transform.eulerAngles = new Vector3(currentVerticalAngle, transform.eulerAngles.y, 0f);
+    }
+
+    // Handle pinch-to-zoom for touch devices
+    private void HandlePinchZoom()
+    {
+        Touch touchZero = Input.GetTouch(0);
+        Touch touchOne = Input.GetTouch(1);
+
+        // Calculate previous positions of the touches
+        Vector2 prevTouchZeroPos = touchZero.position - touchZero.deltaPosition;
+        Vector2 prevTouchOnePos = touchOne.position - touchOne.deltaPosition;
+
+        // Calculate the distance between touches in previous and current positions
+        float prevTouchDeltaMag = (prevTouchZeroPos - prevTouchOnePos).magnitude;
+        float touchDeltaMag = (touchZero.position - touchOne.position).magnitude;
+
+        // Determine the change in distance
+        float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
+
+        // Calculate the direction from the pivot to the camera
+        Vector3 direction = (transform.position - pivot.position).normalized;
+        float distance = Vector3.Distance(transform.position, pivot.position);
+        float newDistance = distance + deltaMagnitudeDiff * zoomSpeed * Time.deltaTime;
+        newDistance = Mathf.Clamp(newDistance, minZoomDistance, maxZoomDistance);
+
+        // Update the camera position along the same direction
+        transform.position = pivot.position + direction * newDistance;
+    }
+
+    // Handle zoom using the mouse wheel
+    private void NewCameraDistance(float adjustedScroll)
+    {
+        // Calculate the direction from the pivot to the camera
+        Vector3 direction = (transform.position - pivot.position).normalized;
+        float distance = Vector3.Distance(transform.position, pivot.position);
+        float newDistance = distance + adjustedScroll;
+        newDistance = Mathf.Clamp(newDistance, minZoomDistance, maxZoomDistance);
+
+        // Update the camera position
+        transform.position = pivot.position + direction * newDistance;
     }
 }
