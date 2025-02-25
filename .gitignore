@@ -1,5 +1,5 @@
 # =============================================== #
-# Unity specific Ignores                         #
+# Unity specific Ignores (Aggiornato per Unity 6) #
 # =============================================== #
 /[Ll]ibrary/
 /[Tt]emp/
@@ -11,7 +11,6 @@
 /[Mm]emoryCaptures/
 /[Rr]ecordings/
 /[Uu]ser[Ss]ettings/
-/[Pp]ackages/
 /[Gg]radle/
 
 # File generati automaticamente da Unity
@@ -120,9 +119,14 @@ xcuserdata/
 !/[Pp]ackages/manifest.json
 
 # Ignora tutti i .meta tranne quelli in Assets e ProjectSettings
-**.meta
-!/[Aa]ssets/**/*.meta
-!/[Pp]rojectSettings/**/*.meta
+# (Modificato per maggiore sicurezza)
+*.meta
+!**/[Aa]ssets/**/*.meta
+!**/[Pp]rojectSettings/**/*.meta
+
+# Permetti file di progetto base (Unity 6+)
+!/*.asset
+!/*.unity
 
 # =============================================== #
 # Altri file temporanei                          #
