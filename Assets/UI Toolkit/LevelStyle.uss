@@ -1,0 +1,19 @@
+.label {
+    left: auto;
+    top: 5%;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    align-content: center;
+    width: auto;
+    font-size: 100px;
+    -unity-text-align: middle-center;
+    position: absolute;
+}
+
+.button {
+    left: 2%;
+    width: 150px;
+    height: 150px;
+    top: 5%;
+}
