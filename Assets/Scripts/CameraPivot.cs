@@ -1,19 +1,21 @@
 using UnityEngine;
 
-public class CameraPivot : MonoBehaviour
+public class CameraOrbit : MonoBehaviour
 {
-    [SerializeField] private Transform pivot; // Point around which rotate
-    [SerializeField] private float rotationSpeed = 5.0f; // Rotation velocity (less == more stiff)
-    [SerializeField] private float minVerticalAngle = 0f;  // Inferior limit angle
-    [SerializeField] private float maxVerticalAngle = 30f; // Superior limit angle
+    [SerializeField] private Transform pivot; // Point around which allow the rotation
+    [SerializeField] private float rotationSpeed = 5.0f; // Define the sensibility of the rotation
+    [SerializeField] private float minVerticalAngle = 0f;  // Define inferior limit for the vertical rotation
+    [SerializeField] private float maxVerticalAngle = 30f; // Define superior limit for the vertical rotation 
+    [SerializeField] private float inertiaDamping = 0.95f; // Define the "throw" effect
 
-    private Vector2 lastTouchPosition;
-    private bool isDragging = false;
-    [SerializeField] private float currentVerticalAngle = 15f; // Initialized angle
+    private Vector2 lastTouchPosition; // Detect where last input weas
+    private Vector2 velocity = Vector2.zero; // Camera velocity used for the "throw"
+    private bool isDragging = false; 
+    private float currentVerticalAngle = 15f;
 
     void Start()
     {
-        // Be sure that camera starts with correct angle
+        // Set a limited initial angle
         Vector3 initialRotation = transform.eulerAngles;
         currentVerticalAngle = Mathf.Clamp(initialRotation.x, minVerticalAngle, maxVerticalAngle);
         transform.eulerAngles = new Vector3(currentVerticalAngle, initialRotation.y, initialRotation.z);
@@ -21,64 +23,80 @@ public class CameraPivot : MonoBehaviour
 
     void Update()
     {
-        // Touch control for the iPhone
-        // Allow only single touch for panning
+        Vector2 delta = Vector2.zero; // Each frame the touch differential from the previous frame is resetted
+
+        // Single touch control for iPhone
         if (Input.touchCount == 1)
         {
             Touch touch = Input.GetTouch(0);
             
-            // Initialize touch once the touch begins
+            // Setup rotation once touch begins
             if (touch.phase == TouchPhase.Began)
             {
-                lastTouchPosition = touch.position; // keep track of touch position each frame
-                isDragging = true; 
+                lastTouchPosition = touch.position; // Set the last touched position to the actual one
+                isDragging = true;
+                velocity = Vector2.zero; // When the new drag starts the velocity is set to zero
             }
-            // Act once the touch position changes and while dragging
+            // Determine delta during the touch
             else if (touch.phase == TouchPhase.Moved && isDragging)
             {
-                Vector2 delta = touch.deltaPosition; // Determine the difference between last frame's position and actual's
-                RotateCamera(delta); // Rotate of delta's angle
+                delta = touch.deltaPosition;
             }
-            // Deinitialize touch once the touch ends
+            // Set off the rotation once touch ends
             else if (touch.phase == TouchPhase.Ended)
             {
                 isDragging = false;
             }
         }
 
-        // Mouse control for debugging (same of touch)
+        // Mouse control in editor (for debug only) 
         if (Input.GetMouseButtonDown(0))
         {
             lastTouchPosition = Input.mousePosition;
             isDragging = true;
+            velocity = Vector2.zero;
         }
         else if (Input.GetMouseButton(0) && isDragging)
         {
-            Vector2 delta = (Vector2)Input.mousePosition - lastTouchPosition;
+            delta = (Vector2)Input.mousePosition - lastTouchPosition;
             lastTouchPosition = Input.mousePosition;
-            RotateCamera(delta);
         }
         else if (Input.GetMouseButtonUp(0))
         {
             isDragging = false;
         }
+        
+        // Updates velocity
+        if (isDragging)
+        {
+            // The update follows the differential of touch's movement and the delta time of the system
+            velocity = delta * rotationSpeed * Time.deltaTime; 
+        }
+        else
+        {
+            // Apply damping to speed to simulate inertia
+            velocity *= inertiaDamping;
+        }
+
+        // Apply rotation based on the gained speed
+        RotateCamera(velocity);
     }
 
-    // Rotate the camera of delta's angle
+    // Rotate the camera based on a given velocity 
     void RotateCamera(Vector2 delta)
     {
-        // Determine the coordinates of rotation
-        float rotationX = delta.x * rotationSpeed * Time.deltaTime;
-        float rotationY = -delta.y * rotationSpeed * Time.deltaTime;
+        // Define axis rotation
+        float rotationX = delta.x * rotationSpeed * Time.deltaTime; // Vertical rotation
+        float rotationY = -delta.y * rotationSpeed * Time.deltaTime; // Horizontal rotation 
 
-        // Rotate aroundo Y axis without limits
+        // Limitless rotation around Y axis
         transform.RotateAround(pivot.position, Vector3.up, rotationX);
 
-        // Determine new vertical angle
+        // Determine new vertical angle 
         float newVerticalAngle = currentVerticalAngle + rotationY;
         currentVerticalAngle = Mathf.Clamp(newVerticalAngle, minVerticalAngle, maxVerticalAngle);
 
-        // Rotate vertically with limits 
+        // Set limited vertical rotation 
         transform.eulerAngles = new Vector3(currentVerticalAngle, transform.eulerAngles.y, 0f);
     }
 }
