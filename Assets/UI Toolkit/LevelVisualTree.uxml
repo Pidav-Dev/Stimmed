@@ -1,8 +1,17 @@
-<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/LevelStyle.uss?fileID=7433441132597879392&amp;guid=a67080915a3ce4379b2c66c2094edf8e&amp;type=3#LevelStyle" />
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xsi:noNamespaceSchemaLocation="library://package_cache/com.unity.ui@1.0.0/Editor/Schemas/USSSchema.xsd">
+    <engine:Style src="project://database/Assets/UI Toolkit/LevelStyle.uss?fileID=7433441132597879392&amp;guid=a67080915a3ce4379b2c66c2094edf8e&amp;type=3#LevelStyle" />
     <engine:VisualElement name="Container" style="flex-grow: 1; justify-content: flex-start; align-self: auto; align-content: auto;">
-        <engine:Button name="Pause" class="button" style="background-image: url(&quot;project://database/Assets/Sprites%20(not%20final)/FakePause.png?fileID=2800000&amp;guid=e7173d05d128249f7b06af7f80a367a2&amp;type=3#FakePause&quot;); background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0);" />
+        <!-- Pause Button -->
+        <engine:Button name="Pause" class="button" style="background-image: url(&quot;project://database/Assets/Sprites (not final)/FakePause.png?fileID=2800000&amp;guid=e7173d05d128249f7b06af7f80a367a2&amp;type=3#FakePause&quot;); background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0);" />
+        
+        <!-- Endurance Label -->
         <engine:Label text="Label" name="Endurance" class="label" />
-        <engine:Label text="60" name="Timer" class="timer" />
+        
+        <!-- Pause Menu Panel (Added Here) -->
+        <engine:VisualElement name="PausePanel" style="display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7);">
+            <engine:Label text="Paused" name="PauseLabel" class="label" style="margin-bottom: 20px;" />
+            <engine:Button name="ResumeButton" text="Resume" class="button" style="margin-bottom: 10px;" />
+            <engine:Button name="QuitButton" text="Quit" class="button" />
+        </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>

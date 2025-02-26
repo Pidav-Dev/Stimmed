@@ -1,15 +1,15 @@
 using UnityEngine;
-using UnityEngine.UIElements; 
+using UnityEngine.UIElements;
 using System.Collections;
 
 public class EnduranceManager : MonoBehaviour
 {
-    public static EnduranceManager Instance; // Singleton instance
-    public float endurance = 100f; // Start from 100
-    private float minEndurance = 0f;
-    private float enduranceDecreaseRate = 2f; // Speed of endurance decrease per second
-    private float decreaseInterval = 1f; // Time interval for decrease (1 second)
-    
+    public static EnduranceManager Instance;
+    public int endurance = 0; // Start at 0 (integer)
+    private const int MaxEndurance = 100;
+    private const int IncreaseRate = 2; // Integer increase per second
+    private const float IncreaseInterval = 1f;
+
     [SerializeField] private UIDocument uiDocument;
     private Label enduranceLabel;
 
@@ -21,16 +21,15 @@ public class EnduranceManager : MonoBehaviour
             Instance = this;
         else
         {
-            Destroy(gameObject); // Prevent duplicates
+            Destroy(gameObject);
             return;
         }
-
-        DontDestroyOnLoad(gameObject); // Keep instance alive
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
-        StartCoroutine(DecreaseEndurance());
+        StartCoroutine(IncreaseEndurance());
     }
 
     private void Update()
@@ -38,19 +37,19 @@ public class EnduranceManager : MonoBehaviour
         enduranceLabel.text = endurance.ToString();
     }
 
-    private IEnumerator DecreaseEndurance()
+    private IEnumerator IncreaseEndurance()
     {
-        while (true)
+        while (endurance < MaxEndurance)
         {
-            yield return new WaitForSeconds(decreaseInterval);
-            endurance = Mathf.Clamp(endurance - enduranceDecreaseRate, minEndurance, 100f);
-            Debug.Log("Endurance: " + endurance);
+            yield return new WaitForSeconds(IncreaseInterval);
+            endurance = Mathf.Clamp(endurance + IncreaseRate, 0, MaxEndurance);
+            Debug.Log($"Endurance: {endurance}");
         }
     }
 
-    public void IncreaseEndurance(float amount)
+    public void ReduceEnduranceByAmount(int amount)
     {
-        endurance = Mathf.Clamp(endurance + amount, minEndurance, 100f);
-        Debug.Log("Endurance Increased! Current Endurance: " + endurance);
+        endurance = Mathf.Max(endurance - amount, 0);
+        Debug.Log($"Endurance Reduced! Current: {endurance}");
     }
 }
