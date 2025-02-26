@@ -4,65 +4,55 @@ using UnityEngine.UIElements;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private UIDocument uiDocument; // Assign this in the Inspector!
-
-    private Button pauseButton;
-    private VisualElement pausePanel;
-    private Button resumeButton;
-    private Button quitButton;
+    // UI elements
+    private Button _pauseButton;
+    private VisualElement _pausePanel;
+    private Button _resumeButton;
+    private Button _quitButton;
 
     private void Awake()
     {
-        if (uiDocument == null)
-        {
-            Debug.LogError("UIDocument is not assigned!");
-            return;
-        }
-
-        // Get root element
-        var root = uiDocument.rootVisualElement;
-
-        // Find pause button (name="Pause")
-        pauseButton = root.Q<Button>("Pause");
-        if (pauseButton == null) Debug.LogError("Pause button not found!");
-
-        // Find pause panel (name="PausePanel")
-        pausePanel = root.Q<VisualElement>("PausePanel");
-        if (pausePanel == null) Debug.LogError("Pause panel not found!");
-
-        // Find resume and quit buttons
-        resumeButton = root.Q<Button>("ResumeButton");
-        quitButton = root.Q<Button>("QuitButton");
+        // Find UI elements (should add if (element == null) Debug.LogError("Element not found!"); but bored)
+        _pauseButton = uiDocument.rootVisualElement.Q<Button>("Pause");
+        _pausePanel = uiDocument.rootVisualElement.Q<VisualElement>("PausePanel");
+        _resumeButton = uiDocument.rootVisualElement.Q<Button>("ResumeButton");
+        _quitButton = uiDocument.rootVisualElement.Q<Button>("QuitButton");
 
         // Add event listeners
-        pauseButton.clicked += TogglePause;
-        resumeButton.clicked += ResumeGame;
-        quitButton.clicked += QuitGame;
+        _pauseButton.clicked += TogglePause;
+        _resumeButton.clicked += ResumeGame;
+        _quitButton.clicked += QuitGame;
     }
 
     private void Update()
     {
+        // Checks if escape button is pressed and then toggles pause (for debugging only) 
         if (Input.GetKeyDown(KeyCode.Escape))
             TogglePause();
     }
 
-    public void TogglePause()
+    // Called when the pause button is pressed 
+    private void TogglePause()
     {
-        bool isPaused = Time.timeScale == 0f;
-        Time.timeScale = isPaused ? 1f : 0f;
-        pausePanel.style.display = isPaused ? DisplayStyle.None : DisplayStyle.Flex;
+        bool isPaused = Time.timeScale == 0f; // Checks if the application is running 
+        Time.timeScale = isPaused ? 1f : 0f; // Resume based on the previous checking 
+        _pausePanel.style.display = isPaused ? DisplayStyle.None : DisplayStyle.Flex; // Displays the panel based on pause
     }
 
+    // Called when the resume button is pressed 
     private void ResumeGame()
     {
         TogglePause();
     }
 
+    // Called when the quit button is pressed
     private void QuitGame()
     {
+        // Preprocessor directive that checks if the application is running in the Unity Editor
         #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
+        UnityEditor.EditorApplication.isPlaying = false; // Uses Unity Editor's way of closing the app
         #else
-        Application.Quit();
+        Application.Quit(); // Uses the particular build's way of closing the app if it is not running in the Unity Editor
         #endif
     }
 }

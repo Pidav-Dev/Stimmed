@@ -3,61 +3,67 @@ using System.Collections;
 
 public class StateChange : MonoBehaviour
 {
-    private bool isActive = false;
-    private Renderer objectRenderer;
-    private Color originalColor;
+    private bool _isActive; // Determine if the stimuli is sensory overloading 
+    private Renderer _objectRenderer; // Get the renderer of the actual object
+    private Color _originalColor; // Get renderer's color
 
     void Start()
     {
-        objectRenderer = GetComponent<Renderer>();
-        if (objectRenderer != null)
+        _objectRenderer = GetComponent<Renderer>(); // Assign the Renderer of the actual component 
+        // Assign renderer's color to its variable
+        if (_objectRenderer != null)
         {
-            originalColor = objectRenderer.material.color;
+            _originalColor = _objectRenderer.material.color;
         }
-        StartCoroutine(ActivateRandomly());
+        StartCoroutine(ActivateRandomly()); // Start the concurrent routine of the random activation
     }
 
+    // Concurrently activates the stimuli with a random wait time
     IEnumerator ActivateRandomly()
     {
+        // Produces warning but it is needed to allow infinite looping 
         while (true)
         {
-            float waitTime = Random.Range(0f, 10f);
+            float waitTime = Random.Range(0f, 10f); // Determine a random wait time 
+            // After the determined time the color is changed and the control is given back to the parent
             yield return new WaitForSeconds(waitTime);
-            if (!isActive) 
+            if (!_isActive) 
             {
-                isActive = true;
+                _isActive = true;
                 ChangeColor(Color.red);
                 Debug.Log(gameObject.name + " Activated (Color: Red)");
             }
         }
     }
 
+    // Increase endurance once the user clicks down
     void OnMouseDown()
     {
-        if (isActive)
+        if (!_isActive) return; 
+        // Execute only if isActive 
+        _isActive = false;
+        ChangeColor(_originalColor); // Change element's color
+        // Increase universal endurance when clicking any active object
+        if (EnduranceManager.Instance != null)
         {
-            isActive = false;
-            ChangeColor(originalColor);
-            // Reduce universal endurance when clicking any active object
-            if (EnduranceManager.Instance != null)
-            {
-                Debug.Log("Before Reduction: " + EnduranceManager.Instance.endurance);
-                EnduranceManager.Instance.ReduceEnduranceByAmount(10); // Integer reduction
-                Debug.Log("After Reduction: " + EnduranceManager.Instance.endurance);
-            }
-            else
-            {
-                Debug.LogError("EnduranceManager instance is missing from the scene!");
-            }
-            Debug.Log(gameObject.name + " Deactivated (Color: Original)");
+            Debug.Log("Before Reduction: " + EnduranceManager.Instance.GetEndurance());
+            EnduranceManager.Instance.IncreaseEnduranceByAmount(10); // Integer reduction
+            Debug.Log("After Reduction: " + EnduranceManager.Instance.GetEndurance());
         }
+        else
+        {
+            Debug.LogError("EnduranceManager instance is missing from the scene!");
+        }
+        Debug.Log(gameObject.name + " Deactivated (Color: Original)");
     }
 
+    // Changes renderer's color
     void ChangeColor(Color newColor)
     {
-        if (objectRenderer != null)
+        // Instead of _objectRenderer != null, too expensive 
+        if (_objectRenderer)
         {
-            objectRenderer.material.color = newColor;
+            _objectRenderer.material.color = newColor;
         }
     }
 }

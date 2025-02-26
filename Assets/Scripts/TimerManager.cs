@@ -3,43 +3,40 @@ using UnityEngine.UIElements;
 
 public class TimerManager : MonoBehaviour
 {
-    // Total time for the timer (in seconds)
-    public float startTime = 60f;
-    private float timeRemaining;
-
-    // Reference to the UIDocument that contains UI elements
-    [SerializeField] private UIDocument uiDocument;
-    
-    // The UI Label that displays the timer in the UXML file
-    private Label timerLabel;
+    [SerializeField] private float duration = 60f; // Duration of the level
+    [SerializeField] private UIDocument uiDocument; // UI document to link the timer to a label 
+    private float _timeRemaining; // Time remaining for the user to clear the level 
+    private Label _timerLabel; // The UI Label that displays the timer in the UXML file
 
     private void Awake()
     {
-        // Initialize the timer
-        timeRemaining = startTime;
-        // Find the timer label by its name ("Timer")
-        timerLabel = uiDocument.rootVisualElement.Q<Label>("Timer");
-        if (timerLabel != null)
-            timerLabel.text = Mathf.CeilToInt(timeRemaining).ToString();
+        _timeRemaining = duration; // Initialize the timer with level's duration 
+        _timerLabel = uiDocument.rootVisualElement.Q<Label>("Timer"); // Find the timer label by its name ("Timer")
+        // Gets the time remaining and attach to the UI label
+        if (_timerLabel != null)
+        {
+            _timerLabel.text = Mathf.CeilToInt(_timeRemaining).ToString();
+        }
     }
 
     private void Update()
     {
-        if (timeRemaining > 0)
+        // Do not update timer when it expires 
+        if (_timeRemaining > 0)
         {
             // Subtract the elapsed time from the remaining time
-            timeRemaining -= Time.deltaTime;
+            _timeRemaining -= Time.deltaTime; // It would be 1 * deltaTime
             
             // When the timer reaches zero or below, clamp it and pause the game
-            if (timeRemaining <= 0)
+            if (_timeRemaining <= 0)
             {
-                timeRemaining = 0;
+                _timeRemaining = 0;
                 Time.timeScale = 0;  // Pause the game
             }
 
             // Update the UI label to show the current time remaining
-            if (timerLabel != null)
-                timerLabel.text = Mathf.CeilToInt(timeRemaining).ToString();
+            if (_timerLabel != null)
+                _timerLabel.text = Mathf.CeilToInt(_timeRemaining).ToString();
         }
     }
 }
