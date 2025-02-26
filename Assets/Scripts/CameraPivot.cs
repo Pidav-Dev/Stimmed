@@ -9,9 +9,9 @@ public class CameraOrbit : MonoBehaviour
     [SerializeField] private float inertiaDamping = 0.95f; // Camera "throw" (inertia) effect
 
     // Fields for zoom
-    [SerializeField] private float minZoomDistance = 2f;   // Minimum distance from the pivot
-    [SerializeField] private float maxZoomDistance = 15f;    // Maximum distance from the pivot
-    [SerializeField] private float zoomSpeed = 0.5f;         // Zoom sensitivity
+    [SerializeField] private float minZoomDistance;   // Minimum distance from the pivot
+    [SerializeField] private float maxZoomDistance;    // Maximum distance from the pivot
+    [SerializeField] private float zoomSpeed;         // Zoom sensitivity
 
     private Vector2 lastTouchPosition; // Last touch/mouse position
     private Vector2 velocity = Vector2.zero; // Camera velocity for inertia effect
