@@ -39,3 +39,15 @@
     font-size: 40px;
     margin: 10px;
 }
+
+.timer {
+    position: absolute;
+    right: 2%;
+    top: 5%;
+    width: auto;
+    font-size: 100px;
+    -unity-text-align: middle-center;
+    /* Optionally, include centering styles */
+    align-items: center;
+    justify-content: center;
+}
