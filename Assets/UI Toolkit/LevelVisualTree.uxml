@@ -7,6 +7,7 @@
         <!-- Endurance Label -->
         <engine:Label text="Label" name="Endurance" class="label" />
 
+        <!-- Timer Label -->
         <engine:Label text="60" name="Timer" class="timer" />
 
         
