@@ -6,13 +6,10 @@ public class StateChange : MonoBehaviour
     private bool _isActive; // Determine if the stimuli is sensory overloading 
     private Renderer _objectRenderer; // Get the renderer of the actual object
     private Color _originalColor; // Get renderer's color
-    private MeshRenderer _meshRenderer;
 
     void Start()
     {
         _objectRenderer = GetComponent<Renderer>(); // Assign the Renderer of the actual component 
-        _meshRenderer = GetComponent<MeshRenderer>();
-        _meshRenderer.enabled = false;
         // Assign renderer's color to its variable
         if (_objectRenderer != null)
         {
@@ -34,7 +31,6 @@ public class StateChange : MonoBehaviour
             {
                 _isActive = true;
                 ChangeColor(Color.red);
-                _meshRenderer.enabled = true;
                 Debug.Log(gameObject.name + " Activated (Color: Red)");
             }
         }
@@ -46,7 +42,6 @@ public class StateChange : MonoBehaviour
         if (!_isActive) return; 
         // Execute only if isActive 
         _isActive = false;
-        _meshRenderer.enabled = false;
         ChangeColor(_originalColor); // Change element's color
         // Increase universal endurance when clicking any active object
         if (EnduranceManager.Instance != null)
