@@ -12,9 +12,11 @@ public class StateChange : MonoBehaviour
     private Renderer _objectRenderer; // Get the renderer of the actual object
     private Color _originalColor; // Get renderer's color
     private int _enduranceAmount = 1; 
+    private AudioSource _audioSource;
 
     void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         _objectRenderer = GetComponent<Renderer>(); // Assign the Renderer of the actual component 
         // Assign renderer's color to its variable
         if (_objectRenderer != null)
@@ -39,6 +41,7 @@ public class StateChange : MonoBehaviour
                 _isActive = true;
                 _enduranceAmount = 1;
                 ChangeColor(Color.red);
+                _audioSource.Play();
                 Debug.Log(gameObject.name + " Activated (Color: Red)");
             }
         }
@@ -54,6 +57,9 @@ public class StateChange : MonoBehaviour
                 _enduranceAmount += stimulusAmount;
                 _enduranceAmount = Math.Clamp(_enduranceAmount, 0, 10);
                 character.SetEndurance(_enduranceAmount);
+            } else if (Time.timeScale == 0)
+            {
+                _audioSource.Stop();
             }
         }
     }
@@ -64,6 +70,7 @@ public class StateChange : MonoBehaviour
         if (!_isActive || Time.timeScale == 0) return; // Execute only if isActive or the game has not ended
         _isActive = false;
         ChangeColor(_originalColor); // Change element's color
+        _audioSource.Stop();
         // Increase universal endurance when clicking any active object
         character.SetEndurance(-(_enduranceAmount*stimulusAmount));
     }

@@ -176,6 +176,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1162411119}
     - target: {fileID: 8293910010053968657, guid: 5422c4ae3cf744d3a9efa3dc3666defc, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8293910010053968657, guid: 5422c4ae3cf744d3a9efa3dc3666defc, type: 3}
       propertyPath: stimulusAmount
       value: 1
       objectReference: {fileID: 0}
