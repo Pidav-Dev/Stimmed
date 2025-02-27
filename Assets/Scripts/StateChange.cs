@@ -52,6 +52,7 @@ public class StateChange : MonoBehaviour
             if (_isActive && Time.timeScale > 0)
             {
                 _enduranceAmount += stimulusAmount;
+                _enduranceAmount = Math.Clamp(_enduranceAmount, 0, 10);
                 character.SetEndurance(_enduranceAmount);
             }
         }
@@ -64,7 +65,7 @@ public class StateChange : MonoBehaviour
         _isActive = false;
         ChangeColor(_originalColor); // Change element's color
         // Increase universal endurance when clicking any active object
-        character.SetEndurance(-2*(_enduranceAmount));
+        character.SetEndurance(-(_enduranceAmount*stimulusAmount));
     }
 
     // Changes renderer's color
