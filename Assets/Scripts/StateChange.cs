@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using System.Collections;
+using Random = UnityEngine.Random;
 
 public class StateChange : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class StateChange : MonoBehaviour
     private bool _isActive; // Determine if the stimuli is sensory overloading 
     private Renderer _objectRenderer; // Get the renderer of the actual object
     private Color _originalColor; // Get renderer's color
+    private int _enduranceAmount = 1; 
 
     void Start()
     {
@@ -34,6 +37,7 @@ public class StateChange : MonoBehaviour
             if (!_isActive) 
             {
                 _isActive = true;
+                _enduranceAmount = 1;
                 ChangeColor(Color.red);
                 Debug.Log(gameObject.name + " Activated (Color: Red)");
             }
@@ -45,9 +49,10 @@ public class StateChange : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(stimulusInterval); // Before incrementing, it waits for some time
-            if (_isActive)
+            if (_isActive && Time.timeScale > 0)
             {
-                character.SetEndurance(stimulusAmount);
+                _enduranceAmount += stimulusAmount;
+                character.SetEndurance(_enduranceAmount);
             }
         }
     }
@@ -55,11 +60,11 @@ public class StateChange : MonoBehaviour
     // Increase endurance once the user clicks down
     void OnMouseDown()
     {
-        if (!_isActive) return; // Execute only if isActive 
+        if (!_isActive || Time.timeScale == 0) return; // Execute only if isActive or the game has not ended
         _isActive = false;
         ChangeColor(_originalColor); // Change element's color
         // Increase universal endurance when clicking any active object
-        character.SetEndurance(-2*stimulusAmount);
+        character.SetEndurance(-2*(_enduranceAmount));
     }
 
     // Changes renderer's color
