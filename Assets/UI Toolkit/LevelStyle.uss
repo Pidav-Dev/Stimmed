@@ -1,4 +1,3 @@
-/* Existing styles */
 .label {
     left: auto;
     top: 5%;
@@ -19,7 +18,6 @@
     top: 5%;
 }
 
-/* New styles for pause menu */
 #PausePanel {
     display: none;
     position: absolute;
@@ -33,7 +31,14 @@
     -unity-text-align: middle-center;
 }
 
-#ResumeButton, #QuitButton {
+#ResumeButton {
+    width: 150px;
+    height: 150px;
+    font-size: 40px;
+    margin: 10px;
+}
+
+#QuitButton {
     width: 150px;
     height: 150px;
     font-size: 40px;
@@ -47,7 +52,6 @@
     width: auto;
     font-size: 100px;
     -unity-text-align: middle-center;
-    /* Optionally, include centering styles */
     align-items: center;
     justify-content: center;
 }
