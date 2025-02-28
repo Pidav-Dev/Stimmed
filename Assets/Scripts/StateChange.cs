@@ -27,6 +27,14 @@ public class StateChange : MonoBehaviour
         StartCoroutine(IncreaseEndurance()); // Start the concurrent routine of the random activation
     }
 
+    void Update()
+    {
+        if (Time.timeScale == 0f)
+        {
+            _audioSource.Stop();
+        }
+    }
+
     // Concurrently activates the stimuli with a random wait time
     private IEnumerator ActivateRandomly()
     {
@@ -57,9 +65,6 @@ public class StateChange : MonoBehaviour
                 _enduranceAmount += stimulusAmount;
                 _enduranceAmount = Math.Clamp(_enduranceAmount, 0, 10);
                 character.SetEndurance(_enduranceAmount);
-            } else if (Time.timeScale == 0)
-            {
-                _audioSource.Stop();
             }
         }
     }
