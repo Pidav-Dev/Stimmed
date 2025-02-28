@@ -5,6 +5,7 @@ public class TimerManager : MonoBehaviour
 {
     [SerializeField] private float duration = 60f; // Duration of the level
     [SerializeField] private UIDocument uiDocument; // UI document to link the timer to a label 
+    private EnduranceManager _character;
     private float _timeRemaining; // Time remaining for the user to clear the level 
     private Label _timerLabel; // The UI Label that displays the timer in the UXML file
 
@@ -12,6 +13,7 @@ public class TimerManager : MonoBehaviour
     {
         _timeRemaining = duration; // Initialize the timer with level's duration 
         _timerLabel = uiDocument.rootVisualElement.Q<Label>("Timer"); // Find the timer label by its name ("Timer")
+        _character = GetComponent<EnduranceManager>();
         // Gets the time remaining and attach to the UI label
         if (_timerLabel != null)
         {
@@ -28,9 +30,8 @@ public class TimerManager : MonoBehaviour
             _timeRemaining -= Time.deltaTime; // It would be 1 * deltaTime
             
             // When the timer reaches zero or below, clamp it and pause the game
-            if (_timeRemaining <= 0)
+            if (_timeRemaining <= 0 || _character.GetEndurance() >= 100)
             {
-                _timeRemaining = 0;
                 Time.timeScale = 0;  // Pause the game
             }
 

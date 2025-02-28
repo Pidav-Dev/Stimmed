@@ -171,6 +171,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stimulus (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8293910010053968657, guid: 5422c4ae3cf744d3a9efa3dc3666defc, type: 3}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 1162411119}
+    - target: {fileID: 8293910010053968657, guid: 5422c4ae3cf744d3a9efa3dc3666defc, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8293910010053968657, guid: 5422c4ae3cf744d3a9efa3dc3666defc, type: 3}
+      propertyPath: stimulusAmount
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -817,6 +829,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stimulus
       objectReference: {fileID: 0}
+    - target: {fileID: 8293910010053968657, guid: 5422c4ae3cf744d3a9efa3dc3666defc, type: 3}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 1162411119}
+    - target: {fileID: 8293910010053968657, guid: 5422c4ae3cf744d3a9efa3dc3666defc, type: 3}
+      propertyPath: stimulusAmount
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8293910010053968657, guid: 5422c4ae3cf744d3a9efa3dc3666defc, type: 3}
+      propertyPath: stimulusInterval
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1095,6 +1119,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stimulus (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 8293910010053968657, guid: 5422c4ae3cf744d3a9efa3dc3666defc, type: 3}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 1162411119}
+    - target: {fileID: 8293910010053968657, guid: 5422c4ae3cf744d3a9efa3dc3666defc, type: 3}
+      propertyPath: stimulusInterval
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1156,6 +1188,18 @@ PrefabInstance:
     - target: {fileID: 2872322128400941725, guid: 5422c4ae3cf744d3a9efa3dc3666defc, type: 3}
       propertyPath: m_Name
       value: Stimulus (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8293910010053968657, guid: 5422c4ae3cf744d3a9efa3dc3666defc, type: 3}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 1162411119}
+    - target: {fileID: 8293910010053968657, guid: 5422c4ae3cf744d3a9efa3dc3666defc, type: 3}
+      propertyPath: stimulusAmount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8293910010053968657, guid: 5422c4ae3cf744d3a9efa3dc3666defc, type: 3}
+      propertyPath: stimulusInterval
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1287,6 +1331,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stimulus (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8293910010053968657, guid: 5422c4ae3cf744d3a9efa3dc3666defc, type: 3}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 1162411119}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2228,7 +2276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a78bd9c176b4581b68567dd611069d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTime: 60
+  duration: 60
   uiDocument: {fileID: 1079975781}
 --- !u!114 &1162411119
 MonoBehaviour:
@@ -2512,6 +2560,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stimulus (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8293910010053968657, guid: 5422c4ae3cf744d3a9efa3dc3666defc, type: 3}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 1162411119}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

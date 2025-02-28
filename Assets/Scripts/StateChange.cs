@@ -1,14 +1,22 @@
+using System;
 using UnityEngine;
 using System.Collections;
+using Random = UnityEngine.Random;
 
 public class StateChange : MonoBehaviour
 {
+    [SerializeField] private int stimulusAmount = 2; 
+    [SerializeField] private float stimulusInterval = 1f;
+    [SerializeField] private EnduranceManager character;
     private bool _isActive; // Determine if the stimuli is sensory overloading 
     private Renderer _objectRenderer; // Get the renderer of the actual object
     private Color _originalColor; // Get renderer's color
+    private int _enduranceAmount = 1; 
+    private AudioSource _audioSource;
 
     void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         _objectRenderer = GetComponent<Renderer>(); // Assign the Renderer of the actual component 
         // Assign renderer's color to its variable
         if (_objectRenderer != null)
@@ -16,10 +24,11 @@ public class StateChange : MonoBehaviour
             _originalColor = _objectRenderer.material.color;
         }
         StartCoroutine(ActivateRandomly()); // Start the concurrent routine of the random activation
+        StartCoroutine(IncreaseEndurance()); // Start the concurrent routine of the random activation
     }
 
     // Concurrently activates the stimuli with a random wait time
-    IEnumerator ActivateRandomly()
+    private IEnumerator ActivateRandomly()
     {
         // Produces warning but it is needed to allow infinite looping 
         while (true)
@@ -30,8 +39,27 @@ public class StateChange : MonoBehaviour
             if (!_isActive) 
             {
                 _isActive = true;
+                _enduranceAmount = 1;
                 ChangeColor(Color.red);
+                _audioSource.Play();
                 Debug.Log(gameObject.name + " Activated (Color: Red)");
+            }
+        }
+    }
+    
+    private IEnumerator IncreaseEndurance()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(stimulusInterval); // Before incrementing, it waits for some time
+            if (_isActive && Time.timeScale > 0)
+            {
+                _enduranceAmount += stimulusAmount;
+                _enduranceAmount = Math.Clamp(_enduranceAmount, 0, 10);
+                character.SetEndurance(_enduranceAmount);
+            } else if (Time.timeScale == 0)
+            {
+                _audioSource.Stop();
             }
         }
     }
@@ -39,26 +67,16 @@ public class StateChange : MonoBehaviour
     // Increase endurance once the user clicks down
     void OnMouseDown()
     {
-        if (!_isActive) return; 
-        // Execute only if isActive 
+        if (!_isActive || Time.timeScale == 0) return; // Execute only if isActive or the game has not ended
         _isActive = false;
         ChangeColor(_originalColor); // Change element's color
+        _audioSource.Stop();
         // Increase universal endurance when clicking any active object
-        if (EnduranceManager.Instance != null)
-        {
-            Debug.Log("Before Reduction: " + EnduranceManager.Instance.GetEndurance());
-            EnduranceManager.Instance.IncreaseEnduranceByAmount(10); // Integer reduction
-            Debug.Log("After Reduction: " + EnduranceManager.Instance.GetEndurance());
-        }
-        else
-        {
-            Debug.LogError("EnduranceManager instance is missing from the scene!");
-        }
-        Debug.Log(gameObject.name + " Deactivated (Color: Original)");
+        character.SetEndurance(-(_enduranceAmount*stimulusAmount));
     }
 
     // Changes renderer's color
-    void ChangeColor(Color newColor)
+    private void ChangeColor(Color newColor)
     {
         // Instead of _objectRenderer != null, too expensive 
         if (_objectRenderer)
