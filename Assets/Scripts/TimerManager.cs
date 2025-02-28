@@ -9,6 +9,9 @@ public class TimerManager : MonoBehaviour
     private float _timeRemaining; // Time remaining for the user to clear the level 
     private Label _timerLabel; // The UI Label that displays the timer in the UXML file
 
+    private int _minutes;
+    private int _seconds; 
+
     private void Awake()
     {
         _timeRemaining = duration; // Initialize the timer with level's duration 
@@ -28,6 +31,8 @@ public class TimerManager : MonoBehaviour
         {
             // Subtract the elapsed time from the remaining time
             _timeRemaining -= Time.deltaTime; // It would be 1 * deltaTime
+            _minutes = Mathf.FloorToInt(_timeRemaining / 60);
+            _seconds = Mathf.FloorToInt(_timeRemaining % 60);
             
             // When the timer reaches zero or below, clamp it and pause the game
             if (_timeRemaining <= 0 || _character.GetEndurance() >= 100)
@@ -37,7 +42,10 @@ public class TimerManager : MonoBehaviour
 
             // Update the UI label to show the current time remaining
             if (_timerLabel != null)
-                _timerLabel.text = Mathf.CeilToInt(_timeRemaining).ToString();
+                _timerLabel.text = 
+                    (_minutes >= 10 ? "" : "0") + Mathf.CeilToInt(_minutes).ToString() +
+                    ":" +
+                    (_seconds >= 10 ? "" : "0") + Mathf.CeilToInt(_seconds).ToString();
         }
     }
 }

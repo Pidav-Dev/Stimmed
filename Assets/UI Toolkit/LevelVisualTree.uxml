@@ -2,16 +2,16 @@
     <Style src="project://database/Assets/UI%20Toolkit/LevelStyle.uss?fileID=7433441132597879392&amp;guid=a67080915a3ce4379b2c66c2094edf8e&amp;type=3#LevelStyle" />
     <engine:VisualElement name="Container" style="flex-grow: 1; justify-content: flex-start; align-self: auto; align-content: auto;">
         <engine:VisualElement name="EnduranceProgress" style="flex-grow: 1; position: absolute; top: 0; right: 0; bottom: 0; left: 0;">
-            <engine:VisualElement name="top" style="flex-grow: 1; background-color: rgba(255, 134, 134, 0); top: 0; left: 0; right: 0; bottom: auto; -unity-background-image-tint-color: rgb(255, 0, 0); width: 100%; height: 30px; transform-origin: left top;">
-                <engine:VisualElement name="top-fill" style="flex-grow: 1; position: absolute; left: 0; bottom: 0; right: 0; top: 0; height: 100%; background-color: rgb(255, 0, 0); transform-origin: left top;" />
+            <engine:VisualElement name="top" style="flex-grow: 1; background-color: rgba(255, 134, 134, 0); top: 0; left: 0; right: 0; bottom: auto; -unity-background-image-tint-color: rgb(255, 0, 0); width: 100%; height: 30px; transform-origin: left;">
+                <engine:VisualElement name="top-fill" style="flex-grow: 1; position: absolute; left: 0; bottom: 0; right: 0; top: 0; height: 100%; background-color: rgb(255, 0, 0); transform-origin: left;" />
             </engine:VisualElement>
             <engine:VisualElement name="padding" style="flex-grow: 1; width: 100%; height: 100%;" />
             <engine:VisualElement name="horizontal" style="flex-grow: 1; height: 100%; top: 0; bottom: 0; position: absolute; width: 100%;">
-                <engine:VisualElement name="left" style="flex-grow: 1; background-color: rgba(255, 134, 134, 0); top: 0; left: 0; right: auto; bottom: 0; -unity-background-image-tint-color: rgb(255, 0, 0); width: 30px; height: 100%; position: absolute; transform-origin: left top;">
-                    <engine:VisualElement name="left-fill" style="flex-grow: 1; position: absolute; left: 0; bottom: 0; right: 0; top: 0; height: 100%; background-color: rgb(255, 0, 0); transform-origin: left top;" />
+                <engine:VisualElement name="left" style="flex-grow: 1; background-color: rgba(255, 134, 134, 0); top: 0; left: 0; right: auto; bottom: 0; -unity-background-image-tint-color: rgb(255, 0, 0); width: 30px; height: 100%; position: absolute; transform-origin: bottom;">
+                    <engine:VisualElement name="left-fill" style="flex-grow: 1; position: absolute; left: 0; bottom: 0; right: 0; top: 0; height: 100%; background-color: rgb(255, 0, 0); transform-origin: bottom;" />
                 </engine:VisualElement>
-                <engine:VisualElement name="right" style="flex-grow: 1; background-color: rgba(255, 134, 134, 0); top: 0; left: auto; right: 0; bottom: 0; -unity-background-image-tint-color: rgb(255, 0, 0); width: 30px; height: 100%; position: absolute; transform-origin: bottom;">
-                    <engine:VisualElement name="right-fill" style="flex-grow: 1; position: absolute; left: 0; bottom: 0; right: 0; top: 0; height: 100%; background-color: rgb(255, 0, 0); transform-origin: bottom;" />
+                <engine:VisualElement name="right" style="flex-grow: 1; background-color: rgba(255, 134, 134, 0); top: 0; left: auto; right: 0; bottom: 0; -unity-background-image-tint-color: rgb(255, 0, 0); width: 30px; height: 100%; position: absolute; transform-origin: top;">
+                    <engine:VisualElement name="right-fill" style="flex-grow: 1; position: absolute; left: 0; bottom: 0; right: 0; top: 0; height: 100%; background-color: rgb(255, 0, 0); transform-origin: top;" />
                 </engine:VisualElement>
             </engine:VisualElement>
             <engine:VisualElement name="bottom" style="flex-grow: 1; background-color: rgba(255, 134, 134, 0); top: 0; left: 0; right: 0; bottom: auto; -unity-background-image-tint-color: rgb(255, 0, 0); width: 100%; height: 30px; transform-origin: right;">

@@ -45,11 +45,13 @@ public class EnduranceManager : MonoBehaviour
 
     private void UpdateProgressBar()
     {
-        float topAmount = Mathf.Clamp01(Math.Clamp(endurance, 0, MaxEndurance)/100f);
+        float topAmount = Mathf.Clamp01(Math.Clamp(endurance, 0, 25)/25f);
         _topFill.transform.scale = new Vector3(topAmount, 1, 1);
-        _leftFill.transform.scale = new Vector3(1, topAmount, 1);
-        float bottomAmount = Mathf.Clamp01(Math.Clamp(endurance, 0, MaxEndurance)/100f);
+        float rightAmount = Mathf.Clamp01((Math.Clamp(endurance, 25, 50)-25)/25f);
+        _rightFill.transform.scale = new Vector3(1, rightAmount, 1);
+        float bottomAmount = Mathf.Clamp01((Math.Clamp(endurance, 50, 75)-50)/25f);
         _bottomFill.transform.scale = new Vector3(bottomAmount, 1, 1);
-        _rightFill.transform.scale = new Vector3(1, bottomAmount, 1);
+        float leftAmount = Mathf.Clamp01((Math.Clamp(endurance, 75, 100)-75)/25f);
+        _leftFill.transform.scale = new Vector3(1, leftAmount, 1);
     }
 }
