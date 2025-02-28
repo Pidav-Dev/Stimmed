@@ -1,0 +1,29 @@
+.title {
+    font-size: 150px;
+    color: white;
+    -unity-text-align: center;
+    margin-bottom: 70px;
+    text-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.main-menu-button {
+    width: 300px;
+    height: 80px;
+    font-size: 30px;
+    border-radius: 20px;
+    background-image: linear-gradient(to bottom, #4a90e2, #5cb8e2);
+    color: white;
+    padding: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.main-menu-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+}
+
+.main-menu-button:active {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
