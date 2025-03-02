@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5111665665345219454}
   - component: {fileID: 5120972985219869278}
   - component: {fileID: 870502550968402450}
-  - component: {fileID: 8293910010053968657}
   - component: {fileID: 2776186914296411794}
+  - component: {fileID: 8293910010053968657}
   m_Layer: 0
   m_Name: Stimulus
   m_TagString: Untagged
@@ -110,21 +110,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8293910010053968657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2872322128400941725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfbc2a4433b5d427ea746c26dfb3c82b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stimulusAmount: 2
-  stimulusInterval: 1
-  character: {fileID: 0}
 --- !u!82 &2776186914296411794
 AudioSource:
   m_ObjectHideFlags: 0
@@ -222,3 +207,32 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8293910010053968657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2872322128400941725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfbc2a4433b5d427ea746c26dfb3c82b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stimulusAmount: 2
+  stimulusInterval: 1
+  interacted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

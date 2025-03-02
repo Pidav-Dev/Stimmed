@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 public class StateMenu : MonoBehaviour
 {
-    [SerializeField] private UIDocument uiDocument; // Assign this in the Inspector!
+    [SerializeField] private UIDocument uiDocument; // UI document to link the timer to a label 
     // UI elements
     private Button _pauseButton;
     private VisualElement _pausePanel;
@@ -13,9 +13,8 @@ public class StateMenu : MonoBehaviour
     private Button _quitButton;
     private Button _replayButton;
     
-    [SerializeField] private EnduranceManager _enduranceManager;
+    [SerializeField] private EnduranceManager enduranceManager; // Endurance reference to toggle Game Over
     
-
     private void Awake()
     {
         // Find UI elements (should add if (element == null) Debug.LogError("Element not found!"); but bored)
@@ -37,8 +36,12 @@ public class StateMenu : MonoBehaviour
     {
         // Checks if escape button is pressed and then toggles pause (for debugging only) 
         if (Input.GetKeyDown(KeyCode.Escape))
+        {
             TogglePause();
-        if (_enduranceManager && _enduranceManager.GetEndurance() == 100)
+        }
+
+        // Toggle Game Over if the Endurance is worn out
+        if (enduranceManager && enduranceManager.Endurance == EnduranceManager.MaxEndurance)
         {
             _gameOverPanel.style.display = DisplayStyle.Flex;
         }
@@ -69,8 +72,10 @@ public class StateMenu : MonoBehaviour
         #endif
     }
 
+    // Called when the replay button is pressed 
     private void ReplayGame()
     {
+        // Restore the timeScale and reload Level scene
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

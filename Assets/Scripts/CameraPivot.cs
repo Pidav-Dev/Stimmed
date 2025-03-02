@@ -1,23 +1,25 @@
 using UnityEngine;
 
-public class CameraOrbit : MonoBehaviour
+public class Camera : MonoBehaviour
 {
-    // Fields for rotation
+    [Header("Camera Rotation")] // Fields for rotation
     [SerializeField] private Transform pivot; // Point around which to rotate
     [SerializeField] private float rotationSpeed; // Rotation sensitivity
     [SerializeField] private float minVerticalAngle;  // Lower limit for vertical rotation
     [SerializeField] private float maxVerticalAngle; // Upper limit for vertical rotation 
     [SerializeField] private float inertiaDamping; // Camera "throw" (inertia) effect
-    // Fields for zoom
+    
+    [Header("Camera Zoom")] // Fields for zoom
     [SerializeField] private float minZoomDistance; // Minimum distance from the pivot
     [SerializeField] private float maxZoomDistance; // Maximum distance from the pivot
     [SerializeField] private float zoomSpeed; // Zoom sensitivity
+    
     // Private fields for state variables
     private Vector2 _lastTouchPosition; // Last touch position
     private Vector2 _velocity = Vector2.zero; // Camera velocity for inertia effect
     private bool _isDragging; // Active when user is dragging 
     private float _currentVerticalAngle = 15f;
-
+    
     void Start()
     { 
         Application.targetFrameRate = 60; // Set frame rate to 60 fps
@@ -123,7 +125,7 @@ public class CameraOrbit : MonoBehaviour
         transform.eulerAngles = new Vector3(_currentVerticalAngle, transform.eulerAngles.y, 0f);
     }
 
-    // Handle pinch-to-zoom
+    // Get direction and distance of the zoom based on pinch wideness
     private void HandlePinchZoom()
     {
         // Gets the first two touches on screen
