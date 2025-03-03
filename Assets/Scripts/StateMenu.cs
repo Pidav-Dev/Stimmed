@@ -34,12 +34,6 @@ public class StateMenu : MonoBehaviour
 
     private void Update()
     {
-        // Checks if escape button is pressed and then toggles pause (for debugging only) 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            TogglePause();
-        }
-
         // Toggle Game Over if the Endurance is worn out
         if (enduranceManager && enduranceManager.Endurance == EnduranceManager.MaxEndurance)
         {

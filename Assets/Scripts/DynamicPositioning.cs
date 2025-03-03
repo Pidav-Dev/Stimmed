@@ -18,9 +18,13 @@ public class DynamicPositioning : MonoBehaviour
     private Quaternion _originalRotation; // Starting rotation of every movement
     private bool _isReturning; // True if the camera is returning back in place at the end of each movement
     private Transform _target; // Target's transform to reach at every movement
+    
+    private CameraPivot _cameraMovement; // Component to disable camera movement's input when the position is focused
 
     private void Start()
     {
+        // Get component from GameObject 
+        _cameraMovement = GetComponent<CameraPivot>();
         // Save starting position and rotation
         _originalPosition = transform.position;
         _originalRotation = transform.rotation;
@@ -47,6 +51,8 @@ public class DynamicPositioning : MonoBehaviour
     private void UpdatePositionAndRotation()
     {
         Vector3 desiredPosition = CalculateFrontPosition();
+
+        _cameraMovement.enabled = false; 
         
         // Interpolate linearly towards target's position
         transform.position = Vector3.Lerp(
@@ -100,6 +106,7 @@ public class DynamicPositioning : MonoBehaviour
             _isReturning = false; // Stops returning phase
             transform.position = _originalPosition;
             transform.rotation = _originalRotation;
+            _cameraMovement.enabled = true;
         }
     }
 

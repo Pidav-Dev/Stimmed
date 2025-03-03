@@ -12,5 +12,5 @@ EditorBuildSettings:
     path: Assets/Scenes/RoomTestScene.unity
     guid: 66381651e12e04b9b900d49f6a148752
   m_configObjects:
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 8540670302ca94619814106df5645eba, type: 3}
   m_UseUCBPForAssetBundles: 0

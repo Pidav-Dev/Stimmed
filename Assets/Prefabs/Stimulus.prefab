@@ -236,3 +236,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  changePosition:
+    m_PersistentCalls:
+      m_Calls: []
+  returnPosition:
+    m_PersistentCalls:
+      m_Calls: []
+  gestureManager:
+    m_PersistentCalls:
+      m_Calls: []

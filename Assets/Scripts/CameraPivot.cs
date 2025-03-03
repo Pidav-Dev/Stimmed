@@ -1,7 +1,10 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class Camera : MonoBehaviour
+public class CameraPivot : MonoBehaviour
 {
+    [SerializeField] private InputActionReference move;
+    
     [Header("Camera Rotation")] // Fields for rotation
     [SerializeField] private Transform pivot; // Point around which to rotate
     [SerializeField] private float rotationSpeed; // Rotation sensitivity
@@ -15,10 +18,19 @@ public class Camera : MonoBehaviour
     [SerializeField] private float zoomSpeed; // Zoom sensitivity
     
     // Private fields for state variables
-    private Vector2 _lastTouchPosition; // Last touch position
     private Vector2 _velocity = Vector2.zero; // Camera velocity for inertia effect
-    private bool _isDragging; // Active when user is dragging 
     private float _currentVerticalAngle = 15f;
+    private Vector2 _delta;
+
+    void OnEnable()
+    {
+        move.action.Enable();
+    }
+
+    void OnDisable()
+    {
+        move.action.Disable();
+    }
     
     void Start()
     { 
@@ -31,72 +43,12 @@ public class Camera : MonoBehaviour
 
     void Update()
     {
-        // ------------------------------------------ TOUCH CONTROLS ---------------------------------------------------
-        // Handle pinch-to-zoom
-        if (Input.touchCount == 2)
-        {
-            HandlePinchZoom();
-            return; // Does not account for any touch types
-        }
-        
-        Vector2 delta = Vector2.zero; // Reset delta's movement each frame
-
-        // Handle rotation
-        if (Input.touchCount == 1)
-        {
-            Touch touch = Input.GetTouch(0); // Get the first detected touch
-            
-            // Update velocity and touch position when touch begins
-            if (touch.phase == TouchPhase.Began)
-            {
-                _lastTouchPosition = touch.position; // Save touch position
-                _isDragging = true;
-                _velocity = Vector2.zero; // Stops any previous movements
-            }
-            // Update touch's delta when the user is dragging
-            else if (touch.phase == TouchPhase.Moved && _isDragging)
-            {
-                // Calculate movement delta
-                delta = touch.deltaPosition;
-            }
-            // Disables dragging when the touch ends
-            else if (touch.phase == TouchPhase.Ended)
-            {
-                _isDragging = false;
-            }
-        }
-        
-        // ------------------------------------------ MOUSE CONTROLS (Debugging only)  ---------------------------------
-        // Handle pinch-to-zoom using the mouse wheel
-        if (Input.mouseScrollDelta.y != 0)
-        {
-            float scroll = Input.mouseScrollDelta.y;
-            float adjustedScroll = scroll * zoomSpeed * Time.deltaTime;
-            NewCameraDistance(adjustedScroll);
-        }
-        
-        // Handle rotation using mouse 
-        if (Input.GetMouseButtonDown(0))
-        {
-            _lastTouchPosition = Input.mousePosition;
-            _isDragging = true;
-            _velocity = Vector2.zero;
-        }
-        else if (Input.GetMouseButton(0) && _isDragging)
-        {
-            delta = (Vector2)Input.mousePosition - _lastTouchPosition;
-            _lastTouchPosition = Input.mousePosition;
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            _isDragging = false;
-        }
-        // -------------------------------------------------------------------------------------------------------------
+        _delta = move.action.ReadValue<Vector2>();
         
         // While dragging, velocity is updated based on delta and rotation speed
-        if (_isDragging)
+        if (_delta != Vector2.zero)
         {
-            _velocity = delta * (rotationSpeed * Time.deltaTime);
+            _velocity = _delta * (rotationSpeed * Time.deltaTime);
         }
         // While not dragging, the velocity gets damping effects added to simulate inertia
         else
@@ -126,44 +78,15 @@ public class Camera : MonoBehaviour
     }
 
     // Get direction and distance of the zoom based on pinch wideness
-    private void HandlePinchZoom()
+    private void HandlePinchZoom(float delta)
     {
-        // Gets the first two touches on screen
-        Touch touchZero = Input.GetTouch(0);
-        Touch touchOne = Input.GetTouch(1);
-
-        // Calculate previous positions of the touches
-        Vector2 prevTouchZeroPos = touchZero.position - touchZero.deltaPosition;
-        Vector2 prevTouchOnePos = touchOne.position - touchOne.deltaPosition;
-
-        // Calculate the distance between touches in previous and current positions
-        float prevTouchDeltaMag = (prevTouchZeroPos - prevTouchOnePos).magnitude;
-        float touchDeltaMag = (touchZero.position - touchOne.position).magnitude;
-
-        // Determine the change in distance
-        float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
-
         // Calculate the direction from the pivot to the camera
         Vector3 direction = (transform.position - pivot.position).normalized; // Gets distance's direction
         float distance = Vector3.Distance(transform.position, pivot.position); // Gets distance between component and pivot
-        float newDistance = distance + deltaMagnitudeDiff * zoomSpeed * Time.deltaTime; // Determine the distance based on new touches
+        float newDistance = distance + delta * zoomSpeed * Time.deltaTime; // Determine the distance based on new touches
         newDistance = Mathf.Clamp(newDistance, minZoomDistance, maxZoomDistance); // Clamps the distance in [min, max]
 
         // Update camera position along the same direction
-        transform.position = pivot.position + direction * newDistance;
-    }
-    
-    // ------------------------------------------ MOUSE PINCH-TO-ZOOM (Debugging only)  --------------------------------
-    // Handle zoom using the mouse wheel
-    private void NewCameraDistance(float adjustedScroll)
-    {
-        // Calculate the direction from the pivot to the camera
-        Vector3 direction = (transform.position - pivot.position).normalized;
-        float distance = Vector3.Distance(transform.position, pivot.position);
-        float newDistance = distance + adjustedScroll;
-        newDistance = Mathf.Clamp(newDistance, minZoomDistance, maxZoomDistance);
-
-        // Update the camera position
         transform.position = pivot.position + direction * newDistance;
     }
 }
