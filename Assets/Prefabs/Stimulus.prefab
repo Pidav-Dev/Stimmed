@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 870502550968402450}
   - component: {fileID: 2776186914296411794}
   - component: {fileID: 8293910010053968657}
+  - component: {fileID: 9016053373051355967}
   m_Layer: 0
   m_Name: Stimulus
   m_TagString: Untagged
@@ -221,6 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stimulusAmount: 2
   stimulusInterval: 1
+  gestureType: 0
   interacted:
     m_PersistentCalls:
       m_Calls:
@@ -242,6 +244,22 @@ MonoBehaviour:
   returnPosition:
     m_PersistentCalls:
       m_Calls: []
-  gestureManager:
+  gestureHandler:
+    m_PersistentCalls:
+      m_Calls: []
+  tap: {fileID: 6027745203277712679, guid: 8540670302ca94619814106df5645eba, type: 3}
+--- !u!114 &9016053373051355967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2872322128400941725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9f5da062c36b42159c9a3f7ec577f69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  correctGesture:
     m_PersistentCalls:
       m_Calls: []

@@ -3,18 +3,20 @@ using UnityEngine;
 using System.Collections;
 using Random = UnityEngine.Random;
 using UnityEngine.Events;
-// ReSharper disable IteratorNeverReturns
+using UnityEngine.InputSystem;
 
 public class StateChange : MonoBehaviour
 {
     [Header("Endurance Wear")] // Fields for specific wear
     [SerializeField] private int stimulusAmount = 2; // Describes amount of sensory overload added each stimulusInterval
     [SerializeField] private float stimulusInterval = 1f; // Describes how often the amount of endurance changes
+    [SerializeField] private int gestureType;
     
     // Level events
     public UnityEvent<int> interacted; // Called when the stimulus is cleared
     public UnityEvent changePosition; // Called to change the position of the camera to the stimulus
     public UnityEvent returnPosition;  // Called to go back to original position
+    public UnityEvent<int> gestureHandler; 
     
     private bool _isActive; // Determine if the stimuli is sensory overloading 
     private bool _isFocusing; // Determine if the stimulus is being focused on with the camera
@@ -22,6 +24,25 @@ public class StateChange : MonoBehaviour
     private Color _originalColor; // Get renderer's color
     private int _enduranceAmount = 1; // Initial amount of endurance wear
     private AudioSource _audioSource; // Audio component for stimulus feature
+    
+    private CameraInteractions _tap;
+
+    void Awake()
+    {
+        _tap = new CameraInteractions();
+    }
+    
+    void OnEnable()
+    {
+        _tap.Camera.Enable();
+        _tap.Camera.Tap.performed += OnTap; 
+    }
+
+    void OnDisable()
+    {
+        _tap.Camera.Tap.performed -= OnTap; 
+        _tap.Camera.Disable();
+    }
 
     void Start()
     {
@@ -85,23 +106,35 @@ public class StateChange : MonoBehaviour
     }
 
     // Focus on the stimulus or interacts and restore part of endurance with it if already focused
-    void OnMouseDown()
+    private void OnTap(InputAction.CallbackContext context)
     {
-        if (!_isActive || Time.timeScale == 0) return; // Execute only if isActive or the game has not ended
-        // Interacts with the stimulus and restore endurance  
-        if (_isFocusing)
+        if (!_isActive || _isFocusing || Time.timeScale == 0) return; // Execute only if isActive or the game has not ended
+        // Get mouse position and cast a ray from that position
+        Vector2 touchPosition;
+    
+        if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed) 
         {
-            _isActive = false;
-            ChangeColor(_originalColor); // Change element's color to communicate better
-            _audioSource.Stop(); // Stops stimulus audio when interacted
-            interacted?.Invoke(-(_enduranceAmount*stimulusAmount)); // Invokes event for endurance restoration
-            returnPosition?.Invoke(); // Invokes event for position returning 
+            // Mobile: Usa il tocco primario
+            touchPosition = Touchscreen.current.primaryTouch.position.ReadValue();
+        } 
+        else if (Mouse.current != null) 
+        {
+            // PC: Usa il mouse
+            touchPosition = Mouse.current.position.ReadValue();
         }
-        // Focus the camera on the stimulus when firstly interacted
         else
         {
+            touchPosition = Vector2.zero;
+        }
+        Ray ray = Camera.main.ScreenPointToRay(touchPosition);
+
+        // True if the ray intersects the game object
+        if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.gameObject == this.gameObject)
+        {
+            // Interacts with the stimulus and restore endurance  
             _isFocusing = true; 
             changePosition?.Invoke(); // Invokes the event for camera focusing
+            gestureHandler?.Invoke(gestureType);
         }
     }
 
@@ -112,5 +145,15 @@ public class StateChange : MonoBehaviour
         {
             _objectRenderer.material.color = newColor;
         }
+    }
+
+    public void CorrectlyInteracted()
+    {
+        _isActive = false;
+        _isFocusing = false;
+        ChangeColor(_originalColor); // Change element's color to communicate better
+        _audioSource.Stop(); // Stops stimulus audio when interacted
+        interacted?.Invoke(-(_enduranceAmount*stimulusAmount)); // Invokes event for endurance restoration
+        returnPosition?.Invoke(); // Invokes event for position returning 
     }
 }

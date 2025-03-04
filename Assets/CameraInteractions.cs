@@ -99,6 +99,15 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Tap"",
+                    ""type"": ""Button"",
+                    ""id"": ""3d943e8c-f77e-4069-b6f5-d65bf4e80f4a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -123,6 +132,28 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""10955ac5-a5b5-4043-a2bf-1fc8b1c946f9"",
+                    ""path"": ""<Mouse>/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";PC"",
+                    ""action"": ""Tap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9d364ce8-adc7-48ca-90b1-4e12e48791e4"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Mobile"",
+                    ""action"": ""Tap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -132,20 +163,20 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Tap"",
-                    ""type"": ""Value"",
-                    ""id"": ""096c6154-5a0e-4818-9b37-cc7c303f8a1a"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""type"": ""Button"",
+                    ""id"": ""47c2a72a-8dbf-436b-86b5-fb33d15943ad"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""61c782ae-b0f1-4cdd-bdcb-8ea7babbbd5c"",
-                    ""path"": ""<Touchscreen>/position"",
-                    ""interactions"": """",
+                    ""id"": ""5f788d71-e12e-4efa-8fb6-e62f0db6e4e2"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": ""Tap"",
                     ""processors"": """",
                     ""groups"": "";Mobile"",
                     ""action"": ""Tap"",
@@ -154,9 +185,9 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f0bf0479-2460-48e0-94a2-b4ad6f413a1b"",
-                    ""path"": ""<Mouse>/position"",
-                    ""interactions"": ""Press(behavior=1)"",
+                    ""id"": ""18530b01-825d-4930-b42e-a8f74c12cd86"",
+                    ""path"": ""<Mouse>/press"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";PC"",
                     ""action"": ""Tap"",
@@ -204,6 +235,7 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Move = m_Camera.FindAction("Move", throwIfNotFound: true);
+        m_Camera_Tap = m_Camera.FindAction("Tap", throwIfNotFound: true);
         // Stimuli
         m_Stimuli = asset.FindActionMap("Stimuli", throwIfNotFound: true);
         m_Stimuli_Tap = m_Stimuli.FindAction("Tap", throwIfNotFound: true);
@@ -289,6 +321,7 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Camera;
     private List<ICameraActions> m_CameraActionsCallbackInterfaces = new List<ICameraActions>();
     private readonly InputAction m_Camera_Move;
+    private readonly InputAction m_Camera_Tap;
     /// <summary>
     /// Provides access to input actions defined in input action map "Camera".
     /// </summary>
@@ -304,6 +337,10 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Camera/Move".
         /// </summary>
         public InputAction @Move => m_Wrapper.m_Camera_Move;
+        /// <summary>
+        /// Provides access to the underlying input action "Camera/Tap".
+        /// </summary>
+        public InputAction @Tap => m_Wrapper.m_Camera_Tap;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -333,6 +370,9 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @Tap.started += instance.OnTap;
+            @Tap.performed += instance.OnTap;
+            @Tap.canceled += instance.OnTap;
         }
 
         /// <summary>
@@ -347,6 +387,9 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @Tap.started -= instance.OnTap;
+            @Tap.performed -= instance.OnTap;
+            @Tap.canceled -= instance.OnTap;
         }
 
         /// <summary>
@@ -516,6 +559,13 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMove(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Tap" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTap(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Stimuli" which allows adding and removing callbacks.
