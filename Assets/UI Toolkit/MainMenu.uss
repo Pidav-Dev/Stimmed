@@ -1,0 +1,126 @@
+/* Main Container */
+#MainMenuContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Title */
+.title {
+    font-size: 48px;
+    color: white;
+    -unity-font-style: bold;
+    margin-bottom: 50px;
+}
+
+/* Options Button */
+.options-button {
+    width: 120px;
+    height: 40px;
+    background-color: #3498db;
+    border-radius: 20px;
+    color: white;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+.options-button:hover {
+    background-color: #2980b9;
+}
+
+/* Main Menu Button */
+.main-menu-button {
+    width: 240px;
+    height: 60px;
+    background-color: #2980b9;
+    border-radius: 30px;
+    color: white;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
+}
+
+.main-menu-button:hover {
+    background-color: #2c3e50;
+}
+
+/* Level Card */
+.level-card {
+    width: 200px;
+    height: 280px;
+    background-color: #2980b9;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    transition: all 0.3s ease;
+    margin-right: 120px; /* Card spacing */
+}
+
+.level-card.no-margin { /* No margin for last card */
+    margin-right: 0;
+}
+
+.level-card.active {
+    scale: 1.05;
+}
+
+.level-card img {
+    width: 100%;
+    height: 160px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background-size: cover;
+    background-position: center;
+}
+
+.level-card-label {
+    font-size: 20px;
+    color: #1a1a1a;
+    -unity-text-outline-color: white;
+    -unity-text-outline-width: 1px;
+}
+
+/* Pagination Dots */
+.pagination-dot {
+    width: 12px;
+    height: 12px;
+    background-color: #555;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.pagination-dot.active {
+    background-color: #fff;
+}
+
+/* ScrollView */
+#LevelScrollView {
+    /* Remove unsupported scrollbar properties */
+}
+
+/* Carousel Container */
+#LevelCarousel {
+    display: flex;
+    flex-direction: row;
+    transition: left 0.3s ease;
+}
+
+#PlayButton {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 240px;
+    height: 60px;
+    background-color: #2980b9;
+    border-radius: 30px;
+    color: white;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
+}
