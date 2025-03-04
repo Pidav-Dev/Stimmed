@@ -1,35 +1,57 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
-using System.Collections;
 
 public class EnduranceManager : MonoBehaviour
 {
-    public static EnduranceManager Instance; // Used to reference the endurance in other scripts
-    [SerializeField] private int endurance; // Level of endurance that describes character's sensory overload 
-    [SerializeField] private UIDocument uiDocument;
-    private const int MaxEndurance = 100; // Means character is sensory overloaded and you lost
-    private Label _enduranceLabel; // Label where it will be attached 
+    [SerializeField] private UIDocument uiDocument; // UI document to link the timer to a label 
+    
+    private int _endurance; // Level of endurance that describes character's sensory overload 
+    public const int MaxEndurance = 100; // Means character is sensory overloaded and Game Over
+    
+    // Visual elements for the endurance's progress bar
+    private VisualElement _topFill;
+    private VisualElement _rightFill;
+    private VisualElement _bottomFill;
+    private VisualElement _leftFill;
     
     private void Start()
     {
-        endurance = 0; 
-        _enduranceLabel = uiDocument.rootVisualElement.Q<Label>("Endurance"); // Find the UI element in UXML file and attach to it
+        _endurance = 0; // Endurance starts at zero 
+        // Assign reference to actual visual element
+        _topFill = uiDocument.rootVisualElement.Q<VisualElement>("top-fill"); 
+        _rightFill = uiDocument.rootVisualElement.Q<VisualElement>("right-fill"); 
+        _bottomFill = uiDocument.rootVisualElement.Q<VisualElement>("bottom-fill"); 
+        _leftFill = uiDocument.rootVisualElement.Q<VisualElement>("left-fill"); 
     }
 
     private void Update()
     {
-        // Update label
-        _enduranceLabel.text = endurance.ToString();
+        // Update progress bar each frame
+        UpdateProgressBar();
     }
 
-    // Returns endurance following information hiding principles
-    public int GetEndurance()
+    // Divide endurance's progress in for segments, each assigned to one visual element
+    private void UpdateProgressBar()
     {
-        return endurance;
+        // First segment: 0 - 25
+        float topAmount = Mathf.Clamp01(Math.Clamp(_endurance, 0, 25)/25f);
+        _topFill.transform.scale = new Vector3(topAmount, 1, 1);
+        // Second segment: 25 - 50
+        float rightAmount = Mathf.Clamp01((Math.Clamp(_endurance, 25, 50)-25)/25f);
+        _rightFill.transform.scale = new Vector3(1, rightAmount, 1);
+        // Third segment: 50 - 75
+        float bottomAmount = Mathf.Clamp01((Math.Clamp(_endurance, 50, 75)-50)/25f);
+        _bottomFill.transform.scale = new Vector3(bottomAmount, 1, 1);
+        // Fourth segment: 75 - 50
+        float leftAmount = Mathf.Clamp01((Math.Clamp(_endurance, 75, 100)-75)/25f);
+        _leftFill.transform.scale = new Vector3(1, leftAmount, 1);
     }
 
-    public void SetEndurance(int amount)
+    // Getter and setter for the endurance
+    public int Endurance
     {
-        endurance = Mathf.Clamp(endurance + amount, 0, MaxEndurance);
+        get => _endurance;
+        set => _endurance = Mathf.Clamp(_endurance + value, 0, MaxEndurance);
     }
 }

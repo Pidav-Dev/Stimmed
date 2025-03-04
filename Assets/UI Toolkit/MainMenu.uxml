@@ -2,21 +2,30 @@
     <engine:Style src="project://database/Assets/UI Toolkit/MainMenu.uss?fileID=YOUR_FILE_ID&amp;guid=YOUR_GUID&amp;type=3#MainMenu" />
     <engine:VisualElement name="MainMenuContainer" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8);">
         
-        <!-- Title -->
-        <engine:Label text="MY GAME" name="Title" class="title" />
+        <!-- Options Button (Top Left) -->
+        <engine:Button name="OptionsButton" text="Options" class="options-button" style="position: absolute; top: 20px; left: 20px;" />
         
-        <!-- Button Container -->
+        <!-- Title -->
+        <engine:Label text="GIN TONIC" name="Title" class="title" />
+        
+        <!-- Main Button Container -->
         <engine:VisualElement style="flex-direction: column; align-items: center; gap: 30px; margin-top: 50px;">
             
-            <!-- Start Button -->
-            <engine:Button name="StartButton" text="Continue" class="main-menu-button" />
+            <!-- Select Level Button -->
+            <engine:Button name="SelectLevelButton" text="Select Level" class="main-menu-button" />
             
-            <!-- Level Select Button -->
-            <engine:Button name="LevelSelectButton" text="Select Level" class="main-menu-button" />
-            
-            <!-- Options Button -->
-            <engine:Button name="OptionsButton" text="Options" class="main-menu-button" />
-            
+            <!-- Carousel Container (Initially Hidden) -->
+            <engine:VisualElement name="LevelCarouselContainer" style="display: none; width: 100%; margin-top: 30px;">
+                <!-- SCROLL VIEW -->
+                <engine:ScrollView name="LevelScrollView" style="-unity-scrollbar-horizontal: true; -unity-scrollbar-vertical: false; -unity-scrollbar-visible: true;">
+                    <engine:VisualElement name="LevelCarousel" 
+                                          style="display: flex; flex-direction: row; gap: 20px;" />
+                </engine:ScrollView>
+                <!-- Pagination Dots -->
+                <engine:VisualElement name="PaginationDots" style="flex-direction: row; justify-content: center; gap: 8px; margin-top: 10px;" />
+                <!-- Play Button -->
+                <engine:Button name="PlayButton" text="PLAY" class="main-menu-button" style="display: none; margin-top: 20px;" />
+            </engine:VisualElement>
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>
