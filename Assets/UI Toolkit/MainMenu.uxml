@@ -1,29 +1,15 @@
-<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements">
-    <engine:Style src="project://database/Assets/UI Toolkit/MainMenu.uss?fileID=YOUR_FILE_ID&amp;guid=YOUR_GUID&amp;type=3#MainMenu" />
-    <engine:VisualElement name="MainMenuContainer" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8);">
-        
-        <!-- Options Button (Top Left) -->
-        <engine:Button name="OptionsButton" text="Options" class="options-button" style="position: absolute; top: 20px; left: 20px;" />
-        
-        <!-- Title -->
-        <engine:Label text="GIN TONIC" name="Title" class="title" />
-        
-        <!-- Main Button Container -->
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MainMenu.uss?fileID=7433441132597879392&amp;guid=7bc9dd64b69a24cb29acfdcc633a4644&amp;type=3#MainMenu" />
+    <engine:VisualElement name="MainMenuContainer" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; background-image: url(&quot;project://database/Assets/Sprites/AppIcon.jpeg?fileID=2800000&amp;guid=de8abe50592854394bdad2de84214bef&amp;type=3#AppIcon&quot;); -unity-background-scale-mode: scale-and-crop;">
+        <engine:Button name="OptionsButton" text="Options" class="options-button" style="position: absolute; top: 100px; left: 100px;" />
+        <engine:Label text="Stimmed" name="Title" class="title" style="-unity-font-definition: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&amp;guid=d8e7528682e90432bbc399953177fd84&amp;type=3#NotInter-Regular&quot;); -unity-font-style: bold-and-italic; text-shadow: 0 0 0 rgb(0, 0, 0);" />
         <engine:VisualElement style="flex-direction: column; align-items: center; gap: 30px; margin-top: 50px;">
-            
-            <!-- Select Level Button -->
             <engine:Button name="SelectLevelButton" text="Select Level" class="main-menu-button" />
-            
-            <!-- Carousel Container (Initially Hidden) -->
             <engine:VisualElement name="LevelCarouselContainer" style="display: none; width: 100%; margin-top: 30px;">
-                <!-- SCROLL VIEW -->
                 <engine:ScrollView name="LevelScrollView" style="-unity-scrollbar-horizontal: true; -unity-scrollbar-vertical: false; -unity-scrollbar-visible: true;">
-                    <engine:VisualElement name="LevelCarousel" 
-                                          style="display: flex; flex-direction: row; gap: 20px;" />
+                    <engine:VisualElement name="LevelCarousel" style="display: flex; flex-direction: row; gap: 20px;" />
                 </engine:ScrollView>
-                <!-- Pagination Dots -->
                 <engine:VisualElement name="PaginationDots" style="flex-direction: row; justify-content: center; gap: 8px; margin-top: 10px;" />
-                <!-- Play Button -->
                 <engine:Button name="PlayButton" text="PLAY" class="main-menu-button" style="display: none; margin-top: 20px;" />
             </engine:VisualElement>
         </engine:VisualElement>
