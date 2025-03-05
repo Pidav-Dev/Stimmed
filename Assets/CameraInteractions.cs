@@ -176,7 +176,7 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""5f788d71-e12e-4efa-8fb6-e62f0db6e4e2"",
                     ""path"": ""<Touchscreen>/Press"",
-                    ""interactions"": ""Tap"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Mobile"",
                     ""action"": ""Tap"",
