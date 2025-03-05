@@ -18,15 +18,19 @@
                 <engine:VisualElement name="bottom-fill" style="flex-grow: 1; position: absolute; left: 0; bottom: 0; right: 0; top: 0; height: 100%; background-color: rgb(255, 0, 0); transform-origin: right;" />
             </engine:VisualElement>
         </engine:VisualElement>
-        <engine:Button name="Pause" class="button" style="background-image: url(&quot;project://database/Assets/Sprites%20(not%20final)/FakePause.png?fileID=2800000&amp;guid=e7173d05d128249f7b06af7f80a367a2&amp;type=3#FakePause&quot;); background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0);" />
-        <engine:Label text="60" name="Timer" class="timer" />
+        <engine:Button name="Pause" class="button" style="background-image: url(&quot;project://database/Assets/Sprites/FakePause.png?fileID=2800000&amp;guid=e7173d05d128249f7b06af7f80a367a2&amp;type=3#FakePause&quot;); background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0);" />
+        <engine:Label text="60" name="Timer" class="timer" style="right: 0; left: 0;" />
         <engine:VisualElement name="PausePanel" style="display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7);">
             <engine:Label text="Paused" name="PauseLabel" class="label" style="margin-bottom: 20px;" />
             <engine:Button name="ResumeButton" text="Resume" class="button" style="margin-bottom: 10px;" />
             <engine:Button name="QuitButton" text="Quit" class="button" />
         </engine:VisualElement>
         <engine:VisualElement name="GameOverPanel" style="display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: absolute;">
-            <engine:Label text="Game Over" name="PauseLabel" class="label" style="margin-bottom: 20px; display: flex;" />
+            <engine:Label text="Game Over" name="GameOverLabel" class="label" style="margin-bottom: 20px; display: flex; top: 33%;" />
+            <engine:Button name="ReplayButton" text="Replay" class="button" style="margin-bottom: 10px;" />
+        </engine:VisualElement>
+        <engine:VisualElement name="NextLevelPanel" style="display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: absolute;">
+            <engine:Label text="You won!" name="NextLevelLabel" class="label" style="margin-bottom: 20px; display: flex;" />
             <engine:Button name="ReplayButton" text="Replay" class="button" style="margin-bottom: 10px;" />
         </engine:VisualElement>
     </engine:VisualElement>

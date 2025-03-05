@@ -9,6 +9,7 @@ public class StateMenu : MonoBehaviour
     private Button _pauseButton;
     private VisualElement _pausePanel;
     private VisualElement _gameOverPanel;
+    private VisualElement _nextLevelPanel;
     private Button _resumeButton;
     private Button _quitButton;
     private Button _replayButton;
@@ -21,6 +22,7 @@ public class StateMenu : MonoBehaviour
         _pauseButton = uiDocument.rootVisualElement.Q<Button>("Pause");
         _pausePanel = uiDocument.rootVisualElement.Q<VisualElement>("PausePanel");
         _gameOverPanel = uiDocument.rootVisualElement.Q<VisualElement>("GameOverPanel");
+        _nextLevelPanel = uiDocument.rootVisualElement.Q<VisualElement>("NextLevelPanel");
         _resumeButton = uiDocument.rootVisualElement.Q<Button>("ResumeButton");
         _quitButton = uiDocument.rootVisualElement.Q<Button>("QuitButton");
         _replayButton = uiDocument.rootVisualElement.Q<Button>("ReplayButton");
@@ -38,6 +40,10 @@ public class StateMenu : MonoBehaviour
         if (enduranceManager && enduranceManager.Endurance == EnduranceManager.MaxEndurance)
         {
             _gameOverPanel.style.display = DisplayStyle.Flex;
+        } else if (enduranceManager && Time.timeScale == 0 &&
+                   enduranceManager.Endurance == EnduranceManager.MaxEndurance)
+        {
+            _nextLevelPanel.style.display = DisplayStyle.Flex;
         }
     }
 
