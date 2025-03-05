@@ -20,11 +20,13 @@ public class GestureHandler : MonoBehaviour
         _tap = new CameraInteractions();
         _trackedActions.Add(_tap.Stimuli.Tap);
         _trackedActions.Add(_tap.Stimuli.Swipe);
+        _trackedActions.Add(_tap.Stimuli.Longpress);
     }
     
     // Focus on the stimulus or interacts and restore part of endurance with it if already focused
     private void OnGesture(InputAction.CallbackContext context)
     {
+        Debug.Log("OnGesture" + _trackedActions[_gestureType]);
         Vector2 touchPosition;
     
         if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed) 

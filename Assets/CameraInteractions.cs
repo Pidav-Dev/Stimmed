@@ -178,6 +178,15 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Longpress"",
+                    ""type"": ""Button"",
+                    ""id"": ""7ce095d1-aebd-45ab-891f-a806e322bb6f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -222,6 +231,28 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";PC"",
                     ""action"": ""Swipe"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""695daa1a-bb47-42bd-82f0-a64a7ae2787d"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": ""Hold(duration=0.6)"",
+                    ""processors"": """",
+                    ""groups"": "";Mobile"",
+                    ""action"": ""Longpress"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""10a53557-ad1d-492f-82cf-1b4e82e4ba17"",
+                    ""path"": ""<Mouse>/press"",
+                    ""interactions"": ""Hold(duration=0.6)"",
+                    ""processors"": """",
+                    ""groups"": "";PC"",
+                    ""action"": ""Longpress"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -271,6 +302,7 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
         m_Stimuli = asset.FindActionMap("Stimuli", throwIfNotFound: true);
         m_Stimuli_Tap = m_Stimuli.FindAction("Tap", throwIfNotFound: true);
         m_Stimuli_Swipe = m_Stimuli.FindAction("Swipe", throwIfNotFound: true);
+        m_Stimuli_Longpress = m_Stimuli.FindAction("Longpress", throwIfNotFound: true);
     }
 
     ~@CameraInteractions()
@@ -461,6 +493,7 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
     private List<IStimuliActions> m_StimuliActionsCallbackInterfaces = new List<IStimuliActions>();
     private readonly InputAction m_Stimuli_Tap;
     private readonly InputAction m_Stimuli_Swipe;
+    private readonly InputAction m_Stimuli_Longpress;
     /// <summary>
     /// Provides access to input actions defined in input action map "Stimuli".
     /// </summary>
@@ -480,6 +513,10 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Stimuli/Swipe".
         /// </summary>
         public InputAction @Swipe => m_Wrapper.m_Stimuli_Swipe;
+        /// <summary>
+        /// Provides access to the underlying input action "Stimuli/Longpress".
+        /// </summary>
+        public InputAction @Longpress => m_Wrapper.m_Stimuli_Longpress;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -512,6 +549,9 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
             @Swipe.started += instance.OnSwipe;
             @Swipe.performed += instance.OnSwipe;
             @Swipe.canceled += instance.OnSwipe;
+            @Longpress.started += instance.OnLongpress;
+            @Longpress.performed += instance.OnLongpress;
+            @Longpress.canceled += instance.OnLongpress;
         }
 
         /// <summary>
@@ -529,6 +569,9 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
             @Swipe.started -= instance.OnSwipe;
             @Swipe.performed -= instance.OnSwipe;
             @Swipe.canceled -= instance.OnSwipe;
+            @Longpress.started -= instance.OnLongpress;
+            @Longpress.performed -= instance.OnLongpress;
+            @Longpress.canceled -= instance.OnLongpress;
         }
 
         /// <summary>
@@ -631,5 +674,12 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSwipe(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Longpress" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLongpress(InputAction.CallbackContext context);
     }
 }
