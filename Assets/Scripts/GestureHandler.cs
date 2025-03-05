@@ -19,6 +19,7 @@ public class GestureHandler : MonoBehaviour
     {
         _tap = new CameraInteractions();
         _trackedActions.Add(_tap.Stimuli.Tap);
+        _trackedActions.Add(_tap.Stimuli.Swipe);
     }
     
     // Focus on the stimulus or interacts and restore part of endurance with it if already focused

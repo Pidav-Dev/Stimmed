@@ -169,6 +169,15 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Swipe"",
+                    ""type"": ""Value"",
+                    ""id"": ""369fd182-1b46-470d-a722-f99851a92b16"",
+                    ""expectedControlType"": ""Delta"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -191,6 +200,28 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";PC"",
                     ""action"": ""Tap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""22f0ba81-9fd6-4ee0-aa5b-f94caa74c82f"",
+                    ""path"": ""<Touchscreen>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Mobile"",
+                    ""action"": ""Swipe"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5992988b-c8ba-4e91-b793-90f9d03f8a6a"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";PC"",
+                    ""action"": ""Swipe"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -239,6 +270,7 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
         // Stimuli
         m_Stimuli = asset.FindActionMap("Stimuli", throwIfNotFound: true);
         m_Stimuli_Tap = m_Stimuli.FindAction("Tap", throwIfNotFound: true);
+        m_Stimuli_Swipe = m_Stimuli.FindAction("Swipe", throwIfNotFound: true);
     }
 
     ~@CameraInteractions()
@@ -428,6 +460,7 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Stimuli;
     private List<IStimuliActions> m_StimuliActionsCallbackInterfaces = new List<IStimuliActions>();
     private readonly InputAction m_Stimuli_Tap;
+    private readonly InputAction m_Stimuli_Swipe;
     /// <summary>
     /// Provides access to input actions defined in input action map "Stimuli".
     /// </summary>
@@ -443,6 +476,10 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Stimuli/Tap".
         /// </summary>
         public InputAction @Tap => m_Wrapper.m_Stimuli_Tap;
+        /// <summary>
+        /// Provides access to the underlying input action "Stimuli/Swipe".
+        /// </summary>
+        public InputAction @Swipe => m_Wrapper.m_Stimuli_Swipe;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -472,6 +509,9 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
             @Tap.started += instance.OnTap;
             @Tap.performed += instance.OnTap;
             @Tap.canceled += instance.OnTap;
+            @Swipe.started += instance.OnSwipe;
+            @Swipe.performed += instance.OnSwipe;
+            @Swipe.canceled += instance.OnSwipe;
         }
 
         /// <summary>
@@ -486,6 +526,9 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
             @Tap.started -= instance.OnTap;
             @Tap.performed -= instance.OnTap;
             @Tap.canceled -= instance.OnTap;
+            @Swipe.started -= instance.OnSwipe;
+            @Swipe.performed -= instance.OnSwipe;
+            @Swipe.canceled -= instance.OnSwipe;
         }
 
         /// <summary>
@@ -581,5 +624,12 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnTap(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Swipe" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwipe(InputAction.CallbackContext context);
     }
 }
