@@ -35,8 +35,8 @@ public class TimerManager : MonoBehaviour
             // Subtract the elapsed time from the remaining time
             _timeRemaining -= Time.deltaTime; // It would be 1 * deltaTime
             // Assign time components from generalized timer 
-            _minutes = Mathf.FloorToInt(_timeRemaining / 60);
-            _seconds = Mathf.FloorToInt(_timeRemaining % 60);
+            _minutes = Mathf.Clamp(Mathf.FloorToInt(_timeRemaining / 60), 0, 59);
+            _seconds = Mathf.Clamp(Mathf.FloorToInt(_timeRemaining % 60), 0, 59);
             
             // When the timer reaches zero or below, clamp it and pause the game
             if (_timeRemaining <= 0 || _character.Endurance >= 100)
