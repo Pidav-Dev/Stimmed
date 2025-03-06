@@ -112,7 +112,8 @@ public class DynamicPositioning : MonoBehaviour
 
     // Sets new target and stops any returning phase
     public void SetNewTarget(Transform newTarget)
-    { 
+    {
+        if (_target) return;
         _target = newTarget;
         _isReturning = false;
     }

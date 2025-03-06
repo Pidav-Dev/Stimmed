@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 public class StateChange : MonoBehaviour
 {
+    public static bool occupied;
     [Header("Endurance Wear")] // Fields for specific wear
     [SerializeField] private int stimulusAmount = 2; // Describes amount of sensory overload added each stimulusInterval
     [SerializeField] private float stimulusInterval = 1f; // Describes how often the amount of endurance changes
@@ -19,7 +20,7 @@ public class StateChange : MonoBehaviour
     public UnityEvent<int> gestureHandler; 
     
     private bool _isActive; // Determine if the stimuli is sensory overloading 
-    private bool _isFocusing; // Determine if the stimulus is being focused on with the camera
+    //private bool _isFocusing; // Determine if the stimulus is being focused on with the camera
     private Renderer _objectRenderer; // Get the renderer of the actual object
     private Color _originalColor; // Get renderer's color
     private int _enduranceAmount = 1; // Initial amount of endurance wear
@@ -80,7 +81,7 @@ public class StateChange : MonoBehaviour
             if (!_isActive) 
             {
                 _isActive = true;
-                _isFocusing = false;
+                //_isFocusing = false;
                 _enduranceAmount = 1;
                 ChangeColor(Color.red);
                 _audioSource.Play();
@@ -107,8 +108,8 @@ public class StateChange : MonoBehaviour
 
     // Focus on the stimulus or interacts and restore part of endurance with it if already focused
     private void OnTap(InputAction.CallbackContext context)
-    {
-        if (!_isActive || _isFocusing || Time.timeScale == 0) return; // Execute only if isActive or the game has not ended
+    { // || _isFocusing
+        if (!_isActive || occupied || Time.timeScale == 0) return; // Execute only if isActive or the game has not ended
         // Get mouse position and cast a ray from that position
         Vector2 touchPosition;
     
@@ -131,8 +132,9 @@ public class StateChange : MonoBehaviour
         // True if the ray intersects the game object
         if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.gameObject == this.gameObject)
         {
+            occupied = true;
             // Interacts with the stimulus and restore endurance  
-            _isFocusing = true; 
+            // _isFocusing = true; 
             changePosition?.Invoke(); // Invokes the event for camera focusing
             gestureHandler?.Invoke(gestureType);
         }
@@ -150,10 +152,11 @@ public class StateChange : MonoBehaviour
     public void CorrectlyInteracted()
     {
         _isActive = false;
-        _isFocusing = false;
+        // _isFocusing = false;
         ChangeColor(_originalColor); // Change element's color to communicate better
         _audioSource.Stop(); // Stops stimulus audio when interacted
         interacted?.Invoke(-(_enduranceAmount*stimulusAmount)); // Invokes event for endurance restoration
         returnPosition?.Invoke(); // Invokes event for position returning 
+        occupied = false;
     }
 }
