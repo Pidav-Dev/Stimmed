@@ -20,23 +20,22 @@
 .options-button {
     width: 120px;
     height: 40px;
-    background-color: #f28833;
+    background-color: #00baff;
     border-radius: 20px;
     color: white;
     font-size: 14px;
     transition: background-color 0.2s ease;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3); /* Added shadow */
 }
 
 .options-button:hover {
-    background-color: #bd6b2a;
+    background-color: #007daf;
 }
 
 /* Main Menu Button */
 .main-menu-button {
     width: 240px;
     height: 60px;
-    background-color: #f28833;
+    background-color: #00baff;
     border-radius: 30px;
     color: white;
     font-size: 16px;
@@ -44,14 +43,14 @@
 }
 
 .main-menu-button:hover {
-    background-color: #bd6b2a;
+    background-color: #007daf;
 }
 
 /* Level Card */
 .level-card {
     width: 200px;
     height: 280px;
-    background-color: #f28833;
+    background-color: #00baff;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
@@ -65,9 +64,14 @@
     margin-right: 0;
 }
 
+.level-card.hover {
+    scale: 1.05;
+    background-color: #007daf;
+}
+
 .level-card.active {
     scale: 1.05;
-    background-color: #bd6b2a;
+    background-color: #007daf;
 }
 
 .level-card img {
@@ -119,9 +123,13 @@
     align-items: center;
     width: 240px;
     height: 60px;
-    background-color: #f28833;
+    background-color: #00baff;
     border-radius: 30px;
     color: white;
     font-size: 32px;
     transition: background-color 0.2s ease;
+}
+
+#PlayButton:hover {
+    background-color: #007daf;
 }
