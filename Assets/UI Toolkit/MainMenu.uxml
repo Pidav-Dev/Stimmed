@@ -1,10 +1,9 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/MainMenu.uss?fileID=7433441132597879392&amp;guid=7bc9dd64b69a24cb29acfdcc633a4644&amp;type=3#MainMenu" />
     <engine:VisualElement name="MainMenuContainer" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; background-image: url(&quot;project://database/Assets/Sprites/AppIcon.jpeg?fileID=2800000&amp;guid=de8abe50592854394bdad2de84214bef&amp;type=3#AppIcon&quot;); -unity-background-scale-mode: scale-and-crop;">
-        <engine:Button name="OptionsButton" text="Options" class="options-button" style="position: absolute; top: 100px; left: 100px;" />
-        <engine:Label text="Stimmed" name="Title" class="title" style="-unity-font-definition: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&amp;guid=d8e7528682e90432bbc399953177fd84&amp;type=3#NotInter-Regular&quot;); -unity-font-style: bold-and-italic; text-shadow: 0 0 0 rgb(0, 0, 0);" />
+        <engine:Button name="OptionsButton" text="Options" class="options-button" style="position: absolute; top: 100px; left: 100px; font-size: 22px; -unity-font-style: bold;" />
+        <engine:Label text="Stimmed" name="Title" class="title" style="-unity-font-definition: url(&quot;project://database/Assets/Fonts/onetwopunch-bb.italic.otf?fileID=12800000&amp;guid=5f00f41e7017d40b0affe55556856df1&amp;type=3#onetwopunch-bb.italic&quot;); -unity-font-style: bold-and-italic; text-shadow: 10 10 50 rgb(0, 0, 0); text-overflow: clip; -unity-text-align: middle-center; white-space: normal; width: 1410px;" />
         <engine:VisualElement style="flex-direction: column; align-items: center; gap: 30px; margin-top: 50px;">
-            <engine:Button name="SelectLevelButton" text="Select Level" class="main-menu-button" />
             <engine:VisualElement name="LevelCarouselContainer" style="display: none; width: 100%; margin-top: 30px;">
                 <engine:ScrollView name="LevelScrollView" style="-unity-scrollbar-horizontal: true; -unity-scrollbar-vertical: false; -unity-scrollbar-visible: true;">
                     <engine:VisualElement name="LevelCarousel" style="display: flex; flex-direction: row; gap: 20px;" />
@@ -13,5 +12,6 @@
                 <engine:Button name="PlayButton" text="PLAY" class="main-menu-button" style="display: none; margin-top: 20px;" />
             </engine:VisualElement>
         </engine:VisualElement>
+        <engine:Button name="SelectLevelButton" text="Select Level" class="main-menu-button" style="font-size: 28px; -unity-font-style: bold; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
     </engine:VisualElement>
 </engine:UXML>
