@@ -20,13 +20,15 @@ public class CameraPivot : MonoBehaviour
     // Private fields for state variables
     private Vector2 _velocity = Vector2.zero; // Camera velocity for inertia effect
     private float _currentVerticalAngle = 15f;
-    private Vector2 _delta;
+    private Vector2 _delta; // Variable for movement detection
 
+    // Enables Input Actions when the component is enabled 
     void OnEnable()
     {
         move.action.Enable();
     }
 
+    // Disables Input Actions when the component is disabled 
     void OnDisable()
     {
         move.action.Disable();
@@ -43,7 +45,7 @@ public class CameraPivot : MonoBehaviour
 
     void Update()
     {
-        _delta = move.action.ReadValue<Vector2>();
+        _delta = move.action.ReadValue<Vector2>(); // Get input values in form of Vector2
         
         // While dragging, velocity is updated based on delta and rotation speed
         if (_delta != Vector2.zero)
@@ -75,18 +77,5 @@ public class CameraPivot : MonoBehaviour
 
         // Set the clamped vertical rotation
         transform.eulerAngles = new Vector3(_currentVerticalAngle, transform.eulerAngles.y, 0f);
-    }
-
-    // Get direction and distance of the zoom based on pinch wideness
-    private void HandlePinchZoom(float delta)
-    {
-        // Calculate the direction from the pivot to the camera
-        Vector3 direction = (transform.position - pivot.position).normalized; // Gets distance's direction
-        float distance = Vector3.Distance(transform.position, pivot.position); // Gets distance between component and pivot
-        float newDistance = distance + delta * zoomSpeed * Time.deltaTime; // Determine the distance based on new touches
-        newDistance = Mathf.Clamp(newDistance, minZoomDistance, maxZoomDistance); // Clamps the distance in [min, max]
-
-        // Update camera position along the same direction
-        transform.position = pivot.position + direction * newDistance;
     }
 }

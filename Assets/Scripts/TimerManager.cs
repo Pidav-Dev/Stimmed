@@ -3,9 +3,9 @@ using UnityEngine.UIElements;
 
 public class TimerManager : MonoBehaviour
 {
-   [Header("Level Timer")]
+    [Header("Level Timer")]
     [SerializeField] private float duration = 60f; // Duration of the level
-    [SerializeField] private UIDocument uiDocument; 
+    [SerializeField] private UIDocument uiDocument; // UI document to link the timer to a label 
     
     private EnduranceManager _character; // Component from which get the endurance
     private float _timeRemaining; // Time in seconds remaining for the user to clear the level 

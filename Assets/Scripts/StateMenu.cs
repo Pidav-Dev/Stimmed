@@ -40,7 +40,9 @@ public class StateMenu : MonoBehaviour
         if (enduranceManager && enduranceManager.Endurance == EnduranceManager.MaxEndurance)
         {
             _gameOverPanel.style.display = DisplayStyle.Flex;
-        } else if (enduranceManager && Time.timeScale == 0 &&
+        }
+        // Toggle Next Level if Endurance is not worn out 
+        else if (enduranceManager && Time.timeScale == 0 &&
                    enduranceManager.Endurance == EnduranceManager.MaxEndurance)
         {
             _nextLevelPanel.style.display = DisplayStyle.Flex;

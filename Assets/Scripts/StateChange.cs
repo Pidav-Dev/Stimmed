@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 
 public class StateChange : MonoBehaviour
 {
+    private static bool occupied; // Control variable to let the user work on one stimulus at time
+    
     [Header("Endurance Wear")] // Fields for specific wear
     [SerializeField] private int stimulusAmount = 2; // Describes amount of sensory overload added each stimulusInterval
     [SerializeField] private float stimulusInterval = 1f; // Describes how often the amount of endurance changes
@@ -19,25 +21,27 @@ public class StateChange : MonoBehaviour
     public UnityEvent<int> gestureHandler; 
     
     private bool _isActive; // Determine if the stimuli is sensory overloading 
-    private bool _isFocusing; // Determine if the stimulus is being focused on with the camera
+    //private bool _isFocusing; // Determine if the stimulus is being focused on with the camera
     private Renderer _objectRenderer; // Get the renderer of the actual object
     private Color _originalColor; // Get renderer's color
     private int _enduranceAmount = 1; // Initial amount of endurance wear
     private AudioSource _audioSource; // Audio component for stimulus feature
     
-    private CameraInteractions _tap;
+    private CameraInteractions _tap; // Input map for interactions
 
     void Awake()
     {
-        _tap = new CameraInteractions();
+        _tap = new CameraInteractions(); // Create a new instance of the input map
     }
     
+    // Enables Input Actions and subscribe to a behaviour to it when the component is enabled 
     void OnEnable()
     {
         _tap.Camera.Enable();
         _tap.Camera.Tap.performed += OnTap; 
     }
 
+    // Disables Input Actions and unsubscribe from its behaviour to it when the component is disabled 
     void OnDisable()
     {
         _tap.Camera.Tap.performed -= OnTap; 
@@ -61,10 +65,7 @@ public class StateChange : MonoBehaviour
     void Update()
     {
         // Stops audio if game is on freeze
-        if (Time.timeScale == 0f)
-        {
-            _audioSource.Stop();
-        }
+        if (Time.timeScale == 0f)  _audioSource.Stop();
     }
 
     // Concurrently activates the stimuli with a random wait time
@@ -79,11 +80,10 @@ public class StateChange : MonoBehaviour
             // Stimulus activation
             if (!_isActive) 
             {
-                _isActive = true;
-                _isFocusing = false;
+                _isActive = true; // Trigger stimulus 
                 _enduranceAmount = 1;
-                ChangeColor(Color.red);
-                _audioSource.Play();
+                ChangeColor(Color.red); // Make the stimulus visible
+                _audioSource.Play(); // Let the user hear the stimulus
             }
         }
     }
@@ -108,52 +108,54 @@ public class StateChange : MonoBehaviour
     // Focus on the stimulus or interacts and restore part of endurance with it if already focused
     private void OnTap(InputAction.CallbackContext context)
     {
-        if (!_isActive || _isFocusing || Time.timeScale == 0) return; // Execute only if isActive or the game has not ended
-        // Get mouse position and cast a ray from that position
-        Vector2 touchPosition;
+        // Execute only if isActive, if the user is not working on another stimulus or if the game has not ended
+        if (!_isActive || occupied || Time.timeScale == 0) return; 
+        
+        Vector2 touchPosition;  // Get position to raycast
     
+        // Get primary touch position from mobile
         if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed) 
         {
-            // Mobile: Usa il tocco primario
             touchPosition = Touchscreen.current.primaryTouch.position.ReadValue();
         } 
+        // Get mouse position from PC
         else if (Mouse.current != null) 
         {
-            // PC: Usa il mouse
             touchPosition = Mouse.current.position.ReadValue();
         }
+        // In case the two input methods are not successful
         else
         {
             touchPosition = Vector2.zero;
         }
+        
+        // Raycast from touch position
         Ray ray = Camera.main.ScreenPointToRay(touchPosition);
 
-        // True if the ray intersects the game object
+        // True if the ray intersects the caller game object
         if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.gameObject == this.gameObject)
         {
+            occupied = true; // The user is working with some stimulus and impede other interactions 
             // Interacts with the stimulus and restore endurance  
-            _isFocusing = true; 
             changePosition?.Invoke(); // Invokes the event for camera focusing
-            gestureHandler?.Invoke(gestureType);
+            gestureHandler?.Invoke(gestureType); // Invokes the event for correct gesture detection
         }
     }
 
     // Changes renderer's color
     private void ChangeColor(Color newColor)
     {
-        if (_objectRenderer)
-        {
-            _objectRenderer.material.color = newColor;
-        }
+        if (_objectRenderer) _objectRenderer.material.color = newColor;
     }
 
+    // The user correctly cleared the stimulus, so the endurance needs to be restored 
     public void CorrectlyInteracted()
     {
-        _isActive = false;
-        _isFocusing = false;
+        _isActive = false; // Allow stimulus to be respawned
         ChangeColor(_originalColor); // Change element's color to communicate better
         _audioSource.Stop(); // Stops stimulus audio when interacted
         interacted?.Invoke(-(_enduranceAmount*stimulusAmount)); // Invokes event for endurance restoration
         returnPosition?.Invoke(); // Invokes event for position returning 
+        occupied = false; // The user can interact back with other stimuli
     }
 }

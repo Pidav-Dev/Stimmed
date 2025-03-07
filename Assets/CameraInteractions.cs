@@ -187,6 +187,15 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shake"",
+                    ""type"": ""Value"",
+                    ""id"": ""ae4f70c7-5773-4116-8aff-d7b08c2c9c71"",
+                    ""expectedControlType"": ""Vector3"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -255,6 +264,17 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
                     ""action"": ""Longpress"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""196f48c6-e782-4bf9-846f-e87c760f5b4a"",
+                    ""path"": ""<Accelerometer>/acceleration"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Mobile"",
+                    ""action"": ""Shake"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -303,6 +323,7 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
         m_Stimuli_Tap = m_Stimuli.FindAction("Tap", throwIfNotFound: true);
         m_Stimuli_Swipe = m_Stimuli.FindAction("Swipe", throwIfNotFound: true);
         m_Stimuli_Longpress = m_Stimuli.FindAction("Longpress", throwIfNotFound: true);
+        m_Stimuli_Shake = m_Stimuli.FindAction("Shake", throwIfNotFound: true);
     }
 
     ~@CameraInteractions()
@@ -494,6 +515,7 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Stimuli_Tap;
     private readonly InputAction m_Stimuli_Swipe;
     private readonly InputAction m_Stimuli_Longpress;
+    private readonly InputAction m_Stimuli_Shake;
     /// <summary>
     /// Provides access to input actions defined in input action map "Stimuli".
     /// </summary>
@@ -517,6 +539,10 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Stimuli/Longpress".
         /// </summary>
         public InputAction @Longpress => m_Wrapper.m_Stimuli_Longpress;
+        /// <summary>
+        /// Provides access to the underlying input action "Stimuli/Shake".
+        /// </summary>
+        public InputAction @Shake => m_Wrapper.m_Stimuli_Shake;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -552,6 +578,9 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
             @Longpress.started += instance.OnLongpress;
             @Longpress.performed += instance.OnLongpress;
             @Longpress.canceled += instance.OnLongpress;
+            @Shake.started += instance.OnShake;
+            @Shake.performed += instance.OnShake;
+            @Shake.canceled += instance.OnShake;
         }
 
         /// <summary>
@@ -572,6 +601,9 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
             @Longpress.started -= instance.OnLongpress;
             @Longpress.performed -= instance.OnLongpress;
             @Longpress.canceled -= instance.OnLongpress;
+            @Shake.started -= instance.OnShake;
+            @Shake.performed -= instance.OnShake;
+            @Shake.canceled -= instance.OnShake;
         }
 
         /// <summary>
@@ -681,5 +713,12 @@ public partial class @CameraInteractions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnLongpress(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Shake" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnShake(InputAction.CallbackContext context);
     }
 }

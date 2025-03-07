@@ -52,7 +52,7 @@ public class DynamicPositioning : MonoBehaviour
     {
         Vector3 desiredPosition = CalculateFrontPosition();
 
-        _cameraMovement.enabled = false; 
+        _cameraMovement.enabled = false; // Disables input controls for camera when focused on a stimulus
         
         // Interpolate linearly towards target's position
         transform.position = Vector3.Lerp(
@@ -106,13 +106,14 @@ public class DynamicPositioning : MonoBehaviour
             _isReturning = false; // Stops returning phase
             transform.position = _originalPosition;
             transform.rotation = _originalRotation;
-            _cameraMovement.enabled = true;
+            _cameraMovement.enabled = true; // Enables again input controls when back from focus 
         }
     }
 
     // Sets new target and stops any returning phase
     public void SetNewTarget(Transform newTarget)
-    { 
+    {
+        if (_target) return; // Don't allow target shifting while focused
         _target = newTarget;
         _isReturning = false;
     }
