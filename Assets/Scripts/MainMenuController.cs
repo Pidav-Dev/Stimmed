@@ -94,7 +94,7 @@ public class MainMenuController : MonoBehaviour
             _carouselContainer.Add(card);
     
             if (i == levels.Count - 1)
-                card.AddToClassList("no-margin"); // 移除最后一张卡片的右边距
+                card.AddToClassList("no-margin");
         }
 
         CreatePaginationDots();

@@ -66,12 +66,8 @@ public class StateMenu : MonoBehaviour
     // Called when the quit button is pressed
     private void QuitGame()
     {
-        // Preprocessor directive that checks if the application is running in the Unity Editor
-        #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false; // Uses Unity Editor's way of closing the app
-        #else
-        Application.Quit(); // Uses the particular build's way of closing the app if it is not running in the Unity Editor
-        #endif
+        Debug.Log("Loading MainMenu...");
+        SceneManager.LoadScene("MainMenu"); // Loads MainMenu scene
     }
 
     // Called when the replay button is pressed 

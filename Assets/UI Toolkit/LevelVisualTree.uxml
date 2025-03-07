@@ -5,7 +5,7 @@
             <engine:VisualElement name="top" style="flex-grow: 1; background-color: rgba(255, 134, 134, 0); top: 0; left: 0; right: 0; bottom: auto; -unity-background-image-tint-color: rgb(255, 0, 0); width: 100%; height: 30px; transform-origin: left;">
                 <engine:VisualElement name="top-fill" style="flex-grow: 1; position: absolute; left: 0; bottom: 0; right: 0; top: 0; height: 100%; background-color: rgb(255, 0, 0); transform-origin: left;" />
             </engine:VisualElement>
-            <engine:VisualElement name="padding" style="flex-grow: 1; width: 100%; height: 100%;" />
+            <engine:VisualElement name="padding" style="pointer-events: none; width: 100%; height: 100%;" />
             <engine:VisualElement name="horizontal" style="flex-grow: 1; height: 100%; top: 0; bottom: 0; position: absolute; width: 100%;">
                 <engine:VisualElement name="left" style="flex-grow: 1; background-color: rgba(255, 134, 134, 0); top: 0; left: 0; right: auto; bottom: 0; -unity-background-image-tint-color: rgb(255, 0, 0); width: 30px; height: 100%; position: absolute; transform-origin: bottom;">
                     <engine:VisualElement name="left-fill" style="flex-grow: 1; position: absolute; left: 0; bottom: 0; right: 0; top: 0; height: 100%; background-color: rgb(255, 0, 0); transform-origin: bottom;" />
@@ -18,11 +18,12 @@
                 <engine:VisualElement name="bottom-fill" style="flex-grow: 1; position: absolute; left: 0; bottom: 0; right: 0; top: 0; height: 100%; background-color: rgb(255, 0, 0); transform-origin: right;" />
             </engine:VisualElement>
         </engine:VisualElement>
-        <engine:Button name="Pause" class="button" style="background-image: url(&quot;project://database/Assets/Sprites/FakePause.png?fileID=2800000&amp;guid=e7173d05d128249f7b06af7f80a367a2&amp;type=3#FakePause&quot;); background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0);" />
+        <engine:Button name="Pause" class="button" style="background-image: url(&quot;project://database/Assets/Sprites/FakePause.png?fileID=2800000&amp;guid=e7173d05d128249f7b06af7f80a367a2&amp;type=3#FakePause&quot;); background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); top: auto;" />
         <engine:Label text="60" name="Timer" class="timer" style="right: 0; left: 0;" />
         <engine:VisualElement name="PausePanel" style="display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7);">
-            <engine:Label text="Paused" name="PauseLabel" class="label" style="margin-bottom: 20px;" />
+            <engine:Label text="Paused" name="PauseLabel" class="label" style="margin-top: 120px;" />
             <engine:Button name="ResumeButton" text="Resume" class="button" style="margin-bottom: 10px;" />
+            <engine:Button name="ReplayButton" text="Replay" class="button" style="margin-bottom: 10px;" />
             <engine:Button name="QuitButton" text="Quit" class="button" />
         </engine:VisualElement>
         <engine:VisualElement name="GameOverPanel" style="display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: absolute;">

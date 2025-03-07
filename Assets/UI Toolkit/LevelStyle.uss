@@ -11,10 +11,13 @@
     -unity-text-align: middle-center;
     position: absolute;
 }
-.button {
-    width: 150px;
-    height: 150px;
-    top: 5%;
+/* Add to USS */
+#Pause {
+    position: absolute;
+    left: 20px;   /* Adjust as needed */
+    top: 20px; /* Positions it in the bottom-left */
+    width: 200px;
+    height: 200px;
 }
 /* New styles for pause menu */
 #PausePanel {
@@ -28,26 +31,26 @@
     font-size: 100px;
     -unity-text-align: middle-center;
 }
-#ResumeButton, #QuitButton {
-    width: 500px;
+#ResumeButton, #QuitButton, #ReplayButton {
+    top: 5%;
+    width: 400px;
     height: 150px;
     font-size: 40px;
     margin: 0;
     border-radius: 40px;
+    background-color: #00baff;
 }
-#ResumeButton {
-    background-color: #debfe8; /* Example green color */
-}
-#QuitButton {
-    background-color: #debfe8; /* Example red color */
+#ResumeButton:hover, #QuitButton:hover, #ReplayButton:hover{
+    background-color: #007daf;
 }
 .timer {
-    position: absolute;
-    right: 2%;
-    top: 5%;
-    width: auto;
-    font-size: 100px;
-    -unity-text-align: middle-center;
     align-items: center;
     justify-content: center;
+    align-self: center;
+    align-content: center;
+    top: 5%;
+    width: 50px;
+    font-size: 100px;
+    -unity-text-align: middle-center;
+    position: relative;
 }
