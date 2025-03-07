@@ -31,7 +31,7 @@
     font-size: 100px;
     -unity-text-align: middle-center;
 }
-#ResumeButton, #QuitButton, #ReplayButton {
+#ResumeButton, #QuitButton, #NextLevelReplayButton, #GameOverReplayButton, #ReplayButton {
     top: 5%;
     width: 400px;
     height: 150px;
@@ -40,7 +40,7 @@
     border-radius: 40px;
     background-color: #00baff;
 }
-#ResumeButton:hover, #QuitButton:hover, #ReplayButton:hover{
+#ResumeButton:hover, #QuitButton:hover, #ReplayButton:hover, #NextLevelReplayButton:hover, #GameOverReplayButton:hover {
     background-color: #007daf;
 }
 .timer {

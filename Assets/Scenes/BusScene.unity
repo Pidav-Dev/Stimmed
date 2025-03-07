@@ -540,6 +540,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   gestureDelay: 0.5
+  shakeThreshold: 0.1
 --- !u!4 &195995066 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 718864067441281827, guid: 5422c4ae3cf744d3a9efa3dc3666defc, type: 3}
@@ -2025,6 +2026,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   gestureDelay: 0.5
+  shakeThreshold: 0.1
 --- !u!1 &945656617
 GameObject:
   m_ObjectHideFlags: 0
@@ -3274,6 +3276,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   gestureDelay: 0.5
+  shakeThreshold: 0.1
 --- !u!1 &1641560711
 GameObject:
   m_ObjectHideFlags: 0

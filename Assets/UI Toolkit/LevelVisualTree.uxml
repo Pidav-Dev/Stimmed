@@ -28,11 +28,11 @@
         </engine:VisualElement>
         <engine:VisualElement name="GameOverPanel" style="display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: absolute;">
             <engine:Label text="Game Over" name="GameOverLabel" class="label" style="margin-bottom: 20px; display: flex; top: 33%;" />
-            <engine:Button name="ReplayButton" text="Replay" class="button" style="margin-bottom: 10px;" />
+            <engine:Button name="GameOverReplayButton" text="Replay" class="button" style="margin-bottom: 10px;" />
         </engine:VisualElement>
         <engine:VisualElement name="NextLevelPanel" style="display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); position: absolute;">
             <engine:Label text="You won!" name="NextLevelLabel" class="label" style="margin-bottom: 20px; display: flex;" />
-            <engine:Button name="ReplayButton" text="Replay" class="button" style="margin-bottom: 10px;" />
+            <engine:Button name="NextLevelReplayButton" text="Replay" class="button" style="margin-bottom: 10px;" />
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>

@@ -4,7 +4,9 @@ using UnityEngine.UIElements;
 
 public class StateMenu : MonoBehaviour
 {
-    [SerializeField] private UIDocument uiDocument; // UI document to link the timer to a label 
+    [SerializeField] private UIDocument uiDocument;
+    [SerializeField] private EnduranceManager enduranceManager;
+
     // UI elements
     private Button _pauseButton;
     private VisualElement _pausePanel;
@@ -12,69 +14,62 @@ public class StateMenu : MonoBehaviour
     private VisualElement _nextLevelPanel;
     private Button _resumeButton;
     private Button _quitButton;
-    private Button _replayButton;
-    
-    [SerializeField] private EnduranceManager enduranceManager; // Endurance reference to toggle Game Over
-    
+    private Button _pauseReplayButton;
+    private Button _gameOverReplayButton;
+    private Button _nextLevelReplayButton;
+
     private void Awake()
     {
-        // Find UI elements (should add if (element == null) Debug.LogError("Element not found!"); but bored)
+        // Get base UI elements
         _pauseButton = uiDocument.rootVisualElement.Q<Button>("Pause");
         _pausePanel = uiDocument.rootVisualElement.Q<VisualElement>("PausePanel");
         _gameOverPanel = uiDocument.rootVisualElement.Q<VisualElement>("GameOverPanel");
         _nextLevelPanel = uiDocument.rootVisualElement.Q<VisualElement>("NextLevelPanel");
         _resumeButton = uiDocument.rootVisualElement.Q<Button>("ResumeButton");
         _quitButton = uiDocument.rootVisualElement.Q<Button>("QuitButton");
-        _replayButton = uiDocument.rootVisualElement.Q<Button>("ReplayButton");
+        _pauseReplayButton = _pausePanel.Q<Button>("ReplayButton");
+        _gameOverReplayButton = _gameOverPanel.Q<Button>("GameOverReplayButton");
+        _nextLevelReplayButton = _nextLevelPanel.Q<Button>("NextLevelReplayButton");
 
         // Add event listeners
         _pauseButton.clicked += TogglePause;
         _resumeButton.clicked += ResumeGame;
         _quitButton.clicked += QuitGame;
-        _replayButton.clicked += ReplayGame;
+        _pauseReplayButton.clicked += ReplayGame;
+        _gameOverReplayButton.clicked += ReplayGame;
+        _nextLevelReplayButton.clicked += ReplayGame;
     }
-
+    
     private void Update()
     {
-        // Toggle Game Over if the Endurance is worn out
-        if (enduranceManager && enduranceManager.Endurance == EnduranceManager.MaxEndurance)
+        if (enduranceManager == null) return;
+
+        // Show Game Over panel when endurance is maxed
+        if (enduranceManager.Endurance == EnduranceManager.MaxEndurance)
         {
             _gameOverPanel.style.display = DisplayStyle.Flex;
         }
-        // Toggle Next Level if Endurance is not worn out 
-        else if (enduranceManager && Time.timeScale == 0 &&
-                   enduranceManager.Endurance == EnduranceManager.MaxEndurance)
+        // Show Next Level panel when paused with max endurance
+        else if (Time.timeScale == 0 && enduranceManager.Endurance == EnduranceManager.MaxEndurance)
         {
             _nextLevelPanel.style.display = DisplayStyle.Flex;
         }
     }
 
-    // Called when the pause button is pressed 
     private void TogglePause()
     {
-        bool isPaused = Time.timeScale == 0f; // Checks if the application is running 
-        Time.timeScale = isPaused ? 1f : 0f; // Resume based on the previous checking 
-        _pausePanel.style.display = isPaused ? DisplayStyle.None : DisplayStyle.Flex; // Displays the panel based on pause
+        bool isPaused = Time.timeScale == 0f;
+        Time.timeScale = isPaused ? 1f : 0f;
+        _pausePanel.style.display = isPaused ? DisplayStyle.None : DisplayStyle.Flex;
     }
 
-    // Called when the resume button is pressed 
-    private void ResumeGame()
-    {
-        TogglePause();
-    }
+    private void ResumeGame() => TogglePause();
 
-    // Called when the quit button is pressed
-    private void QuitGame()
-    {
-        Debug.Log("Loading MainMenu...");
-        SceneManager.LoadScene("MainMenu"); // Loads MainMenu scene
-    }
+    private void QuitGame() => SceneManager.LoadScene("MainMenu");
 
-    // Called when the replay button is pressed 
     private void ReplayGame()
     {
-        // Restore the timeScale and reload Level scene
-        Time.timeScale = 1f;
+        Time.timeScale = 1f; // Ensure time is unpaused
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
