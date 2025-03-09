@@ -12,7 +12,9 @@ public class StateChange : MonoBehaviour
     [Header("Endurance Wear")] // Fields for specific wear
     [SerializeField] private int stimulusAmount = 2; // Describes amount of sensory overload added each stimulusInterval
     [SerializeField] private float stimulusInterval = 1f; // Describes how often the amount of endurance changes
-    [SerializeField] private int gestureType;
+    [SerializeField] private int gestureType; // Map the gesture types defined in GestureHandler to int
+    [SerializeField] private Material activeMaterial; // First material to show when the stimulus is active
+    [SerializeField] private Material clearedMaterial; // First material to show when the stimulus is clear
     
     // Level events
     public UnityEvent<int> interacted; // Called when the stimulus is cleared
@@ -21,9 +23,7 @@ public class StateChange : MonoBehaviour
     public UnityEvent<int> gestureHandler; 
     
     private bool _isActive; // Determine if the stimuli is sensory overloading 
-    //private bool _isFocusing; // Determine if the stimulus is being focused on with the camera
     private Renderer _objectRenderer; // Get the renderer of the actual object
-    private Color _originalColor; // Get renderer's color
     private int _enduranceAmount = 1; // Initial amount of endurance wear
     private AudioSource _audioSource; // Audio component for stimulus feature
     
@@ -53,11 +53,7 @@ public class StateChange : MonoBehaviour
         // Assign the component of the very own GameObject
         _audioSource = GetComponent<AudioSource>();
         _objectRenderer = GetComponent<Renderer>(); 
-        // Assign renderer's color to its variable
-        if (_objectRenderer != null)
-        {
-            _originalColor = _objectRenderer.material.color;
-        }
+        ChangeOutline(false);
         StartCoroutine(ActivateRandomly()); // Start the concurrent routine of the random activation
         StartCoroutine(IncreaseEndurance()); // Start the concurrent routine of the random activation
     }
@@ -82,7 +78,7 @@ public class StateChange : MonoBehaviour
             {
                 _isActive = true; // Trigger stimulus 
                 _enduranceAmount = 1;
-                ChangeColor(Color.red); // Make the stimulus visible
+                ChangeOutline(true); // Make the stimulus visible
                 _audioSource.Play(); // Let the user hear the stimulus
             }
         }
@@ -133,7 +129,7 @@ public class StateChange : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(touchPosition);
 
         // True if the ray intersects the caller game object
-        if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.gameObject == this.gameObject)
+        if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.gameObject == gameObject)
         {
             occupied = true; // The user is working with some stimulus and impede other interactions 
             // Interacts with the stimulus and restore endurance  
@@ -142,17 +138,22 @@ public class StateChange : MonoBehaviour
         }
     }
 
-    // Changes renderer's color
-    private void ChangeColor(Color newColor)
+    // Changes renderer's outline based on activeness
+    private void ChangeOutline(bool active)
     {
-        if (_objectRenderer) _objectRenderer.material.color = newColor;
+        if (active)
+        {
+            _objectRenderer.material = activeMaterial;
+            return; 
+        }
+        _objectRenderer.material = clearedMaterial;
     }
 
     // The user correctly cleared the stimulus, so the endurance needs to be restored 
     public void CorrectlyInteracted()
     {
         _isActive = false; // Allow stimulus to be respawned
-        ChangeColor(_originalColor); // Change element's color to communicate better
+        ChangeOutline(false); // Change element's color to communicate better
         _audioSource.Stop(); // Stops stimulus audio when interacted
         interacted?.Invoke(-(_enduranceAmount*stimulusAmount)); // Invokes event for endurance restoration
         returnPosition?.Invoke(); // Invokes event for position returning 

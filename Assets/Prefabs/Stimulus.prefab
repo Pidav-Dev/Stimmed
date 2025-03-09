@@ -223,6 +223,8 @@ MonoBehaviour:
   stimulusAmount: 2
   stimulusInterval: 1
   gestureType: 0
+  activeMaterial: {fileID: 0}
+  clearedMaterial: {fileID: 0}
   interacted:
     m_PersistentCalls:
       m_Calls:

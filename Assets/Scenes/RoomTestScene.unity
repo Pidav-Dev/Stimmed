@@ -243,6 +243,8 @@ MonoBehaviour:
   stimulusAmount: 2
   stimulusInterval: 1
   gestureType: 0
+  activeMaterial: {fileID: 0}
+  clearedMaterial: {fileID: 0}
   interacted:
     m_PersistentCalls:
       m_Calls: []
@@ -292,9 +294,6 @@ MonoBehaviour:
   minVerticalAngle: 0
   maxVerticalAngle: 30
   inertiaDamping: 0.8
-  minZoomDistance: 0
-  maxZoomDistance: 0
-  zoomSpeed: 0
 --- !u!81 &206728643
 AudioListener:
   m_ObjectHideFlags: 0
@@ -698,6 +697,8 @@ MonoBehaviour:
   stimulusAmount: 2
   stimulusInterval: 1
   gestureType: 0
+  activeMaterial: {fileID: 0}
+  clearedMaterial: {fileID: 0}
   interacted:
     m_PersistentCalls:
       m_Calls: []
@@ -1085,6 +1086,8 @@ MonoBehaviour:
   stimulusAmount: 2
   stimulusInterval: 1
   gestureType: 0
+  activeMaterial: {fileID: 0}
+  clearedMaterial: {fileID: 0}
   interacted:
     m_PersistentCalls:
       m_Calls: []

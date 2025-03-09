@@ -12,11 +12,6 @@ public class CameraPivot : MonoBehaviour
     [SerializeField] private float maxVerticalAngle; // Upper limit for vertical rotation 
     [SerializeField] private float inertiaDamping; // Camera "throw" (inertia) effect
     
-    [Header("Camera Zoom")] // Fields for zoom
-    [SerializeField] private float minZoomDistance; // Minimum distance from the pivot
-    [SerializeField] private float maxZoomDistance; // Maximum distance from the pivot
-    [SerializeField] private float zoomSpeed; // Zoom sensitivity
-    
     // Private fields for state variables
     private Vector2 _velocity = Vector2.zero; // Camera velocity for inertia effect
     private float _currentVerticalAngle = 15f;

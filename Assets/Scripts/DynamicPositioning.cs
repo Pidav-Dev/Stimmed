@@ -25,9 +25,6 @@ public class DynamicPositioning : MonoBehaviour
     {
         // Get component from GameObject 
         _cameraMovement = GetComponent<CameraPivot>();
-        // Save starting position and rotation
-        _originalPosition = transform.position;
-        _originalRotation = transform.rotation;
     }
 
     private void Update()
@@ -36,14 +33,19 @@ public class DynamicPositioning : MonoBehaviour
         if(_isReturning)
         {
             ReturnToOriginalPosition();
-            return;
-        }
-
+        } 
         // Update position and rotation if some target exists 
-        if(_target)
+        else if (_target)
         {
             _isReturning = false; // If a stimulus is targeted, the camera needs to reach it not to return in place 
             UpdatePositionAndRotation();
+        }
+        // The original position is updated every frame so that once out of focus the user will not lose the position
+        else
+        {
+            // Save starting position and rotation
+            _originalPosition = transform.position;
+            _originalRotation = transform.rotation;
         }
     }
 
