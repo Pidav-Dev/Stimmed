@@ -17,6 +17,7 @@ public class StateMenu : MonoBehaviour
     private Button _pauseReplayButton;
     private Button _gameOverReplayButton;
     private Button _nextLevelReplayButton;
+    private bool _isPaused; 
 
     private void Awake()
     {
@@ -42,7 +43,7 @@ public class StateMenu : MonoBehaviour
     
     private void Update()
     {
-        if (enduranceManager == null) return;
+        if (!enduranceManager) return;
 
         // Show Game Over panel when endurance is maxed
         if (enduranceManager.Endurance == EnduranceManager.MaxEndurance)
@@ -50,7 +51,7 @@ public class StateMenu : MonoBehaviour
             _gameOverPanel.style.display = DisplayStyle.Flex;
         }
         // Show Next Level panel when paused with max endurance
-        else if (Time.timeScale == 0 && enduranceManager.Endurance == EnduranceManager.MaxEndurance)
+        else if (Time.timeScale == 0 && enduranceManager.Endurance != EnduranceManager.MaxEndurance && !_isPaused)
         {
             _nextLevelPanel.style.display = DisplayStyle.Flex;
         }
@@ -58,9 +59,9 @@ public class StateMenu : MonoBehaviour
 
     private void TogglePause()
     {
-        bool isPaused = Time.timeScale == 0f;
-        Time.timeScale = isPaused ? 1f : 0f;
-        _pausePanel.style.display = isPaused ? DisplayStyle.None : DisplayStyle.Flex;
+        _isPaused = Time.timeScale == 0f;
+        Time.timeScale = _isPaused ? 1f : 0f;
+        _pausePanel.style.display = _isPaused ? DisplayStyle.None : DisplayStyle.Flex;
     }
 
     private void ResumeGame() => TogglePause();
