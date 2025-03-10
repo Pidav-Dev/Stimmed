@@ -70,17 +70,17 @@ public class StateChange : MonoBehaviour
         // Produces warning but it is needed to allow infinite looping 
         while (true)
         {
-            float waitTime = Random.Range(0f, 10f); // Determine a random wait time for the activation 
+            if (_isActive) continue; // 
+            // Longer wait if visible, Shorter wait if outside FOV
+            float waitTime = IsVisible() ? Random.Range(15f, 20f) : Random.Range(2f, 10f); 
+
             // After the determined time the color is changed and the control is given back to the parent
             yield return new WaitForSeconds(waitTime);
             // Stimulus activation
-            if (!_isActive) 
-            {
-                _isActive = true; // Trigger stimulus 
-                _enduranceAmount = 1;
-                ChangeOutline(true); // Make the stimulus visible
-                _audioSource.Play(); // Let the user hear the stimulus
-            }
+            _isActive = true; // Trigger stimulus 
+            _enduranceAmount = 1;
+            ChangeOutline(true); // Make the stimulus visible
+            _audioSource.Play(); // Let the user hear the stimulus
         }
     }
     
@@ -94,9 +94,11 @@ public class StateChange : MonoBehaviour
             // Wear endurance only if the stimulus is active and the game is not on freeze
             if (_isActive && Time.timeScale > 0)
             {
+                /*
                 _enduranceAmount += stimulusAmount;
-                _enduranceAmount = Math.Clamp(_enduranceAmount, 0, 10);
-                interacted?.Invoke(_enduranceAmount); // Invoke event to actually wear endurance
+                _enduranceAmount = Math.Clamp(_enduranceAmount, 0, 7);
+                */
+                interacted?.Invoke(stimulusAmount); // Invoke event to actually wear endurance
             }
         }
     }
@@ -155,8 +157,17 @@ public class StateChange : MonoBehaviour
         _isActive = false; // Allow stimulus to be respawned
         ChangeOutline(false); // Change element's color to communicate better
         _audioSource.Stop(); // Stops stimulus audio when interacted
-        interacted?.Invoke(-(_enduranceAmount*stimulusAmount)); // Invokes event for endurance restoration
+        interacted?.Invoke(-(_enduranceAmount)); // Invokes event for endurance restoration
         returnPosition?.Invoke(); // Invokes event for position returning 
         occupied = false; // The user can interact back with other stimuli
+    }
+    
+    private bool IsVisible()
+    {
+        if (Camera.main == null) return false;
+        Vector3 viewportPoint = Camera.main.WorldToViewportPoint(transform.position);
+        return viewportPoint.z > 0 && 
+               viewportPoint.x >= 0 && viewportPoint.x <= 1 && 
+               viewportPoint.y >= 0 && viewportPoint.y <= 1;
     }
 }
