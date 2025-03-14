@@ -220,8 +220,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 882933735}
-  - component: {fileID: 882933734}
   - component: {fileID: 882933733}
+  - component: {fileID: 882933736}
   m_Layer: 0
   m_Name: MainMenu
   m_TagString: Untagged
@@ -248,31 +248,6 @@ MonoBehaviour:
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
---- !u!114 &882933734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 882933732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 380b198b027684e5db1d609ec4dfb3fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levels:
-  - Name: Bus Level
-    ThumbnailPath: Screenshot
-    SceneName: BusScene
-  - Name: Room Test
-    ThumbnailPath: Screenshot
-    SceneName: RoomTestScene
-  - Name: Bus Level
-    ThumbnailPath: Screenshot
-    SceneName: BusScene
-  - Name: Room Test
-    ThumbnailPath: Screenshot
-    SceneName: RoomTestScene
 --- !u!4 &882933735
 Transform:
   m_ObjectHideFlags: 0
@@ -288,6 +263,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &882933736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882933732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 115ee92695a7f4a2b95f33b9f19a0066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiDocument: {fileID: 882933733}
 --- !u!1 &1940787892
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,6 +286,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1940787894}
   - component: {fileID: 1940787893}
+  - component: {fileID: 1940787895}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -385,6 +374,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1940787895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940787892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
