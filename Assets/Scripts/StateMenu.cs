@@ -4,73 +4,82 @@ using UnityEngine.UIElements;
 
 public class StateMenu : MonoBehaviour
 {
-    [SerializeField] private UIDocument uiDocument;
-    [SerializeField] private EnduranceManager enduranceManager;
-
+    [SerializeField] private UIDocument uiDocument; // UI document to link the timer to a label 
+    
     // UI elements
     private Button _pauseButton;
-    private VisualElement _pausePanel;
-    private VisualElement _gameOverPanel;
-    private VisualElement _nextLevelPanel;
-    private Button _resumeButton;
-    private Button _quitButton;
-    private Button _pauseReplayButton;
-    private Button _gameOverReplayButton;
-    private Button _nextLevelReplayButton;
-    private bool _isPaused; 
-
+    private VisualElement _overlayPanel;
+    private Label _label; 
+    private Button _playButton;
+    private Button _replayButton;
+    private Button _mainMenuButton;
+    
     private void Awake()
     {
+        // Get elements' reference 
+        var root = uiDocument.rootVisualElement;
+        
         // Get base UI elements
-        _pauseButton = uiDocument.rootVisualElement.Q<Button>("Pause");
-        _pausePanel = uiDocument.rootVisualElement.Q<VisualElement>("PausePanel");
-        _gameOverPanel = uiDocument.rootVisualElement.Q<VisualElement>("GameOverPanel");
-        _nextLevelPanel = uiDocument.rootVisualElement.Q<VisualElement>("NextLevelPanel");
-        _resumeButton = uiDocument.rootVisualElement.Q<Button>("ResumeButton");
-        _quitButton = uiDocument.rootVisualElement.Q<Button>("QuitButton");
-        _pauseReplayButton = _pausePanel.Q<Button>("ReplayButton");
-        _gameOverReplayButton = _gameOverPanel.Q<Button>("GameOverReplayButton");
-        _nextLevelReplayButton = _nextLevelPanel.Q<Button>("NextLevelReplayButton");
-
+        _pauseButton = root.Q<Button>("Pause");
+        _overlayPanel = root.Q<VisualElement>("OverlayPanel");
+        _label = _overlayPanel.Q<Label>("Label");
+        _playButton = _overlayPanel.Q<Button>("PlayButton");
+        _replayButton = _overlayPanel.Q<Button>("ReplayButton");
+        _mainMenuButton = _overlayPanel.Q<Button>("MainMenuButton");
+        
         // Add event listeners
         _pauseButton.clicked += TogglePause;
-        _resumeButton.clicked += ResumeGame;
-        _quitButton.clicked += QuitGame;
-        _pauseReplayButton.clicked += ReplayGame;
-        _gameOverReplayButton.clicked += ReplayGame;
-        _nextLevelReplayButton.clicked += ReplayGame;
-    }
-    
-    private void Update()
-    {
-        if (!enduranceManager) return;
-
-        // Show Game Over panel when endurance is maxed
-        if (enduranceManager.Endurance == EnduranceManager.MaxEndurance)
-        {
-            _gameOverPanel.style.display = DisplayStyle.Flex;
-        }
-        // Show Next Level panel when paused with max endurance
-        else if (Time.timeScale == 0 && enduranceManager.Endurance != EnduranceManager.MaxEndurance && !_isPaused)
-        {
-            _nextLevelPanel.style.display = DisplayStyle.Flex;
-        }
+        _replayButton.clicked += ReplayGame;
+        _mainMenuButton.clicked += MainMenuGame; 
     }
 
+    // Called when the user taps on pause button or resume button after pause
     private void TogglePause()
     {
-        _isPaused = Time.timeScale == 0f;
-        Time.timeScale = _isPaused ? 1f : 0f;
-        _pausePanel.style.display = _isPaused ? DisplayStyle.None : DisplayStyle.Flex;
+        // Pause or resume the game based on actual state
+        var isPaused = Time.timeScale == 0f;
+        Time.timeScale = isPaused ? 1f : 0f;
+        
+        _label.text = "Paused"; // Show correct label
+        
+        // Show the correct button in the Overlay Panel to resume the game
+        _playButton.text = "Resume";
+        _playButton.clicked += TogglePause;
+        
+        // Show the Overlay Panel based on actual state
+        _overlayPanel.style.display = isPaused ? DisplayStyle.None : DisplayStyle.Flex;
     }
-
-    private void ResumeGame() => TogglePause();
-
-    private void QuitGame() => SceneManager.LoadScene("MainMenu");
-
+    
+    // Called when user taps on replay button in Overlay Panel
     private void ReplayGame()
     {
         Time.timeScale = 1f; // Ensure time is unpaused
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single); // Reload actual scene
+    }
+
+    // Called when user taps on main menu button in Overlay Panel
+    private void MainMenuGame()
+    {
+        Time.timeScale = 1f; // Ensure time is unpaused
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single); // Load Main Menu scene
+    }
+
+    // Invoked by event when the user loses
+    public void GameOver()
+    {
+        Time.timeScale = 0f; // Pause the game 
+        _label.text = "Game Over"; // Show correct label
+        _playButton.style.display = DisplayStyle.None; // Remove Resume button
+        _overlayPanel.style.display = DisplayStyle.Flex; // Show Overlay Panel
+    }
+
+    // Invoked by event when the user clears the level 
+    public void NextLevel()
+    {
+        Time.timeScale = 0f; // Pause the game 
+        _label.text = "Level cleared"; // Show correct label
+        _playButton.text = "NextLevel"; // Show the correct button in the Overlay Panel to play next level
+        _playButton.clicked += MainMenuGame; // TO CHANGE IN NEXT LEVEL
+        _overlayPanel.style.display = DisplayStyle.Flex; // Show Overlay Panel
     }
 }

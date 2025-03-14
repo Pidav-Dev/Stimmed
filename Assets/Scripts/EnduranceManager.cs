@@ -1,13 +1,16 @@
 using System;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.Events;
 
 public class EnduranceManager : MonoBehaviour
 {
     [SerializeField] private UIDocument uiDocument; // UI document to link the timer to a label 
     
+    public UnityEvent losingCondition; // Event to manage the losing condition
+    
     private int _endurance; // Level of endurance that describes character's sensory overload 
-    public const int MaxEndurance = 100; // Means character is sensory overloaded and Game Over
+    private const int MaxEndurance = 100; // Means character is sensory overloaded and Game Over
     
     // Visual elements for the endurance's progress bar
     private VisualElement _topFill;
@@ -27,6 +30,7 @@ public class EnduranceManager : MonoBehaviour
 
     private void Update()
     {
+        if (_endurance == MaxEndurance) losingCondition?.Invoke(); // When the user maxes out the endurance, it loses
         // Update progress bar each frame
         UpdateProgressBar();
     }

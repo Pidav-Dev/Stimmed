@@ -94,10 +94,6 @@ public class StateChange : MonoBehaviour
             // Wear endurance only if the stimulus is active and the game is not on freeze
             if (_isActive && Time.timeScale > 0)
             {
-                /*
-                _enduranceAmount += stimulusAmount;
-                _enduranceAmount = Math.Clamp(_enduranceAmount, 0, 7);
-                */
                 interacted?.Invoke(stimulusAmount); // Invoke event to actually wear endurance
             }
         }
@@ -152,7 +148,7 @@ public class StateChange : MonoBehaviour
         _objectRenderer.material = clearedMaterial;
     }
 
-    // The user correctly cleared the stimulus, so the endurance needs to be restored 
+    // Invoked by event when the user correctly cleared the stimulus, so the endurance needs to be restored 
     public void CorrectlyInteracted()
     {
         _isActive = false; // Allow stimulus to be respawned
@@ -163,6 +159,7 @@ public class StateChange : MonoBehaviour
         occupied = false; // The user can interact back with other stimuli
     }
     
+    // Checks if the stimulus enters the FOV
     private bool IsVisible()
     {
         if (Camera.main == null) return false;

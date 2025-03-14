@@ -112,7 +112,7 @@ public class DynamicPositioning : MonoBehaviour
         }
     }
 
-    // Sets new target and stops any returning phase
+    // Invoked by event when user taps on stimulus, sets new target and stops any returning phase
     public void SetNewTarget(Transform newTarget)
     {
         if (_target) return; // Don't allow target shifting while focused
@@ -120,7 +120,7 @@ public class DynamicPositioning : MonoBehaviour
         _isReturning = false;
     }
 
-    // Starts returning and resets target
+    // Invoked by event when user clears the stimulus, starts returning and resets target
     public void StartReturning()
     {
         _isReturning = true;

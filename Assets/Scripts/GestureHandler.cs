@@ -40,7 +40,7 @@ public class GestureHandler : MonoBehaviour
         }
     }
 
-    // Assign desired gesture after the needed delay to let the focus animation end
+    // Invoked by event when user taps on stimulus, assign desired gesture after the needed delay to let the focus animation end
     public async void TapGesture(int i)
     {
         await Task.Delay((int)(gestureDelay*1000)); 

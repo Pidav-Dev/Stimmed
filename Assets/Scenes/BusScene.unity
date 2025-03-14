@@ -1633,6 +1633,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 60
   uiDocument: {fileID: 1079975781}
+  WinningCondition:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1819617983}
+        m_TargetAssemblyTypeName: StateMenu, Assembly-CSharp
+        m_MethodName: NextLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &778619785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1646,6 +1661,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiDocument: {fileID: 1079975781}
+  LosingCondition:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1819617983}
+        m_TargetAssemblyTypeName: StateMenu, Assembly-CSharp
+        m_MethodName: GameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &807792521
 PrefabInstance:
   m_ObjectHideFlags: 0

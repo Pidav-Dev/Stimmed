@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 public class TimerManager : MonoBehaviour
@@ -6,6 +7,8 @@ public class TimerManager : MonoBehaviour
     [Header("Level Timer")]
     [SerializeField] private float duration = 60f; // Duration of the level
     [SerializeField] private UIDocument uiDocument; // UI document to link the timer to a label 
+    
+    public UnityEvent winningCondition; // Event to manage the winning condition
     
     private EnduranceManager _character; // Component from which get the endurance
     private float _timeRemaining; // Time in seconds remaining for the user to clear the level 
@@ -52,6 +55,11 @@ public class TimerManager : MonoBehaviour
                     ":" +
                     (_seconds >= 10 ? "" : "0") + Mathf.CeilToInt(_seconds);
             }
+        } 
+        // When the timer runs out, the user wins
+        else if (_timeRemaining <= 0)
+        {
+            winningCondition?.Invoke();
         }
     }
 }
