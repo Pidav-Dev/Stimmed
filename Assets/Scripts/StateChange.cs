@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using System.Collections;
 using Random = UnityEngine.Random;
@@ -65,6 +64,7 @@ public class StateChange : MonoBehaviour
     }
 
     // Concurrently activates the stimuli with a random wait time
+    // ReSharper disable Unity.PerformanceAnalysis
     private IEnumerator ActivateRandomly()
     {
         // Produces warning but it is needed to allow infinite looping 
@@ -143,6 +143,7 @@ public class StateChange : MonoBehaviour
     // Changes renderer's outline based on activeness
     private void ChangeOutline(bool active)
     {
+        if (!_objectRenderer) return; 
         if (active)
         {
             _objectRenderer.material = activeMaterial;
@@ -157,7 +158,7 @@ public class StateChange : MonoBehaviour
         _isActive = false; // Allow stimulus to be respawned
         ChangeOutline(false); // Change element's color to communicate better
         _audioSource.Stop(); // Stops stimulus audio when interacted
-        interacted?.Invoke(-(_enduranceAmount)); // Invokes event for endurance restoration
+        interacted?.Invoke(-_enduranceAmount); // Invokes event for endurance restoration
         returnPosition?.Invoke(); // Invokes event for position returning 
         occupied = false; // The user can interact back with other stimuli
     }
@@ -166,8 +167,6 @@ public class StateChange : MonoBehaviour
     {
         if (Camera.main == null) return false;
         Vector3 viewportPoint = Camera.main.WorldToViewportPoint(transform.position);
-        return viewportPoint.z > 0 && 
-               viewportPoint.x >= 0 && viewportPoint.x <= 1 && 
-               viewportPoint.y >= 0 && viewportPoint.y <= 1;
+        return viewportPoint is { z: > 0, x: >= 0 and <= 1, y: >= 0 and <= 1 };
     }
 }
