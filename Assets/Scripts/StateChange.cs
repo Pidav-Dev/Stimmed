@@ -12,8 +12,6 @@ public class StateChange : MonoBehaviour
     [SerializeField] private int stimulusAmount = 2; // Describes amount of sensory overload added each stimulusInterval
     [SerializeField] private float stimulusInterval = 1f; // Describes how often the amount of endurance changes
     [SerializeField] private int gestureType; // Map the gesture types defined in GestureHandler to int
-    [SerializeField] private Material activeMaterial; // First material to show when the stimulus is active
-    [SerializeField] private Material clearedMaterial; // First material to show when the stimulus is clear
     
     // Level events
     public UnityEvent<int> interacted; // Called when the stimulus is cleared
@@ -22,7 +20,6 @@ public class StateChange : MonoBehaviour
     public UnityEvent<int> gestureHandler; 
     
     private bool _isActive; // Determine if the stimuli is sensory overloading 
-    private Renderer _objectRenderer; // Get the renderer of the actual object
     private int _enduranceAmount = 1; // Initial amount of endurance wear
     private AudioSource _audioSource; // Audio component for stimulus feature
     
@@ -51,7 +48,6 @@ public class StateChange : MonoBehaviour
     {
         // Assign the component of the very own GameObject
         _audioSource = GetComponent<AudioSource>();
-        _objectRenderer = GetComponent<Renderer>(); 
         ChangeOutline(false);
         StartCoroutine(ActivateRandomly()); // Start the concurrent routine of the random activation
         StartCoroutine(IncreaseEndurance()); // Start the concurrent routine of the random activation
@@ -139,13 +135,7 @@ public class StateChange : MonoBehaviour
     // Changes renderer's outline based on activeness
     private void ChangeOutline(bool active)
     {
-        if (!_objectRenderer) return; 
-        if (active)
-        {
-            _objectRenderer.material = activeMaterial;
-            return; 
-        }
-        _objectRenderer.material = clearedMaterial;
+        Debug.Log("ACTIVATED" + active);
     }
 
     // Invoked by event when the user correctly cleared the stimulus, so the endurance needs to be restored 

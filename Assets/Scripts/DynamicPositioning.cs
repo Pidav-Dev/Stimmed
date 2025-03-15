@@ -12,12 +12,13 @@ public class DynamicPositioning : MonoBehaviour
 
     [Header("Return Settings")] // Fields for the return speed and position
     [SerializeField] private float returnSpeed = 4f; // Speed in which the camera will move to get back to position
-    [SerializeField] private float positionThreshold = 0.1f; // Threshold behind which determine returning arrival 
+    [SerializeField] private float positionThreshold = 1f; // Threshold behind which determine returning arrival 
 
     private Vector3 _originalPosition; // Starting position of every movement
     private Quaternion _originalRotation; // Starting rotation of every movement
     private bool _isReturning; // True if the camera is returning back in place at the end of each movement
     private Transform _target; // Target's transform to reach at every movement
+    private BusMovement _busMovement; // Camera's random bus movements' component
     
     private CameraPivot _cameraMovement; // Component to disable camera movement's input when the position is focused
 
@@ -25,6 +26,7 @@ public class DynamicPositioning : MonoBehaviour
     {
         // Get component from GameObject 
         _cameraMovement = GetComponent<CameraPivot>();
+        _busMovement = GetComponent<BusMovement>();
     }
 
     private void Update()
@@ -108,7 +110,8 @@ public class DynamicPositioning : MonoBehaviour
             _isReturning = false; // Stops returning phase
             transform.position = _originalPosition;
             transform.rotation = _originalRotation;
-            _cameraMovement.enabled = true; // Enables again input controls when back from focus 
+            _cameraMovement.enabled = true; // Enables again input controls when back from focus
+            _busMovement.enabled = true;  // Enables again random bus movement when back from focus
         }
     }
 
@@ -118,6 +121,7 @@ public class DynamicPositioning : MonoBehaviour
         if (_target) return; // Don't allow target shifting while focused
         _target = newTarget;
         _isReturning = false;
+        _busMovement.enabled = false; // Disables random bus movement when entering focus
     }
 
     // Invoked by event when user clears the stimulus, starts returning and resets target
