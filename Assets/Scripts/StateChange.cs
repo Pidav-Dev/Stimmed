@@ -66,7 +66,10 @@ public class StateChange : MonoBehaviour
         // Produces warning but it is needed to allow infinite looping 
         while (true)
         {
-            if (_isActive) continue; // 
+            while (_isActive)
+            {
+                yield return null; // Yield each frame to prevent freezing
+            }
             // Longer wait if visible, Shorter wait if outside FOV
             float waitTime = IsVisible() ? Random.Range(15f, 20f) : Random.Range(2f, 10f); 
 

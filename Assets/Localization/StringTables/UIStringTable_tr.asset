@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UIStringTable_tr
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: tr
+  m_SharedData: {fileID: 11400000, guid: 7765421b6973f4569a0143f955936f3a, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 36560691200
+    m_Localized: "Devam etmek i\xE7in dokunun"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 861777420288
+    m_Localized: "S\u0131nav"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 914550153216
+    m_Localized: "Haz\u0131rl\u0131k"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1083928731648
+    m_Localized: "Al\u0131\u015Fveri\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 710639869952
+    m_Localized: "Gidi\u015F Geli\u015F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1160474779648
+    m_Localized: Randevu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13614982356992
+    m_Localized: Devam Et
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14231050117120
+    m_Localized: "Duraklat\u0131ld\u0131"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14374633725952
+    m_Localized: Tekrar Oyna
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14505076580352
+    m_Localized: "Ana Men\xFC"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36992799727616
+    m_Localized: "OYUN B\u0130TT\u0130"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37240750202880
+    m_Localized: "Seviye Tamamland\u0131"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37461651611648
+    m_Localized: Sonraki Seviye
+    m_Metadata:
+      m_Items: []
+  - m_Id: 260812416475136
+    m_Localized: "T\xDCRK\xC7E"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
