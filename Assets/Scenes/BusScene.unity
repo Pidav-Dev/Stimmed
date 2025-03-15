@@ -1426,7 +1426,19 @@ MonoBehaviour:
   uiDocument: {fileID: 1079975781}
   winningCondition:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1819617983}
+        m_TargetAssemblyTypeName: StateMenu, Assembly-CSharp
+        m_MethodName: NextLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &778619785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1442,7 +1454,19 @@ MonoBehaviour:
   uiDocument: {fileID: 1079975781}
   losingCondition:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1819617983}
+        m_TargetAssemblyTypeName: StateMenu, Assembly-CSharp
+        m_MethodName: GameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &923059565 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 449678, guid: a7098370ff0b3a54089782975f3851a2, type: 3}
