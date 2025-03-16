@@ -2,13 +2,16 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public class LevelSelectorController : MonoBehaviour
+public class MainMenuController : MonoBehaviour
 {
     [SerializeField] private UIDocument uiDocument; // UI document to link the timer to a label 
     
     private VisualElement _levelContainer; // Container for level selector
+    private VisualElement _optionsContainer; // Container for options 
+    
     private Button _selectLevelButton; // Button to enter level selection
     private Button _optionsButton; // Options button 
+    private Button _backButton; // Back button 
 
     // Level buttons
     private Button _commutingButton; 
@@ -22,20 +25,28 @@ public class LevelSelectorController : MonoBehaviour
         // Get elements' reference 
         var root = uiDocument.rootVisualElement;
         
+        // Containers
         _levelContainer = root.Q<VisualElement>("LevelContainer");
-        _selectLevelButton = root.Q<Button>("SelectLevelButton");
-        _optionsButton = root.Q<Button>("Options");
+        _optionsContainer = root.Q<VisualElement>("OptionsContainer");
         
+        // Control Buttons
+        _selectLevelButton = root.Q<Button>("SelectLevelButton");
+        _optionsButton = root.Q<Button>("OptionsButton");
+        _backButton = root.Q<Button>("BackButton");
+        
+        // Level Buttons
         _commutingButton = _levelContainer.Q<Button>("Commuting");
         _examButton = _levelContainer.Q<Button>("Exam");
         _preparationButton = _levelContainer.Q<Button>("Preparation");
         _groceryButton = _levelContainer.Q<Button>("Grocery");
         _dateButton = _levelContainer.Q<Button>("Date");
 
-        // Subscribe to behaviours
+        // Control Buttons' behaviours
         _selectLevelButton.clicked += ShowLevelCarousel;
         _optionsButton.clicked += ShowOptionsMenu;
+        _backButton.clicked += HideOptionsMenu;
         
+        // Level Buttons' behaviours
         _commutingButton.clicked += CommutingScene;
         _examButton.clicked += SceneNotReady;
         _preparationButton.clicked += SceneNotReady;
@@ -46,16 +57,27 @@ public class LevelSelectorController : MonoBehaviour
     // Called when user taps on screen once opened the game
     private void ShowLevelCarousel()
     {
-        _levelContainer.style.display = DisplayStyle.Flex; // Shows the level selector
-        _optionsButton.style.display = DisplayStyle.Flex; // Shows the options button
+        _levelContainer.style.display = DisplayStyle.Flex; // Show the level selector
+        _optionsButton.style.display = DisplayStyle.Flex; // Show the options button
         _selectLevelButton.style.display = DisplayStyle.None; // Hide the button just pressed
-        _selectLevelButton.clicked -= ShowLevelCarousel; // Unsubscribe from behaviour to avoid conflicts
     }
 
     // Called when user taps on option button
     private void ShowOptionsMenu()
     {
-        Debug.Log("Options menu not available yet");
+        _levelContainer.style.display = DisplayStyle.None; // Hide the level selector
+        _optionsButton.style.display = DisplayStyle.None; // Hide the options button
+        _optionsContainer.style.display = DisplayStyle.Flex; // Show the options container
+        _backButton.style.display = DisplayStyle.Flex; // Show the back button
+    }
+
+    // Called when user taps on back button in options menu
+    private void HideOptionsMenu()
+    {
+        _levelContainer.style.display = DisplayStyle.Flex; // Hide the level selector
+        _optionsButton.style.display = DisplayStyle.Flex; // Hide the options button
+        _optionsContainer.style.display = DisplayStyle.None; // Show the options container
+        _backButton.style.display = DisplayStyle.None; // Hide the back button
     }
 
     // Methods that loads the single scenes
