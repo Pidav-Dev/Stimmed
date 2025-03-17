@@ -19,59 +19,59 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 36560691200
-    m_Localized: "Tocca pe' cuntinu\xE0"
+    m_Localized: Tuocc' p'ij annanz
     m_Metadata:
       m_Items: []
   - m_Id: 710639869952
-    m_Localized: "Viaggi\xE0"
+    m_Localized: O' pendolar
     m_Metadata:
       m_Items: []
   - m_Id: 861777420288
-    m_Localized: Esame
+    m_Localized: L'esam
     m_Metadata:
       m_Items: []
   - m_Id: 914550153216
-    m_Localized: Preparazione
+    m_Localized: A fa a spes
     m_Metadata:
       m_Items: []
   - m_Id: 1083928731648
-    m_Localized: Spesa
+    m_Localized: Ndo negozij
     m_Metadata:
       m_Items: []
   - m_Id: 1160474779648
-    m_Localized: Appuntament'
+    m_Localized: Ca Piccerell
     m_Metadata:
       m_Items: []
   - m_Id: 13614982356992
-    m_Localized: Ripiglja
+    m_Localized: Arrepigl'
     m_Metadata:
       m_Items: []
   - m_Id: 14231050117120
-    m_Localized: Pausato
+    m_Localized: Aspttamm a te
     m_Metadata:
       m_Items: []
   - m_Id: 14374633725952
-    m_Localized: Rigioca
+    m_Localized: N'atavot
     m_Metadata:
       m_Items: []
   - m_Id: 14505076580352
-    m_Localized: "Men\xF9 principale"
+    m_Localized: Tuorn a cas
     m_Metadata:
       m_Items: []
   - m_Id: 36992799727616
-    m_Localized: GIOCO FINIUTO
+    m_Localized: TE NZALLANUT
     m_Metadata:
       m_Items: []
   - m_Id: 37240750202880
-    m_Localized: LiveLLo Spassato
+    m_Localized: Brav o scem
     m_Metadata:
       m_Items: []
   - m_Id: 37461651611648
-    m_Localized: Prossimo LiveLLo
+    m_Localized: Jamm Annanz
     m_Metadata:
       m_Items: []
   - m_Id: 260812416475136
-    m_Localized: NAPULITANO
+    m_Localized: NAPULITAN
     m_Metadata:
       m_Items: []
   references:
