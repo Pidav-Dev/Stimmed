@@ -322,6 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiDocument: {fileID: 882933733}
+  audioMixer: {fileID: 24100000, guid: 1aab74880304c48278994d61b8c91316, type: 2}
 --- !u!114 &882933737
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class MainMenuController : MonoBehaviour
 {
     [SerializeField] private UIDocument uiDocument; // UI document to link the timer to a label 
+    [SerializeField] private AudioMixer audioMixer;
     
     private VisualElement _levelContainer; // Container for level selector
     private VisualElement _optionsContainer; // Container for options 
@@ -19,6 +21,7 @@ public class MainMenuController : MonoBehaviour
     private Button _preparationButton; 
     private Button _groceryButton; 
     private Button _dateButton; 
+    private Slider _soundSlider;
 
     private void Start()
     {
@@ -33,6 +36,16 @@ public class MainMenuController : MonoBehaviour
         _selectLevelButton = root.Q<Button>("SelectLevelButton");
         _optionsButton = root.Q<Button>("OptionsButton");
         _backButton = root.Q<Button>("BackButton");
+        var soundContainer = _optionsContainer.Q<VisualElement>("AmbientContainer");
+        _soundSlider = soundContainer.Q<Slider>("SoundSlider");
+        SetAudio(_soundSlider.value);
+        // Changes mixer volume each time slider changes
+        _soundSlider.RegisterValueChangedCallback(v =>
+        {
+            var newValue = v.newValue;
+            SetAudio(newValue);
+            
+        });
         
         // Level Buttons
         _commutingButton = _levelContainer.Q<Button>("Commuting");
@@ -90,5 +103,11 @@ public class MainMenuController : MonoBehaviour
     private void SceneNotReady()
     {
         Debug.Log("Scene not available yet");
+    }
+
+    private void SetAudio(float volume)
+    {
+        audioMixer.SetFloat("Ambient", Mathf.Log10(volume)*20); // Changes audio once exiting options
+        audioMixer.SetFloat("Stimuli", Mathf.Log10(volume)*20); // Changes audio once exiting options
     }
 }

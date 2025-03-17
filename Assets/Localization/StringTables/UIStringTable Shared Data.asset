@@ -72,11 +72,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 941083323260928
-    m_Key: SOUND_OPTION
+    m_Key: AMBIENT_OPTION
     m_Metadata:
       m_Items: []
   - m_Id: 943220803493888
     m_Key: CREDITS_OPTION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1052797314260992
+    m_Key: STIMULI_OPTION
     m_Metadata:
       m_Items: []
   m_Metadata:

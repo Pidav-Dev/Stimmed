@@ -75,11 +75,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 941083323260928
-    m_Localized: Suoni
+    m_Localized: Volume Ambientale
     m_Metadata:
       m_Items: []
   - m_Id: 943220803493888
     m_Localized: Crediti
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1052797314260992
+    m_Localized: Volume degli stimoli
     m_Metadata:
       m_Items: []
   references:

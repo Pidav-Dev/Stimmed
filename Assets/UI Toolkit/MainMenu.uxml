@@ -41,8 +41,8 @@
                     <UnityEngine.Localization.LocalizedString property="text" table="GUID:7765421b6973f4569a0143f955936f3a" entry="Id(260812416475136)" />
                 </Bindings>
             </engine:Button>
-            <engine:VisualElement name="SoundsContainer" style="flex-grow: 1; position: relative; width: 100%; left: 0; right: 0; top: auto;">
-                <engine:Slider label="Slider" value="75" high-value="100" fill="true" show-input-field="false" inverted="false" style="right: 5%; left: auto; width: 70%; position: absolute; top: auto; height: 100%;" />
+            <engine:VisualElement name="AmbientContainer" style="flex-grow: 1; position: relative; width: 100%; left: 0; right: 0; top: auto; margin-top: 10px; margin-bottom: 10px;">
+                <engine:Slider label="Slider" value="100" high-value="1" fill="true" show-input-field="false" inverted="false" low-value="0.0001" name="SoundSlider" style="right: 5%; left: auto; width: 70%; position: absolute; top: auto; height: 100%;" />
                 <engine:Label text="Sounds" style="font-size: 50px; color: rgb(255, 255, 255); -unity-font-style: bold; margin-left: 4px; left: 5%; right: auto; width: 20%; position: absolute; top: auto; height: 100%; -unity-text-align: middle-left;">
                     <Bindings>
                         <UnityEngine.Localization.LocalizedString property="text" table="GUID:7765421b6973f4569a0143f955936f3a" entry="Id(941083323260928)" />
