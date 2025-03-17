@@ -74,6 +74,14 @@ MonoBehaviour:
     m_Localized: ENGLISH
     m_Metadata:
       m_Items: []
+  - m_Id: 941083323260928
+    m_Localized: Sound
+    m_Metadata:
+      m_Items: []
+  - m_Id: 943220803493888
+    m_Localized: Credits
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

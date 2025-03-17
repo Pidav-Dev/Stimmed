@@ -74,6 +74,14 @@ MonoBehaviour:
     m_Localized: NAPULITAN
     m_Metadata:
       m_Items: []
+  - m_Id: 941083323260928
+    m_Localized: Rummori
+    m_Metadata:
+      m_Items: []
+  - m_Id: 943220803493888
+    m_Localized: E' credit
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

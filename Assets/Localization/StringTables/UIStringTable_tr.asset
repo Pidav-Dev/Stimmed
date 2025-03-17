@@ -35,7 +35,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 710639869952
-    m_Localized: "Gidi\u015F Geli\u015F"
+    m_Localized: Yolculuk
     m_Metadata:
       m_Items: []
   - m_Id: 1160474779648
@@ -72,6 +72,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 260812416475136
     m_Localized: "T\xDCRK\xC7E"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 941083323260928
+    m_Localized: Sesler
+    m_Metadata:
+      m_Items: []
+  - m_Id: 943220803493888
+    m_Localized: Jenerik
     m_Metadata:
       m_Items: []
   references:
