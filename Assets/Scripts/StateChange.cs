@@ -56,7 +56,8 @@ public class StateChange : MonoBehaviour
     void Update()
     {
         // Stops audio if game is on freeze
-        if (Time.timeScale == 0f)  _audioSource.Stop();
+        if (Time.timeScale == 0f) _audioSource.Pause();
+        else _audioSource.UnPause();
     }
 
     // Concurrently activates the stimuli with a random wait time
@@ -138,7 +139,7 @@ public class StateChange : MonoBehaviour
     // Changes renderer's outline based on activeness
     private void ChangeOutline(bool active)
     {
-        Debug.Log("ACTIVATED" + active);
+        return; 
     }
 
     // Invoked by event when the user correctly cleared the stimulus, so the endurance needs to be restored 
