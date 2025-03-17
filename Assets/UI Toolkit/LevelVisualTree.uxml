@@ -20,23 +20,23 @@
         </engine:VisualElement>
         <engine:Button name="Pause" class="button" style="background-image: url(&quot;project://database/Assets/Sprites/Placeholders/FakePause.png?fileID=2800000&amp;guid=e7173d05d128249f7b06af7f80a367a2&amp;type=3#FakePause&quot;); background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); top: auto;" />
         <engine:Label text="60" name="Timer" class="timer" style="right: 0; left: 0; color: rgb(255, 255, 255);" />
-        <engine:VisualElement name="OverlayPanel" style="display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7);">
+        <engine:VisualElement name="OverlayPanel" style="display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; background-color: rgb(0, 0, 0); top: 0; left: 0;">
             <engine:Label text="Paused" name="Label" class="label" style="margin-top: 120px; color: rgb(255, 255, 255);">
                 <Bindings>
                     <UnityEngine.Localization.LocalizedString property="text" table="GUID:7765421b6973f4569a0143f955936f3a" entry="Id(14231050117120)" />
                 </Bindings>
             </engine:Label>
-            <engine:Button name="PlayButton" text="Resume" class="button" style="margin-bottom: 10px; background-color: rgb(255, 255, 255);">
+            <engine:Button name="PlayButton" text="Resume" class="button" style="margin-bottom: 10px; background-color: rgba(0, 0, 0, 0); background-image: url(&quot;project://database/Assets/Sprites/button.png?fileID=2800000&amp;guid=4e0427f0766cf4069a93533f301d63d5&amp;type=3#button&quot;); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; -unity-font-style: bold; color: rgb(255, 255, 255); -unity-background-image-tint-color: rgb(255, 255, 255);">
                 <Bindings>
                     <UnityEngine.Localization.LocalizedString property="text" table="GUID:7765421b6973f4569a0143f955936f3a" entry="Id(13614982356992)" />
                 </Bindings>
             </engine:Button>
-            <engine:Button name="ReplayButton" text="Replay" class="button" style="margin-bottom: 10px; background-color: rgb(255, 255, 255);">
+            <engine:Button name="ReplayButton" text="Replay" class="button" style="margin-bottom: 10px; background-color: rgba(0, 0, 0, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; background-image: url(&quot;project://database/Assets/Sprites/button.png?fileID=2800000&amp;guid=4e0427f0766cf4069a93533f301d63d5&amp;type=3#button&quot;); -unity-font-style: bold; color: rgb(255, 255, 255); -unity-background-image-tint-color: rgb(255, 255, 255);">
                 <Bindings>
                     <UnityEngine.Localization.LocalizedString property="text" table="GUID:7765421b6973f4569a0143f955936f3a" entry="Id(14374633725952)" />
                 </Bindings>
             </engine:Button>
-            <engine:Button name="MainMenuButton" text="Main Menu" class="button" style="background-color: rgb(255, 255, 255);">
+            <engine:Button name="MainMenuButton" text="Main Menu" class="button" style="background-color: rgba(0, 0, 0, 0); background-image: url(&quot;project://database/Assets/Sprites/button.png?fileID=2800000&amp;guid=4e0427f0766cf4069a93533f301d63d5&amp;type=3#button&quot;); -unity-background-image-tint-color: rgb(255, 255, 255); -unity-font-style: bold; border-left-width: 0; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); color: rgb(255, 255, 255);">
                 <Bindings>
                     <UnityEngine.Localization.LocalizedString property="text" table="GUID:7765421b6973f4569a0143f955936f3a" entry="Id(14505076580352)" />
                 </Bindings>
