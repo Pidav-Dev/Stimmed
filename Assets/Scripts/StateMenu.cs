@@ -47,6 +47,8 @@ public class StateMenu : MonoBehaviour
         levelClearedText.StringChanged += UpdateLabelText;
         resumeText.StringChanged += UpdatePlayButtonText;
         nextLevelText.StringChanged += UpdatePlayButtonText;
+        
+        AudioListener.pause = false;
     }
 
     // Called when the user taps on pause button or resume button after pause
@@ -100,6 +102,7 @@ public class StateMenu : MonoBehaviour
     public void GameOver()
     {
         Time.timeScale = 0f; // Pause the game 
+        AudioListener.pause = true;
         gameOverText.RefreshString(); // Show correct localized label
         _playButton.style.display = DisplayStyle.None; // Remove Resume button
         _replayButton.style.display = DisplayStyle.Flex; // Show replay button
@@ -110,6 +113,7 @@ public class StateMenu : MonoBehaviour
     public void LevelWon()
     {
         Time.timeScale = 0f; // Pause the game 
+        AudioListener.pause = true;
         levelClearedText.RefreshString(); // Show correct localized label
         nextLevelText.RefreshString(); // Update button text
         _playButton.style.display = DisplayStyle.Flex; // Show Next Level button
