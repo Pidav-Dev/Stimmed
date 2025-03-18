@@ -71,7 +71,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 260812416475136
-    m_Localized: ITALIANO
+    m_Localized: Italiano
     m_Metadata:
       m_Items: []
   - m_Id: 941083323260928
@@ -80,10 +80,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 943220803493888
     m_Localized: Crediti
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1052797314260992
-    m_Localized: Volume degli stimoli
     m_Metadata:
       m_Items: []
   references:
