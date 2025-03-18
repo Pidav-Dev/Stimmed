@@ -348,9 +348,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfbc2a4433b5d427ea746c26dfb3c82b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiDocument: {fileID: 1079975781}
   stimulusAmount: 2
   stimulusInterval: 1
-  gestureType: 0
+  gestureIcon: {fileID: 2800000, guid: 684bc5f068c0b475bb1ea355a4acbe99, type: 3}
   animator: {fileID: 723401202}
   interacted:
     m_PersistentCalls:
@@ -1587,9 +1588,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfbc2a4433b5d427ea746c26dfb3c82b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiDocument: {fileID: 1079975781}
   stimulusAmount: 2
   stimulusInterval: 1
-  gestureType: 1
+  gestureIcon: {fileID: 2800000, guid: cedca407ce1b94bd883157d18493934e, type: 3}
   animator: {fileID: 1723537438}
   interacted:
     m_PersistentCalls:
@@ -9212,9 +9214,9 @@ MonoBehaviour:
   winningCondition:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1819617983}
+      - m_Target: {fileID: 1079975783}
         m_TargetAssemblyTypeName: StateMenu, Assembly-CSharp
-        m_MethodName: NextLevel
+        m_MethodName: LevelWon
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9240,7 +9242,7 @@ MonoBehaviour:
   losingCondition:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1819617983}
+      - m_Target: {fileID: 1079975783}
         m_TargetAssemblyTypeName: StateMenu, Assembly-CSharp
         m_MethodName: GameOver
         m_Mode: 1
@@ -12018,9 +12020,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfbc2a4433b5d427ea746c26dfb3c82b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiDocument: {fileID: 1079975781}
   stimulusAmount: 2
   stimulusInterval: 1
-  gestureType: 0
+  gestureIcon: {fileID: 2800000, guid: 684bc5f068c0b475bb1ea355a4acbe99, type: 3}
   animator: {fileID: 0}
   interacted:
     m_PersistentCalls:
@@ -13322,6 +13325,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1079975782}
   - component: {fileID: 1079975781}
+  - component: {fileID: 1079975783}
+  - component: {fileID: 1079975784}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -13363,6 +13368,80 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1079975783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079975780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fefb7d6dc0614e148919458ef53e50e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiDocument: {fileID: 1079975781}
+  pausedText:
+    m_TableReference:
+      m_TableCollectionName: GUID:7765421b6973f4569a0143f955936f3a
+    m_TableEntryReference:
+      m_KeyId: 14231050117120
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  gameOverText:
+    m_TableReference:
+      m_TableCollectionName: GUID:7765421b6973f4569a0143f955936f3a
+    m_TableEntryReference:
+      m_KeyId: 36992799727616
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  levelClearedText:
+    m_TableReference:
+      m_TableCollectionName: GUID:7765421b6973f4569a0143f955936f3a
+    m_TableEntryReference:
+      m_KeyId: 37240750202880
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  resumeText:
+    m_TableReference:
+      m_TableCollectionName: GUID:7765421b6973f4569a0143f955936f3a
+    m_TableEntryReference:
+      m_KeyId: 13614982356992
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  nextLevelText:
+    m_TableReference:
+      m_TableCollectionName: GUID:7765421b6973f4569a0143f955936f3a
+    m_TableEntryReference:
+      m_KeyId: 37461651611648
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
+--- !u!114 &1079975784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079975780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c54bb8c826d45420f9f2dbab57351c18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiDocument: {fileID: 1079975781}
 --- !u!4 &1081159811 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: b8ee657c6800ab849bb30b4375d02323, type: 3}
@@ -15779,9 +15858,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfbc2a4433b5d427ea746c26dfb3c82b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiDocument: {fileID: 1079975781}
   stimulusAmount: 2
   stimulusInterval: 1
-  gestureType: 1
+  gestureIcon: {fileID: 2800000, guid: cedca407ce1b94bd883157d18493934e, type: 3}
   animator: {fileID: 0}
   interacted:
     m_PersistentCalls:
@@ -20083,9 +20163,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfbc2a4433b5d427ea746c26dfb3c82b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiDocument: {fileID: 1079975781}
   stimulusAmount: 2
   stimulusInterval: 1
-  gestureType: 1
+  gestureIcon: {fileID: 2800000, guid: cedca407ce1b94bd883157d18493934e, type: 3}
   animator: {fileID: 0}
   interacted:
     m_PersistentCalls:
@@ -22887,7 +22968,6 @@ GameObject:
   - component: {fileID: 1819617981}
   - component: {fileID: 1819617980}
   - component: {fileID: 1819617985}
-  - component: {fileID: 1819617983}
   - component: {fileID: 1819617978}
   - component: {fileID: 1819617984}
   - component: {fileID: 1819617987}
@@ -22991,67 +23071,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 20, y: 90, z: 0}
---- !u!114 &1819617983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1819617977}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fefb7d6dc0614e148919458ef53e50e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiDocument: {fileID: 1079975781}
-  pausedText:
-    m_TableReference:
-      m_TableCollectionName: GUID:7765421b6973f4569a0143f955936f3a
-    m_TableEntryReference:
-      m_KeyId: 14231050117120
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 0
-    m_LocalVariables: []
-  gameOverText:
-    m_TableReference:
-      m_TableCollectionName: GUID:7765421b6973f4569a0143f955936f3a
-    m_TableEntryReference:
-      m_KeyId: 36992799727616
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 0
-    m_LocalVariables: []
-  levelClearedText:
-    m_TableReference:
-      m_TableCollectionName: GUID:7765421b6973f4569a0143f955936f3a
-    m_TableEntryReference:
-      m_KeyId: 37240750202880
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 0
-    m_LocalVariables: []
-  resumeText:
-    m_TableReference:
-      m_TableCollectionName: GUID:7765421b6973f4569a0143f955936f3a
-    m_TableEntryReference:
-      m_KeyId: 13614982356992
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 0
-    m_LocalVariables: []
-  nextLevelText:
-    m_TableReference:
-      m_TableCollectionName: GUID:7765421b6973f4569a0143f955936f3a
-    m_TableEntryReference:
-      m_KeyId: 37461651611648
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 0
-    m_LocalVariables: []
-  references:
-    version: 2
-    RefIds: []
 --- !u!114 &1819617984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24295,9 +24314,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfbc2a4433b5d427ea746c26dfb3c82b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiDocument: {fileID: 1079975781}
   stimulusAmount: 2
   stimulusInterval: 1
-  gestureType: 0
+  gestureIcon: {fileID: 2800000, guid: 684bc5f068c0b475bb1ea355a4acbe99, type: 3}
   animator: {fileID: 0}
   interacted:
     m_PersistentCalls:

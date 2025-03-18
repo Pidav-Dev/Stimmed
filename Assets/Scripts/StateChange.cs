@@ -14,9 +14,9 @@ public class StateChange : MonoBehaviour
     [Header("Endurance Wear")] // Fields for specific wear
     [SerializeField] private int stimulusAmount = 2; // Describes amount of sensory overload added each stimulusInterval
     [SerializeField] private float stimulusInterval = 1f; // Describes how often the amount of endurance changes
-    [SerializeField] private int gestureType; // Map the gesture types defined in GestureHandler to int
-    [SerializeField] private Animator animator;
     [SerializeField] private Texture2D gestureIcon;
+    
+    [SerializeField] private Animator animator;
     
     // Level events
     public UnityEvent<int> interacted; // Called when the stimulus is cleared
@@ -91,7 +91,7 @@ public class StateChange : MonoBehaviour
             _enduranceAmount = 1;
             ChangeOutline(true); // Make the stimulus visible
             _audioSource.Play(); // Let the user hear the stimulus
-
+            
             if (animator != null)
             {
                 animator.SetTrigger("Activate"); // uses trigger to play active stimuli animation
@@ -145,9 +145,10 @@ public class StateChange : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.gameObject == gameObject)
         {
             occupied = true; // The user is working with some stimulus and impede other interactions 
-            // Interacts with the stimulus and restore endurance  
+            // Interacts with the stimulus
+            _gestureInfo.style.backgroundImage = gestureIcon; // Change the gesture icon to the mapped one
             changePosition?.Invoke(); // Invokes the event for camera focusing
-            gestureHandler?.Invoke(gestureType); // Invokes the event for correct gesture detection
+            gestureHandler?.Invoke(0); // Invokes the event for correct gesture detection
         }
     }
 

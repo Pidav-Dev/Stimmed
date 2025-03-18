@@ -75,6 +75,13 @@ public class StateMenu : MonoBehaviour
         _overlayPanel.style.display = isPaused ? DisplayStyle.None : DisplayStyle.Flex;
     }
     
+    // Called when user taps on next level once won
+    private void NextLevel()
+    {
+        Time.timeScale = 1f; // Ensure time is unpaused
+        SceneManager.LoadScene("CreditsScene", LoadSceneMode.Single); // Reload actual scene
+    }
+    
     // Called when user taps on replay button in Overlay Panel
     private void ReplayGame()
     {
@@ -100,7 +107,7 @@ public class StateMenu : MonoBehaviour
     }
 
     // Invoked by event when the user clears the level 
-    public void NextLevel()
+    public void LevelWon()
     {
         Time.timeScale = 0f; // Pause the game 
         levelClearedText.RefreshString(); // Show correct localized label
@@ -111,7 +118,7 @@ public class StateMenu : MonoBehaviour
         // Clear existing click handlers and set new one
         _playButton.clicked -= MainMenuGame;
         _playButton.clicked -= TogglePause;
-        _playButton.clicked += MainMenuGame; // TO CHANGE IN NEXT LEVEL
+        _playButton.clicked += NextLevel; // TO CHANGE IN NEXT LEVEL
         
         _overlayPanel.style.display = DisplayStyle.Flex; // Show Overlay Panel
     }
