@@ -12,6 +12,7 @@ public class StateChange : MonoBehaviour
     [SerializeField] private int stimulusAmount = 2; // Describes amount of sensory overload added each stimulusInterval
     [SerializeField] private float stimulusInterval = 1f; // Describes how often the amount of endurance changes
     [SerializeField] private int gestureType; // Map the gesture types defined in GestureHandler to int
+    [SerializeField] private Animator animator;
     
     // Level events
     public UnityEvent<int> interacted; // Called when the stimulus is cleared
@@ -81,6 +82,11 @@ public class StateChange : MonoBehaviour
             _enduranceAmount = 1;
             ChangeOutline(true); // Make the stimulus visible
             _audioSource.Play(); // Let the user hear the stimulus
+
+            if (animator != null)
+            {
+                animator.SetTrigger("Activate"); // uses trigger to play active stimuli animation
+            }
         }
     }
     
@@ -151,6 +157,10 @@ public class StateChange : MonoBehaviour
         interacted?.Invoke(-_enduranceAmount); // Invokes event for endurance restoration
         returnPosition?.Invoke(); // Invokes event for position returning 
         occupied = false; // The user can interact back with other stimuli
+        if (animator != null)
+        {
+            animator.SetTrigger("Deactivate"); //returns to idle animation
+        }
     }
     
     // Checks if the stimulus enters the FOV
