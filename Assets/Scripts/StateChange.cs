@@ -3,15 +3,18 @@ using System.Collections;
 using Random = UnityEngine.Random;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class StateChange : MonoBehaviour
 {
     private static bool occupied; // Control variable to let the user work on one stimulus at time
     
+    [SerializeField] private UIDocument uiDocument; // UI document to link the timer to a label 
+    
     [Header("Endurance Wear")] // Fields for specific wear
     [SerializeField] private int stimulusAmount = 2; // Describes amount of sensory overload added each stimulusInterval
     [SerializeField] private float stimulusInterval = 1f; // Describes how often the amount of endurance changes
-    [SerializeField] private int gestureType; // Map the gesture types defined in GestureHandler to int
+    [SerializeField] private Texture2D gestureIcon;
     
     // Level events
     public UnityEvent<int> interacted; // Called when the stimulus is cleared
@@ -22,12 +25,17 @@ public class StateChange : MonoBehaviour
     private bool _isActive; // Determine if the stimuli is sensory overloading 
     private int _enduranceAmount = 1; // Initial amount of endurance wear
     private AudioSource _audioSource; // Audio component for stimulus feature
+    private VisualElement _gestureInfo; // UI gesture icon reference
     
     private CameraInteractions _tap; // Input map for interactions
 
     void Awake()
     {
-        _tap = new CameraInteractions(); // Create a new instance of the input map
+        // Create a new instance of the input map
+        _tap = new CameraInteractions(); 
+        // Get elements' reference 
+        var root = uiDocument.rootVisualElement;
+        _gestureInfo = root.Q<VisualElement>("GestureInfo");
     }
     
     // Enables Input Actions and subscribe to a behaviour to it when the component is enabled 
@@ -130,9 +138,10 @@ public class StateChange : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.gameObject == gameObject)
         {
             occupied = true; // The user is working with some stimulus and impede other interactions 
-            // Interacts with the stimulus and restore endurance  
+            // Interacts with the stimulus
+            _gestureInfo.style.backgroundImage = gestureIcon; // Change the gesture icon to the mapped one
             changePosition?.Invoke(); // Invokes the event for camera focusing
-            gestureHandler?.Invoke(gestureType); // Invokes the event for correct gesture detection
+            gestureHandler?.Invoke(0); // Invokes the event for correct gesture detection
         }
     }
 
@@ -150,6 +159,7 @@ public class StateChange : MonoBehaviour
         _audioSource.Stop(); // Stops stimulus audio when interacted
         interacted?.Invoke(-_enduranceAmount); // Invokes event for endurance restoration
         returnPosition?.Invoke(); // Invokes event for position returning 
+        _gestureInfo.style.backgroundImage = null; // Change the icon back to null
         occupied = false; // The user can interact back with other stimuli
     }
     

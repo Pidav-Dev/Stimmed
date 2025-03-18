@@ -55,6 +55,7 @@ public class StateMenu : MonoBehaviour
         // Pause or resume the game based on actual state
         var isPaused = Time.timeScale == 0f;
         Time.timeScale = isPaused ? 1f : 0f;
+        AudioListener.pause = !isPaused; // Pause ambient sounds based on pause state
         
         // Update localized texts
         if (!isPaused)
@@ -78,7 +79,7 @@ public class StateMenu : MonoBehaviour
     private void ReplayGame()
     {
         Time.timeScale = 1f; // Ensure time is unpaused
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single); // Reload actual scene
+        SceneManager.LoadScene("BusScene", LoadSceneMode.Single); // Reload actual scene
     }
 
     // Called when user taps on main menu button in Overlay Panel
