@@ -9,11 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 0d26c2cf77672408b8c974f4b4820fa9
   - enabled: 1
+    path: Assets/Scenes/CreditsScene.unity
+    guid: cc20cb6a304b64ddd91b583bd83e9957
+  - enabled: 1
     path: Assets/Scenes/BusScene.unity
     guid: 864c7b90f2ce54e37a7cd2200d993b84
-  - enabled: 1
-    path: Assets/Scenes/BusTestScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 6760f08e84c6242279be1a43db9696ba, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 8540670302ca94619814106df5645eba, type: 3}
