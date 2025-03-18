@@ -79,10 +79,6 @@ MonoBehaviour:
     m_Key: CREDITS_OPTION
     m_Metadata:
       m_Items: []
-  - m_Id: 1052797314260992
-    m_Key: STIMULI_OPTION
-    m_Metadata:
-      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -27,7 +27,59 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 861777420288
-    m_Localized: el examen
+    m_Localized: El examen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 260812416475136
+    m_Localized: "Espa\xF1ol"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 914550153216
+    m_Localized: Compras
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1083928731648
+    m_Localized: Supermercado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1160474779648
+    m_Localized: Cita
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13614982356992
+    m_Localized: "Contin\xFAa"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14231050117120
+    m_Localized: Pausa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14374633725952
+    m_Localized: Reintentar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14505076580352
+    m_Localized: "Men\xFA principal"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36992799727616
+    m_Localized: FIN DEL JUEGO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37240750202880
+    m_Localized: Nivel completo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37461651611648
+    m_Localized: Nivel sucesivo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 941083323260928
+    m_Localized: Volumen ambiental
+    m_Metadata:
+      m_Items: []
+  - m_Id: 943220803493888
+    m_Localized: "Cr\xE9ditos"
     m_Metadata:
       m_Items: []
   references:
