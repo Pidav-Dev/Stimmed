@@ -16,6 +16,8 @@ public class StateChange : MonoBehaviour
     [SerializeField] private float stimulusInterval = 1f; // Describes how often the amount of endurance changes
     [SerializeField] private Texture2D gestureIcon;
     
+    [SerializeField] private Animator animator;
+    
     // Level events
     public UnityEvent<int> interacted; // Called when the stimulus is cleared
     public UnityEvent changePosition; // Called to change the position of the camera to the stimulus
@@ -89,6 +91,11 @@ public class StateChange : MonoBehaviour
             _enduranceAmount = 1;
             ChangeOutline(true); // Make the stimulus visible
             _audioSource.Play(); // Let the user hear the stimulus
+            
+            if (animator != null)
+            {
+                animator.SetTrigger("Activate"); // uses trigger to play active stimuli animation
+            }
         }
     }
     
@@ -161,6 +168,10 @@ public class StateChange : MonoBehaviour
         returnPosition?.Invoke(); // Invokes event for position returning 
         _gestureInfo.style.backgroundImage = null; // Change the icon back to null
         occupied = false; // The user can interact back with other stimuli
+        if (animator != null)
+        {
+            animator.SetTrigger("Deactivate"); //returns to idle animation
+        }
     }
     
     // Checks if the stimulus enters the FOV
