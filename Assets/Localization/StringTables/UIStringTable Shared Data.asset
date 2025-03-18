@@ -79,6 +79,46 @@ MonoBehaviour:
     m_Key: CREDITS_OPTION
     m_Metadata:
       m_Items: []
+  - m_Id: 1339141714337792
+    m_Key: TUTORIAL0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339343523274752
+    m_Key: TUTORIAL1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339733165727744
+    m_Key: TAP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339770562142208
+    m_Key: SWIPE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339870453686272
+    m_Key: LONGPRESS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339920365903872
+    m_Key: SHAKE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1340755648962560
+    m_Key: TNX_LABEL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1340925581189120
+    m_Key: ART_DIR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1340994787205120
+    m_Key: GAME_DES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1341043998973952
+    m_Key: HON_MEN
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -7,6 +7,7 @@ using UnityEngine.Localization;
 public class LanguageSwitcher : MonoBehaviour
 {
     private Button languageButton;
+    private int _languageIndex; 
     
     private void OnEnable()
     {
@@ -15,6 +16,7 @@ public class LanguageSwitcher : MonoBehaviour
         
         languageButton = root.Q<Button>("LanguageButton");
         languageButton.clicked += OnLanguageButtonClicked;
+        Load(); 
     }
 
     private void OnDisable()
@@ -26,7 +28,19 @@ public class LanguageSwitcher : MonoBehaviour
     {
         var locales = LocalizationSettings.AvailableLocales.Locales;
         var currentIndex = locales.IndexOf(LocalizationSettings.SelectedLocale);
-        var nextIndex = (currentIndex + 1) % locales.Count;
-        LocalizationSettings.SelectedLocale = locales[nextIndex];
+        _languageIndex = (currentIndex + 1) % locales.Count;
+        LocalizationSettings.SelectedLocale = locales[_languageIndex];
+        Save(); 
+    }
+    
+    private void Save()
+    {
+        PlayerPrefs.SetFloat("Language", _languageIndex);
+        PlayerPrefs.Save(); 
+    }
+
+    private void Load()
+    {
+        _languageIndex = PlayerPrefs.GetInt("Language", _languageIndex);
     }
 }

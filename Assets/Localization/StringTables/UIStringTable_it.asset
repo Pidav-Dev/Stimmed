@@ -82,6 +82,46 @@ MonoBehaviour:
     m_Localized: Crediti
     m_Metadata:
       m_Items: []
+  - m_Id: 1339141714337792
+    m_Localized: Impedisci a Davide di sentirsi sovrastimolato
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339343523274752
+    m_Localized: Ogni stimolo ha il suo modo di essere rimosso
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339733165727744
+    m_Localized: Tocca
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339770562142208
+    m_Localized: Scorri
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339870453686272
+    m_Localized: Tieni premuto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339920365903872
+    m_Localized: Scuoti
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1340755648962560
+    m_Localized: Grazie per aver giocato. Livello due a breve
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1340925581189120
+    m_Localized: DIREZIONE ARTISTICA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1340994787205120
+    m_Localized: GAME DESIGN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1341043998973952
+    m_Localized: MENZIONI D'ONORE
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

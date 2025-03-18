@@ -44,24 +44,48 @@
             </engine:Button>
         </engine:VisualElement>
         <engine:VisualElement name="TutorialPanel" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; background-color: rgb(31, 40, 59); top: 0; left: 0; position: absolute;">
-            <engine:Label text="Prevent Davide from feeling sensory overloaded" name="FirstLabel" class="label" style="margin-top: 0; color: rgb(255, 255, 255); top: 0; width: 80%; height: 40%; text-overflow: clip; white-space: normal; display: flex; -unity-font-style: bold;" />
-            <engine:Label text="Each stimulus has its own way of being cleared" name="SecondLabel" class="label" style="margin-top: 0; color: rgb(255, 255, 255); top: 0; width: 80%; height: 40%; text-overflow: clip; white-space: normal; display: none; -unity-font-style: bold;" />
+            <engine:Label text="Prevent Davide from feeling sensory overloaded" name="FirstLabel" class="label" style="margin-top: 0; color: rgb(255, 255, 255); top: 0; width: 80%; height: 40%; text-overflow: clip; white-space: normal; display: flex; -unity-font-style: bold;">
+                <Bindings>
+                    <UnityEngine.Localization.LocalizedString property="text" table="GUID:7765421b6973f4569a0143f955936f3a" entry="Id(1339141714337792)" />
+                </Bindings>
+            </engine:Label>
+            <engine:Label text="Each stimulus has its own way of being cleared" name="SecondLabel" class="label" style="margin-top: 0; color: rgb(255, 255, 255); top: 0; width: 80%; height: 40%; text-overflow: clip; white-space: normal; display: none; -unity-font-style: bold;">
+                <Bindings>
+                    <UnityEngine.Localization.LocalizedString property="text" table="GUID:7765421b6973f4569a0143f955936f3a" entry="Id(1339343523274752)" />
+                </Bindings>
+            </engine:Label>
             <engine:VisualElement name="GestureContainer" style="flex-grow: 1; position: absolute; width: 100%; height: 40%; bottom: 25%; display: none;">
                 <engine:VisualElement name="Tap" style="flex-grow: 1; left: 10%; height: 100%; width: 20%; position: absolute;">
                     <engine:VisualElement name="Icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/Gestures/tap.png?fileID=2800000&amp;guid=684bc5f068c0b475bb1ea355a4acbe99&amp;type=3#tap&quot;); width: 60%; height: auto; -unity-background-scale-mode: scale-to-fit; left: 20%;" />
-                    <engine:Label text="Tap" name="Label" class="label" style="margin-top: 0; color: rgb(255, 255, 255); top: auto; width: auto; height: auto; text-overflow: clip; white-space: normal; display: flex; -unity-font-style: bold; font-size: 50px; position: relative;" />
+                    <engine:Label text="Tap" name="Label" class="label" style="margin-top: 0; color: rgb(255, 255, 255); top: auto; width: auto; height: auto; text-overflow: clip; white-space: normal; display: flex; -unity-font-style: bold; font-size: 50px; position: relative;">
+                        <Bindings>
+                            <UnityEngine.Localization.LocalizedString property="text" table="GUID:7765421b6973f4569a0143f955936f3a" entry="Id(1339733165727744)" />
+                        </Bindings>
+                    </engine:Label>
                 </engine:VisualElement>
                 <engine:VisualElement name="Swipe" style="flex-grow: 1; left: 30%; height: 100%; width: 20%; position: absolute;">
                     <engine:VisualElement name="Icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/Gestures/swipe.png?fileID=2800000&amp;guid=cedca407ce1b94bd883157d18493934e&amp;type=3#swipe&quot;); width: 60%; height: auto; -unity-background-scale-mode: scale-to-fit; left: 20%;" />
-                    <engine:Label text="Swipe" name="Label" class="label" style="margin-top: 0; color: rgb(255, 255, 255); top: auto; width: auto; height: auto; text-overflow: clip; white-space: normal; display: flex; -unity-font-style: bold; font-size: 50px; position: relative;" />
+                    <engine:Label text="Swipe" name="Label" class="label" style="margin-top: 0; color: rgb(255, 255, 255); top: auto; width: auto; height: auto; text-overflow: clip; white-space: normal; display: flex; -unity-font-style: bold; font-size: 50px; position: relative;">
+                        <Bindings>
+                            <UnityEngine.Localization.LocalizedString property="text" table="GUID:7765421b6973f4569a0143f955936f3a" entry="Id(1339770562142208)" />
+                        </Bindings>
+                    </engine:Label>
                 </engine:VisualElement>
                 <engine:VisualElement name="Longpress" style="flex-grow: 1; left: 50%; height: 100%; width: 20%; position: absolute;">
                     <engine:VisualElement name="Icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/Gestures/longpress.png?fileID=2800000&amp;guid=df7caf8d03f9348be98413b6a32dae42&amp;type=3#longpress&quot;); width: 60%; height: auto; -unity-background-scale-mode: scale-to-fit; left: 20%;" />
-                    <engine:Label text="Longpress" name="Label" class="label" style="margin-top: 0; color: rgb(255, 255, 255); top: auto; width: auto; height: auto; text-overflow: clip; white-space: normal; display: flex; -unity-font-style: bold; font-size: 50px; position: relative;" />
+                    <engine:Label text="Longpress" name="Label" class="label" style="margin-top: 0; color: rgb(255, 255, 255); top: auto; width: auto; height: auto; text-overflow: clip; white-space: normal; display: flex; -unity-font-style: bold; font-size: 50px; position: relative;">
+                        <Bindings>
+                            <UnityEngine.Localization.LocalizedString property="text" table="GUID:7765421b6973f4569a0143f955936f3a" entry="Id(1339870453686272)" />
+                        </Bindings>
+                    </engine:Label>
                 </engine:VisualElement>
                 <engine:VisualElement name="Shake" style="flex-grow: 1; left: 70%; height: 100%; width: 20%; position: absolute;">
                     <engine:VisualElement name="Icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/Gestures/shake.png?fileID=2800000&amp;guid=bc0a6a642fcb94e1492ad5b60d1e9c8a&amp;type=3#shake&quot;); width: 60%; height: auto; -unity-background-scale-mode: scale-to-fit; left: 20%;" />
-                    <engine:Label text="Shake" name="Label" class="label" style="margin-top: 0; color: rgb(255, 255, 255); top: auto; width: auto; height: auto; text-overflow: clip; white-space: normal; display: flex; -unity-font-style: bold; font-size: 50px; position: relative;" />
+                    <engine:Label text="Shake" name="Label" class="label" style="margin-top: 0; color: rgb(255, 255, 255); top: auto; width: auto; height: auto; text-overflow: clip; white-space: normal; display: flex; -unity-font-style: bold; font-size: 50px; position: relative;">
+                        <Bindings>
+                            <UnityEngine.Localization.LocalizedString property="text" table="GUID:7765421b6973f4569a0143f955936f3a" entry="Id(1339920365903872)" />
+                        </Bindings>
+                    </engine:Label>
                 </engine:VisualElement>
             </engine:VisualElement>
             <engine:Button name="ContinueButton" text="Tap to continue" class="main-menu-button" style="font-size: 50px; -unity-font-style: bold; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; visibility: visible; position: absolute; width: 100%; height: 100%; -unity-text-align: lower-center; background-color: rgba(0, 0, 0, 0); padding-bottom: 130px; display: flex; color: rgb(255, 255, 255);">
