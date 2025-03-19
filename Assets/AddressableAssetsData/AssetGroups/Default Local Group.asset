@@ -14,7 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: Default Local Group
   m_GUID: 6fa66f4fe793440d59ce92751093cbaf
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: fb91daf29ddf44c9d92b68d79af94784
+    m_Address: Assets/Sprites/Placeholders/Screenshot 2025-03-18 at 09.50.49.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 4ce42c7a1c4fe4fd9aad501d72ae6ddc, type: 2}
   m_SchemaSet:
