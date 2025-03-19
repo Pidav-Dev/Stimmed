@@ -82,6 +82,46 @@ MonoBehaviour:
     m_Localized: Credits
     m_Metadata:
       m_Items: []
+  - m_Id: 1339141714337792
+    m_Localized: Prevent Davide from feeling sensory overloaded
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339343523274752
+    m_Localized: Each stimulus has its own way of being cleared
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339733165727744
+    m_Localized: Tap
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339770562142208
+    m_Localized: Swipe
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339870453686272
+    m_Localized: Longpress
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339920365903872
+    m_Localized: Shake
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1340755648962560
+    m_Localized: Thanks for playing. Level two coming soon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1340925581189120
+    m_Localized: ART DIRECTION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1340994787205120
+    m_Localized: GAME DESIGN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1341043998973952
+    m_Localized: HONORABLE MENTIONS
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

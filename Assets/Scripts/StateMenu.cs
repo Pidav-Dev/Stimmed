@@ -47,6 +47,8 @@ public class StateMenu : MonoBehaviour
         levelClearedText.StringChanged += UpdateLabelText;
         resumeText.StringChanged += UpdatePlayButtonText;
         nextLevelText.StringChanged += UpdatePlayButtonText;
+        
+        AudioListener.pause = false;
     }
 
     // Called when the user taps on pause button or resume button after pause
@@ -55,6 +57,7 @@ public class StateMenu : MonoBehaviour
         // Pause or resume the game based on actual state
         var isPaused = Time.timeScale == 0f;
         Time.timeScale = isPaused ? 1f : 0f;
+        AudioListener.pause = !isPaused; // Pause ambient sounds based on pause state
         
         // Update localized texts
         if (!isPaused)
@@ -74,11 +77,18 @@ public class StateMenu : MonoBehaviour
         _overlayPanel.style.display = isPaused ? DisplayStyle.None : DisplayStyle.Flex;
     }
     
+    // Called when user taps on next level once won
+    private void NextLevel()
+    {
+        Time.timeScale = 1f; // Ensure time is unpaused
+        SceneManager.LoadScene("CreditsScene", LoadSceneMode.Single); // Reload actual scene
+    }
+    
     // Called when user taps on replay button in Overlay Panel
     private void ReplayGame()
     {
         Time.timeScale = 1f; // Ensure time is unpaused
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single); // Reload actual scene
+        SceneManager.LoadScene("BusScene", LoadSceneMode.Single); // Reload actual scene
     }
 
     // Called when user taps on main menu button in Overlay Panel
@@ -92,6 +102,7 @@ public class StateMenu : MonoBehaviour
     public void GameOver()
     {
         Time.timeScale = 0f; // Pause the game 
+        AudioListener.pause = true;
         gameOverText.RefreshString(); // Show correct localized label
         _playButton.style.display = DisplayStyle.None; // Remove Resume button
         _replayButton.style.display = DisplayStyle.Flex; // Show replay button
@@ -99,9 +110,10 @@ public class StateMenu : MonoBehaviour
     }
 
     // Invoked by event when the user clears the level 
-    public void NextLevel()
+    public void LevelWon()
     {
         Time.timeScale = 0f; // Pause the game 
+        AudioListener.pause = true;
         levelClearedText.RefreshString(); // Show correct localized label
         nextLevelText.RefreshString(); // Update button text
         _playButton.style.display = DisplayStyle.Flex; // Show Next Level button
@@ -110,7 +122,7 @@ public class StateMenu : MonoBehaviour
         // Clear existing click handlers and set new one
         _playButton.clicked -= MainMenuGame;
         _playButton.clicked -= TogglePause;
-        _playButton.clicked += MainMenuGame; // TO CHANGE IN NEXT LEVEL
+        _playButton.clicked += NextLevel; // TO CHANGE IN NEXT LEVEL
         
         _overlayPanel.style.display = DisplayStyle.Flex; // Show Overlay Panel
     }

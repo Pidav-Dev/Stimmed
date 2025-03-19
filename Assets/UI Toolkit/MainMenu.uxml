@@ -1,8 +1,8 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/MainMenu.uss?fileID=7433441132597879392&amp;guid=7bc9dd64b69a24cb29acfdcc633a4644&amp;type=3#MainMenu" />
     <engine:VisualElement name="MainMenuContainer" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; background-image: url(&quot;project://database/Assets/Sprites/AppIcon.png?fileID=2800000&amp;guid=b9536f06934594c3ab80a2880acba9de&amp;type=3#AppIcon&quot;); -unity-background-scale-mode: scale-and-crop;">
-        <engine:VisualElement name="OpaquePanel" style="flex-grow: 1; position: absolute; width: 120%; height: 100%; background-color: rgba(0, 0, 0, 0.7); top: 0; left: -278px;" />
-        <engine:Button name="SelectLevelButton" text="Tap to continue" class="main-menu-button" style="font-size: 50px; -unity-font-style: bold; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; visibility: visible; position: absolute; width: 100%; height: 100%; -unity-text-align: lower-center; background-color: rgba(0, 0, 0, 0); padding-bottom: 180px; display: flex;">
+        <engine:VisualElement name="OpaquePanel" style="flex-grow: 1; position: absolute; width: 120%; height: 100%; background-color: rgba(0, 0, 0, 0.8); top: 0; left: -278px;" />
+        <engine:Button name="SelectLevelButton" text="Tap to continue" class="main-menu-button" style="font-size: 50px; -unity-font-style: bold; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; visibility: visible; position: absolute; width: 100%; height: 100%; -unity-text-align: lower-center; background-color: rgba(0, 0, 0, 0); padding-bottom: 130px; display: flex;">
             <Bindings>
                 <UnityEngine.Localization.LocalizedString property="text" table="GUID:7765421b6973f4569a0143f955936f3a" entry="Id(36560691200)" />
             </Bindings>

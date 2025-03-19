@@ -82,6 +82,30 @@ MonoBehaviour:
     m_Localized: E' credit
     m_Metadata:
       m_Items: []
+  - m_Id: 1339141714337792
+    m_Localized: Nun fa sentr mal Davide
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339343523274752
+    m_Localized: Ogni cazz s lev ind a na maner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339733165727744
+    m_Localized: Tuocc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339770562142208
+    m_Localized: Scurr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339870453686272
+    m_Localized: Lasc prmmut
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339920365903872
+    m_Localized: Scutulea
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

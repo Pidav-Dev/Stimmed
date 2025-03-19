@@ -38,6 +38,7 @@ public class MainMenuController : MonoBehaviour
         _backButton = root.Q<Button>("BackButton");
         var soundContainer = _optionsContainer.Q<VisualElement>("AmbientContainer");
         _soundSlider = soundContainer.Q<Slider>("SoundSlider");
+        Load();
         SetAudio(_soundSlider.value);
         // Changes mixer volume each time slider changes
         _soundSlider.RegisterValueChangedCallback(v =>
@@ -109,5 +110,17 @@ public class MainMenuController : MonoBehaviour
     {
         audioMixer.SetFloat("Ambient", Mathf.Log10(volume)*20); // Changes audio once exiting options
         audioMixer.SetFloat("Stimuli", Mathf.Log10(volume)*20); // Changes audio once exiting options
+        Save(); 
+    }
+
+    private void Save()
+    {
+        PlayerPrefs.SetFloat("Ambient", _soundSlider.value);
+        PlayerPrefs.Save(); 
+    }
+
+    private void Load()
+    {
+        _soundSlider.value = PlayerPrefs.GetFloat("Ambient", _soundSlider.value);
     }
 }
