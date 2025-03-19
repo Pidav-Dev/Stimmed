@@ -81,7 +81,7 @@ public class StateChange : MonoBehaviour
                 yield return null; // Yield each frame to prevent freezing
             }
             // Longer wait if visible, Shorter wait if outside FOV
-            float waitTime = IsVisible() ? Random.Range(15f, 20f) : Random.Range(2f, 10f); 
+            float waitTime = IsVisible() ? Random.Range(20f, 25f) : Random.Range(10f, 15f); 
 
             // After the determined time the color is changed and the control is given back to the parent
             yield return new WaitForSeconds(waitTime);
