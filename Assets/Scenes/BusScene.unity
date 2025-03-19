@@ -23486,7 +23486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pivot: {fileID: 743398617}
-  rotationSpeed: 180
+  rotationSpeed: 100
 --- !u!4 &1821799171 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: b8ee657c6800ab849bb30b4375d02323, type: 3}
