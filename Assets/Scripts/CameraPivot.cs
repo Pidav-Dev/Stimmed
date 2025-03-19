@@ -16,6 +16,9 @@ public class CameraPivot : MonoBehaviour
     private Vector2 _velocity = Vector2.zero; // Camera velocity for inertia effect
     private float _currentVerticalAngle = 15f;
     private Vector2 _delta; // Variable for movement detection
+    private bool _shouldRotate;
+    private float _totalRotation;
+    private bool _rotationComplete;
 
     // Enables Input Actions when the component is enabled 
     void OnEnable()
@@ -36,10 +39,13 @@ public class CameraPivot : MonoBehaviour
         Vector3 initialRotation = transform.eulerAngles; // Returns component's initial angles
         _currentVerticalAngle = Mathf.Clamp(initialRotation.x, minVerticalAngle, maxVerticalAngle); // Limits the currentVerticalAngle to [min, max]
         transform.eulerAngles = new Vector3(_currentVerticalAngle, initialRotation.y, initialRotation.z); // Changes component's angle to the clamped one
+        _shouldRotate = true;
     }
 
     void Update()
     {
+        FirstRotation();
+        
         _delta = move.action.ReadValue<Vector2>(); // Get input values in form of Vector2
         
         // While dragging, velocity is updated based on delta and rotation speed
@@ -72,5 +78,30 @@ public class CameraPivot : MonoBehaviour
 
         // Set the clamped vertical rotation
         transform.eulerAngles = new Vector3(_currentVerticalAngle, transform.eulerAngles.y, 0f);
+    }
+
+    private void FirstRotation()
+    {
+        if (_shouldRotate && Time.timeScale > 0f && !_rotationComplete && _totalRotation < 300f)
+        {
+            // Calculate rotation delta for this frame
+            float deltaRotation = 90 * Time.deltaTime;
+            
+            // Prevent overshooting 360°
+            if (_totalRotation + deltaRotation > 300f)
+            {
+                deltaRotation = 300f - _totalRotation;
+                _rotationComplete = true;
+            }
+
+            // Apply rotation [[3]][[10]]
+            transform.RotateAround(
+                pivot.transform.position,
+                Vector3.up,
+                deltaRotation
+            );
+
+            _totalRotation += deltaRotation;
+        }
     }
 }
