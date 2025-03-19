@@ -58,7 +58,6 @@ public class StateChange : MonoBehaviour
     {
         // Assign the component of the very own GameObject
         _audioSource = GetComponent<AudioSource>();
-        ChangeOutline(false);
         StartCoroutine(ActivateRandomly()); // Start the concurrent routine of the random activation
         StartCoroutine(IncreaseEndurance()); // Start the concurrent routine of the random activation
     }
@@ -89,7 +88,6 @@ public class StateChange : MonoBehaviour
             // Stimulus activation
             _isActive = true; // Trigger stimulus 
             _enduranceAmount = 1;
-            ChangeOutline(true); // Make the stimulus visible
             _audioSource.Play(); // Let the user hear the stimulus
             
             if (animator != null)
@@ -152,17 +150,10 @@ public class StateChange : MonoBehaviour
         }
     }
 
-    // Changes renderer's outline based on activeness
-    private void ChangeOutline(bool active)
-    {
-        return; 
-    }
-
     // Invoked by event when the user correctly cleared the stimulus, so the endurance needs to be restored 
     public void CorrectlyInteracted()
     {
         _isActive = false; // Allow stimulus to be respawned
-        ChangeOutline(false); // Change element's color to communicate better
         _audioSource.Stop(); // Stops stimulus audio when interacted
         interacted?.Invoke(-_enduranceAmount); // Invokes event for endurance restoration
         returnPosition?.Invoke(); // Invokes event for position returning 
