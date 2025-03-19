@@ -97,7 +97,7 @@ public class MainMenuController : MonoBehaviour
     // Methods that loads the single scenes
     private void CommutingScene()
     {
-        SceneManager.LoadScene("BusScene", LoadSceneMode.Single);
+        SceneManager.LoadScene("Scenes/BusLevel/Intro", LoadSceneMode.Single);
     }
 
     // Scene for the "not available" levels
