@@ -18,6 +18,11 @@ public class StateChange : MonoBehaviour
     
     [SerializeField] private Animator animator;
     
+    // Outline settings exposed in the editor
+    [Header("Outline Settings")]
+    [SerializeField] private Color activeOutlineColor = Color.magenta;
+    [SerializeField] private float activeOutlineWidth = 7.0f;
+    
     // Level events
     public UnityEvent<int> interacted; // Called when the stimulus is cleared
     public UnityEvent changePosition; // Called to change the position of the camera to the stimulus
@@ -90,6 +95,16 @@ public class StateChange : MonoBehaviour
             _enduranceAmount = 1;
             _audioSource.Play(); // Let the user hear the stimulus
             
+            // Enable outline effect on the skinned mesh
+            Outline outline = GetComponent<Outline>();
+            if (outline == null)
+            {
+                outline = gameObject.AddComponent<Outline>();
+            }
+            outline.OutlineColor = activeOutlineColor;
+            outline.OutlineWidth = activeOutlineWidth;
+            outline.enabled = true;
+            
             if (animator != null)
             {
                 animator.SetTrigger("Activate"); // uses trigger to play active stimuli animation
@@ -155,6 +170,14 @@ public class StateChange : MonoBehaviour
     {
         _isActive = false; // Allow stimulus to be respawned
         _audioSource.Stop(); // Stops stimulus audio when interacted
+        
+        // Disable the outline effect
+        Outline outline = GetComponent<Outline>();
+        if (outline != null)
+        {
+            outline.enabled = false;
+        }
+        
         interacted?.Invoke(-_enduranceAmount); // Invokes event for endurance restoration
         returnPosition?.Invoke(); // Invokes event for position returning 
         _gestureInfo.style.backgroundImage = null; // Change the icon back to null

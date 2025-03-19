@@ -75,11 +75,53 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 941083323260928
-    m_Localized: Ortam hacmi
+    m_Localized: Ortam ses seviyesi
     m_Metadata:
       m_Items: []
   - m_Id: 943220803493888
     m_Localized: Jenerik
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339141714337792
+    m_Localized: "Davide'nin duyusal a\u015F\u0131r\u0131 y\xFCklenme hissetmesini
+      \xF6nleyin"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1340755648962560
+    m_Localized: "Oynad\u0131\u011F\u0131n\u0131z i\xE7in te\u015Fekk\xFCrler. \u0130kinci
+      b\xF6l\xFCm \xE7ok yak\u0131nda"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339733165727744
+    m_Localized: Dokun
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339770562142208
+    m_Localized: "Kayd\u0131r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339870453686272
+    m_Localized: "Bas\u0131l\u0131 tut"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339920365903872
+    m_Localized: Salla
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1339343523274752
+    m_Localized: "Her uyaran\u0131n temizlenme yolu kendine \xF6zg\xFCd\xFCr"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1340994787205120
+    m_Localized: OYUN TASARIMI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1340925581189120
+    m_Localized: SANAT TASARIMI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1341043998973952
+    m_Localized: "\xD6ZEL TE\u015EEKK\xDCRLER"
     m_Metadata:
       m_Items: []
   references:
