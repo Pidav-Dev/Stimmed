@@ -1,5 +1,5 @@
-# GinTonic
-Challenge 5, Gin Tonic. By Donut Donkeys v1.0.1 (Ahmet Haydar Işık, Davide Picentino, Dylan Esposito, Luca Maria Incarnato, Michele Barbato, Paola Barbuto Ferraiuolo)
+# Stimmed
+Challenge by Donut Donkeys v1.0.1 (Ahmet Haydar Işık, Davide Picentino, Dylan Esposito, Luca Maria Incarnato, Michele Barbato, Paola Barbuto Ferraiuolo)
 
 ## Game Design Document
 
